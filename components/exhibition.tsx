@@ -94,7 +94,7 @@ export function Exhibition({
   videos?: VideoLink[];
 }) {
   return (
-    <SoundProvider settings={settings}>
+    <SoundProvider settings={settings} autoplay>
       <Universe works={works} settings={settings} mode={mode} videos={videos} />
     </SoundProvider>
   );
@@ -132,6 +132,9 @@ function Universe({
   const {
     ready,
     enabled,
+    wanted,
+    start,
+    toggleMusic,
     toggle,
     effect,
     tone,
@@ -168,6 +171,27 @@ function Universe({
       .forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
+  // 페이지 안 링크(#…)는 클릭할 때만 부드럽게 이동합니다.
+  useEffect(() => {
+    const jump = (e: MouseEvent) => {
+      const link = (e.target as Element | null)?.closest?.('a[href^="#"]');
+      if (
+        !link ||
+        link.matches(".skip-link") ||
+        e.defaultPrevented ||
+        e.button !== 0
+      )
+        return;
+      const id = link.getAttribute("href")!.slice(1);
+      const target = id ? document.getElementById(id) : document.body;
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+      history.replaceState(null, "", id ? `#${id}` : location.pathname);
+    };
+    document.addEventListener("click", jump);
+    return () => document.removeEventListener("click", jump);
+  }, [reduced]);
   function open(work: Work, kind: "select" | "star" = "select") {
     effect(kind);
     setSelected(work);
@@ -194,7 +218,7 @@ function Universe({
         reduced={reduced}
         economy={economy}
         soundOn={enabled}
-        enableSound={() => void toggle(true)}
+        enableSound={() => void start(true)}
         onReveal={() => setStage("ready")}
       />
       {mode === "review" && (
@@ -226,12 +250,13 @@ function Universe({
         <div className="header-controls">
           <button
             disabled={!ready}
-            className={`sound-toggle ${enabled ? "is-on" : ""}`}
-            aria-label={enabled ? "사운드 끄기" : "사운드 켜기"}
+            data-sound-control
+            className={`sound-toggle ${wanted ? "is-on" : ""}`}
+            aria-label={wanted ? "사운드 끄기" : "사운드 켜기"}
             onClick={() => void toggle()}
           >
-            {enabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
-            <span>SOUND {enabled ? "ON" : "OFF"}</span>
+            {wanted ? <Volume2 size={15} /> : <VolumeX size={15} />}
+            <span>SOUND {wanted ? "ON" : "OFF"}</span>
           </button>
           <button
             disabled={!ready}
@@ -328,7 +353,7 @@ function Universe({
               지안이의 생각이 반짝이는 작은 우주에 오신 걸 환영해요.
             </p>
             <a className="primary-button" href="#collection">
-              나의 우주 둘러보기 <ArrowUpRight size={17} />
+              지안이의 우주 둘러보기 <ArrowUpRight size={17} />
             </a>
             <div className="hero-footnote">
               <span className="mini-orbit">✧</span> 생각이 작품이 되고, 작품이
@@ -814,6 +839,33 @@ function Universe({
           </a>
         </div>
       </footer>
+      {/* 배경 음악 켜고 끄기: 화면 오른쪽 아래에 늘 떠 있는 버튼 */}
+      <button
+        type="button"
+        data-sound-control
+        className={`music-fab ${enabled && preferences.music && !paused ? "is-playing" : ""}`}
+        aria-label={
+          enabled && preferences.music && !paused
+            ? "배경 음악 끄기"
+            : "배경 음악 켜기"
+        }
+        aria-pressed={enabled && preferences.music && !paused}
+        onClick={toggleMusic}
+      >
+        <span className="music-bars" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <i />
+        </span>
+        <span className="music-label">
+          {enabled && preferences.music && !paused
+            ? "배경 음악 ON"
+            : wanted && !enabled
+              ? "화면을 누르면 음악이 시작돼요"
+              : "배경 음악 OFF"}
+        </span>
+      </button>
       <WorkDialog work={selected} onClose={() => setSelected(null)} />
     </div>
   );

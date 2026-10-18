@@ -18,12 +18,17 @@ import type { EffectKind, SoundEngine } from "@/lib/sound";
 
 type SoundContext = {
   ready: boolean;
+  /** 소리 엔진이 실제로 켜져 있음 */
   enabled: boolean;
+  /** 방문자가 원하는 상태(저장됨). 켜져 있으면 첫 터치·클릭 때 음악이 시작됩니다. */
+  wanted: boolean;
   preferences: Preferences;
   reduced: boolean;
   paused: boolean;
   error: string;
   toggle: (intro?: boolean) => Promise<void>;
+  start: (intro?: boolean) => Promise<void>;
+  toggleMusic: () => void;
   update: (patch: Partial<Preferences>) => void;
   effect: (kind?: EffectKind) => void;
   tone: (frequency: number) => void;
@@ -39,9 +44,12 @@ export const useSound = () => {
 
 export function SoundProvider({
   settings,
+  autoplay = false,
   children,
 }: {
   settings: SiteSettings;
+  /** 랜딩: 저장된 설정이 켜져 있으면 첫 상호작용 때 배경 음악을 자동으로 시작 */
+  autoplay?: boolean;
   children: ReactNode;
 }) {
   const [ready, setReady] = useState(false);
@@ -49,9 +57,11 @@ export function SoundProvider({
     [preferences, setPreferences] = useState(defaultPreferences),
     [systemReduced, setSystemReduced] = useState(false),
     [paused, setPaused] = useState(false),
+    [hidden, setHidden] = useState(false),
     [error, setError] = useState("");
   const engine = useRef<SoundEngine | null>(null),
-    theme = useRef<HTMLAudioElement | null>(null);
+    theme = useRef<HTMLAudioElement | null>(null),
+    starting = useRef(false);
   const currentVolume = useRef(preferences.volume);
   currentVolume.current = preferences.volume;
   useEffect(() => {
@@ -99,8 +109,9 @@ export function SoundProvider({
   }
   useEffect(() => {
     const hide = () => {
+      // 탭을 벗어나면 잠시 멈추고, 돌아오면 배경 음악을 이어서 들려줍니다.
+      setHidden(document.hidden);
       if (document.hidden) {
-        pauseBackground();
         document
           .querySelectorAll("audio,video")
           .forEach((el) => (el as HTMLMediaElement).pause());
@@ -108,7 +119,7 @@ export function SoundProvider({
       }
     };
     const leave = () => {
-      pauseBackground();
+      setHidden(true);
       window.dispatchEvent(new Event("universe:pause-media"));
     };
     document.addEventListener("visibilitychange", hide);
@@ -121,8 +132,8 @@ export function SoundProvider({
   useEffect(() => {
     engine.current?.stop();
     theme.current?.pause();
-    if (!enabled || !preferences.music || paused) return;
-    engine.current?.volume(currentVolume.current);
+    if (!enabled || !preferences.music || paused || hidden) return;
+    void engine.current?.activate(currentVolume.current).catch(() => {});
     if (settings.theme_id) {
       theme.current ??= new Audio();
       theme.current.src = mediaUrl(settings.theme_id);
@@ -138,14 +149,11 @@ export function SoundProvider({
       engine.current?.stop();
       theme.current?.pause();
     };
-  }, [enabled, preferences.music, paused, settings.theme_id]);
-  async function toggle(intro = false) {
-    if (enabled) {
-      setEnabled(false);
-      engine.current?.stop();
-      theme.current?.pause();
-      return;
-    }
+  }, [enabled, preferences.music, paused, hidden, settings.theme_id]);
+  async function start(intro = false) {
+    if (starting.current) return;
+    starting.current = true;
+    if (!preferences.sound) update({ sound: true });
     try {
       const { SoundEngine } = await import("@/lib/sound");
       engine.current ??= new SoundEngine();
@@ -153,15 +161,53 @@ export function SoundProvider({
       setError("");
       setPaused(false);
       setEnabled(true);
-      if (preferences.effects && settings.effects_enabled)
-        engine.current.effect(intro ? "shimmer" : "star");
+      if (intro && preferences.effects && settings.effects_enabled)
+        engine.current.effect("shimmer");
     } catch {
       setError(
         "이 브라우저에서 소리를 켤 수 없습니다. 작품은 소리 없이 감상할 수 있습니다.",
       );
       setEnabled(false);
+    } finally {
+      starting.current = false;
     }
   }
+  async function toggle(intro = false) {
+    if (enabled || (autoplay && preferences.sound)) {
+      update({ sound: false });
+      setEnabled(false);
+      engine.current?.stop();
+      theme.current?.pause();
+      return;
+    }
+    await start(intro);
+    if (!autoplay && preferences.effects && settings.effects_enabled)
+      engine.current?.effect(intro ? "shimmer" : "star");
+  }
+  // 배경 음악만 켜고 끄기(효과음은 그대로)
+  function toggleMusic() {
+    const playing = enabled && preferences.music && !paused;
+    if (playing) return update({ music: false });
+    update({ music: true });
+    setPaused(false);
+    if (!enabled) void start();
+  }
+  // 브라우저는 사용자 동작 전에 소리를 막으므로, 첫 터치·클릭·키 입력 때 시작합니다.
+  useEffect(() => {
+    if (!autoplay || !preferences.sound || enabled) return;
+    void import("@/lib/sound");
+    const begin = (e: Event) => {
+      if ((e.target as Element | null)?.closest?.("[data-sound-control]"))
+        return;
+      void start();
+    };
+    const events = ["pointerdown", "keydown", "touchstart"] as const;
+    events.forEach((t) =>
+      addEventListener(t, begin, { capture: true, passive: true }),
+    );
+    return () =>
+      events.forEach((t) => removeEventListener(t, begin, { capture: true }));
+  });
   const canPlay = () =>
     enabled &&
     preferences.effects &&
@@ -179,11 +225,14 @@ export function SoundProvider({
       value={{
         ready,
         enabled,
+        wanted: autoplay ? preferences.sound : enabled,
         preferences,
         reduced,
         paused,
         error,
         toggle,
+        start,
+        toggleMusic,
         update,
         effect,
         tone,

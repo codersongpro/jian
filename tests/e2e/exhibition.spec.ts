@@ -1,14 +1,15 @@
 import { test, expect } from "@playwright/test";
 
-test("exhibition is silent, filterable and keyboard accessible", async ({
+test("exhibition has no media autoplay, filters and is keyboard accessible", async ({
   page,
 }) => {
   await page.goto("/");
   await expect(
     page.getByRole("heading", { name: "JIAN’S UNIVERSE" }),
   ).toBeVisible();
+  // 배경 음악은 기본 ON(첫 상호작용 때 시작), 작품 미디어는 자동 재생하지 않음
   await expect(
-    page.getByRole("button", { name: "사운드 켜기", exact: true }),
+    page.getByRole("button", { name: "사운드 끄기", exact: true }),
   ).toBeVisible();
   expect(await page.locator("audio[autoplay], video[autoplay]").count()).toBe(
     0,
@@ -22,7 +23,7 @@ test("exhibition is silent, filterable and keyboard accessible", async ({
   await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(card).toBeFocused();
 });
-test("saved settings never autoplay and survive a reload", async ({ page }) => {
+test("saved settings survive a reload", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "감상 설정" }).click();
   await page.getByLabel("모션 최소화").check();
@@ -33,7 +34,7 @@ test("saved settings never autoplay and survive a reload", async ({ page }) => {
     "true",
   );
   await expect(
-    page.getByRole("button", { name: "사운드 켜기", exact: true }),
+    page.getByRole("button", { name: "사운드 끄기", exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "감상 설정" }).click();
   await expect(page.getByLabel("볼륨")).toHaveValue("0.6");
@@ -78,7 +79,7 @@ test("repository management opens GitHub editing without requiring a database", 
   ).toHaveCount(0);
 });
 
-test("sound engine is created only by opt-in and stops voices on opt-out", async ({
+test("background music starts on first interaction and stays off once turned off", async ({
   page,
 }) => {
   await page.addInitScript(() => {
@@ -113,10 +114,11 @@ test("sound engine is created only by opt-in and stops voices on opt-out", async
           }
         ).soundProbe.contexts.length,
     );
+  // 브라우저 정책상 사용자 동작 전에는 소리 엔진을 만들지 않음
   expect(await count()).toBe(0);
-  await page.getByRole("button", { name: "사운드 켜기", exact: true }).click();
+  await page.getByRole("heading", { name: "JIAN’S UNIVERSE" }).click();
   await expect(
-    page.getByRole("button", { name: "사운드 끄기", exact: true }),
+    page.getByRole("button", { name: "배경 음악 끄기", exact: true }),
   ).toBeVisible();
   expect(await count()).toBe(1);
   await expect
@@ -168,6 +170,19 @@ test("sound engine is created only by opt-in and stops voices on opt-out", async
       ),
     )
     .toBe(0);
+  // 끈 상태는 다음 방문에도 유지되어, 화면을 눌러도 소리가 나지 않음
   await page.reload();
+  await expect(
+    page.getByRole("button", { name: "사운드 켜기", exact: true }),
+  ).toBeVisible();
+  await page.getByRole("heading", { name: "JIAN’S UNIVERSE" }).click();
   expect(await count()).toBe(0);
+  // 배경 음악 버튼으로 다시 켤 수 있음
+  await page
+    .getByRole("button", { name: "배경 음악 켜기", exact: true })
+    .click();
+  await expect(
+    page.getByRole("button", { name: "배경 음악 끄기", exact: true }),
+  ).toBeVisible();
+  expect(await count()).toBe(1);
 });

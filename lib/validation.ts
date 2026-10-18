@@ -15,6 +15,7 @@ export function parsePreferences(value: string | null): Preferences {
     const p = JSON.parse(value || "{}");
     if (!p || typeof p !== "object") return { ...defaultPreferences };
     return {
+      sound: typeof p.sound === "boolean" ? p.sound : true,
       music: typeof p.music === "boolean" ? p.music : true,
       effects: typeof p.effects === "boolean" ? p.effects : true,
       volume:

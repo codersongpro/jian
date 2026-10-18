@@ -74,6 +74,8 @@ export type SiteSettings = {
   motion_intensity: "off" | "gentle" | "full";
 };
 export type Preferences = {
+  /** 방문할 때마다 배경 음악을 들을지(끄면 다음 방문에도 꺼진 채로 유지) */
+  sound: boolean;
   music: boolean;
   effects: boolean;
   volume: number;
@@ -87,6 +89,7 @@ export const defaultSettings: SiteSettings = {
   motion_intensity: "gentle",
 };
 export const defaultPreferences: Preferences = {
+  sound: true,
   music: true,
   effects: true,
   volume: 0.35,

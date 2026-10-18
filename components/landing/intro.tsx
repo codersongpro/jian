@@ -3,8 +3,16 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2 } from "lucide-react";
 import { fitCanvas, seeded } from "./use-scroll";
 
-// 인트로 시간표(ms): 빛 한 점 → 별가루 폭발 → 이름으로 모임 → 머무름 → 화면이 열림
-const T = { burst: 600, gather: 1300, gathered: 2800, leave: 4100, end: 4800 };
+// 인트로 시간표(ms, 총 8초): 빛 한 점 → 별가루 폭발 → 이름으로 모임 → 머무름 → 화면이 열림(0.7초)
+const T = {
+  burst: 1200,
+  spread: 1400,
+  gather: 2600,
+  travel: 1800,
+  gathered: 5300,
+  leave: 7300,
+  end: 8000,
+};
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 4);
 const easeInOut = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -69,16 +77,12 @@ export function Intro({
   reveal.current = onReveal;
   const finish = useRef<() => void>(() => {});
 
-  // 세션당 한 번만 재생. 모션 최소화면 바로 본문을 보여 줍니다.
+  // 접속할 때마다 재생. 모션 최소화면 바로 본문을 보여 줍니다.
   useEffect(() => {
-    let seen = false;
-    try {
-      seen = Boolean(sessionStorage.getItem("jian-intro"));
-    } catch {}
     const systemReduced = matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    if (seen || systemReduced) {
+    if (systemReduced) {
       setPhase("leaving");
       reveal.current(false);
       const t = setTimeout(() => setPhase("done"), 450);
@@ -140,7 +144,7 @@ export function Intro({
           tx: target ? target[0] : rand() * w,
           ty: target ? target[1] : rand() * h,
           text: Boolean(target),
-          delay: rand() * 450,
+          delay: rand() * 900,
           size: target ? 0.7 + rand() * 0.9 : 0.4 + rand() * 1.1,
           gold: rand() < 0.35,
           phase: rand() * 6.28,
@@ -153,10 +157,6 @@ export function Intro({
         if (stopped) return;
         stopped = true;
         cancelAnimationFrame(frame);
-        // 끝까지 보거나 건너뛴 뒤에만 '본 인트로'로 기록합니다.
-        try {
-          sessionStorage.setItem("jian-intro", "seen");
-        } catch {}
         setPhase("leaving");
         reveal.current(true);
         setTimeout(() => setPhase("done"), 700);
@@ -171,7 +171,7 @@ export function Intro({
         // 처음의 작은 빛
         const glow =
           t < T.gather
-            ? clamp(t / T.burst) * (1 - clamp((t - T.burst) / 900))
+            ? clamp(t / T.burst) * (1 - clamp((t - T.burst) / T.spread))
             : 0;
         if (glow > 0) {
           const r = 6 + glow * 60,
@@ -184,10 +184,10 @@ export function Intro({
           ctx.fill();
         }
         if (t >= T.burst) {
-          const burst = easeOut(clamp((t - T.burst) / 900)),
+          const burst = easeOut(clamp((t - T.burst) / T.spread)),
             leave = clamp((t - T.leave) / (T.end - T.leave));
           for (const p of particles) {
-            const g = easeInOut(clamp((t - T.gather - p.delay) / 1100));
+            const g = easeInOut(clamp((t - T.gather - p.delay) / T.travel));
             let x = cx + (p.sx - cx) * burst,
               y = cy + (p.sy - cy) * burst;
             x += (p.tx - x) * g;
@@ -247,8 +247,8 @@ export function Intro({
           </div>
           <div className="intro-actions">
             {!soundOn && (
-              <button type="button" onClick={enableSound}>
-                <Volume2 size={14} /> 소리와 함께 보기
+              <button type="button" data-sound-control onClick={enableSound}>
+                <Volume2 size={14} /> 음악과 함께 보기
               </button>
             )}
             <button type="button" onClick={() => finish.current()}>

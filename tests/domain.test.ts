@@ -19,6 +19,7 @@ test("filters combine category and year without changing the source", () => {
 });
 test("preferences recover safely from malformed and untrusted storage", () => {
   assert.deepEqual(parsePreferences("{broken"), {
+    sound: true,
     music: true,
     effects: true,
     volume: 0.35,
@@ -28,9 +29,10 @@ test("preferences recover safely from malformed and untrusted storage", () => {
     parsePreferences(
       '{"music":false,"effects":"yes","volume":9,"reduced":true,"enabled":true}',
     ),
-    { music: false, effects: true, volume: 1, reduced: true },
+    { sound: true, music: false, effects: true, volume: 1, reduced: true },
   );
   assert.equal(parsePreferences("null").volume, 0.35);
+  assert.equal(parsePreferences('{"sound":false}').sound, false);
 });
 test("accepts only valid YouTube hosts and video identifiers", () => {
   assert.equal(youtubeId("https://youtu.be/dQw4w9WgXcQ?t=3"), "dQw4w9WgXcQ");
