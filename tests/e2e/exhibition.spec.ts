@@ -52,13 +52,27 @@ test("constellation and reduced motion retain the ordinary list", async ({
     ),
   ).toBeTruthy();
 });
-test("missing backend is explained without a fake administrator login", async ({
+test("repository management opens GitHub editing without requiring a database", async ({
   page,
 }) => {
   await page.goto("/admin");
   await expect(
-    page.getByRole("heading", { name: "전시실 연결 준비" }),
+    page.getByRole("heading", { name: "GitHub로 작품 관리" }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "작품 목록 편집", exact: true }),
+  ).toHaveAttribute(
+    "href",
+    "https://github.com/codersongpro/jian/edit/main/content/works.json",
+  );
+  await expect(page.getByRole("link", { name: "작품 본문 편집" })).toHaveCount(
+    9,
+  );
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
   await expect(
     page.getByRole("button", { name: "로그인", exact: true }),
   ).toHaveCount(0);

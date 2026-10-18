@@ -3,9 +3,7 @@ test("actual source works retain transcriptions, pages, dates and six unembedded
   page,
 }) => {
   await page.goto("/");
-  await expect(
-    page.getByText("자료 검토 미리보기 · 9개 작품 묶음 · 공개 검수 대기"),
-  ).toBeVisible();
+  await expect(page.locator(".review-banner")).toHaveCount(0);
   await expect(page.locator("[data-work-card]")).toHaveCount(9);
   await page
     .locator("[data-work-card]")

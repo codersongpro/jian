@@ -1,10 +1,23 @@
 import { test, expect } from "@playwright/test";
-test("unconfigured APIs never expose media or accept an upload", async ({
+test("repository catalog works without a database and uploads stay protected", async ({
   request,
 }) => {
   const catalog = await request.get("http://127.0.0.1:3000/api/catalog");
   expect(catalog.status()).toBe(200);
-  expect((await catalog.json()).mode).toBe("setup");
+  const data = await catalog.json();
+  expect(data.mode).toBe("repository");
+  expect(data.works).toHaveLength(9);
+  expect(
+    data.works.every(
+      (work: { is_public: boolean; review?: unknown }) =>
+        work.is_public && !work.review,
+    ),
+  ).toBe(true);
+  expect(data.videos).toHaveLength(6);
+  const image = await request.get(
+    "http://127.0.0.1:3000" + data.works[0].thumbnail_url,
+  );
+  expect(image.status()).toBe(200);
   const media = await request.get(
     "http://127.0.0.1:3000/api/media/00000000-0000-4000-8000-000000000000",
     { headers: { Range: "bytes=0-99" } },
@@ -17,11 +30,17 @@ test("unconfigured APIs never expose media or accept an upload", async ({
   expect(upload.status()).toBe(401);
 });
 
-test("production never exposes candidate works, text or asset paths", async ({
+test("production serves selected works without exposing the private review bundle", async ({
   request,
 }) => {
   const catalog = await request.get("http://127.0.0.1:3000/api/catalog");
-  expect((await catalog.json()).works).toEqual([]);
+  const data = await catalog.json();
+  expect(
+    data.works.find((work: { id: string }) => work.id === "poems").content_text,
+  ).toContain("## 튤립");
+  expect(JSON.stringify(data)).not.toMatch(
+    /review_notes|review_status|publish_ready|content-bundle|api\/review-assets/,
+  );
   for (const path of [
     "/api/review-assets/assets/acorn/photo.jpg",
     "/api/review-assets/data/works.json",
