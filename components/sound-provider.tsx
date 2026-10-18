@@ -14,7 +14,7 @@ import {
   type SiteSettings,
 } from "@/lib/model";
 import { parsePreferences } from "@/lib/validation";
-import type { SoundEngine } from "@/lib/sound";
+import type { EffectKind, SoundEngine } from "@/lib/sound";
 
 type SoundContext = {
   ready: boolean;
@@ -23,9 +23,10 @@ type SoundContext = {
   reduced: boolean;
   paused: boolean;
   error: string;
-  toggle: () => Promise<void>;
+  toggle: (intro?: boolean) => Promise<void>;
   update: (patch: Partial<Preferences>) => void;
-  effect: (kind?: "select" | "page" | "star" | "success") => void;
+  effect: (kind?: EffectKind) => void;
+  tone: (frequency: number) => void;
   pauseBackground: () => void;
   resumeBackground: () => void;
 };
@@ -138,7 +139,7 @@ export function SoundProvider({
       theme.current?.pause();
     };
   }, [enabled, preferences.music, paused, settings.theme_id]);
-  async function toggle() {
+  async function toggle(intro = false) {
     if (enabled) {
       setEnabled(false);
       engine.current?.stop();
@@ -153,7 +154,7 @@ export function SoundProvider({
       setPaused(false);
       setEnabled(true);
       if (preferences.effects && settings.effects_enabled)
-        engine.current.effect("star");
+        engine.current.effect(intro ? "shimmer" : "star");
     } catch {
       setError(
         "이 브라우저에서 소리를 켤 수 없습니다. 작품은 소리 없이 감상할 수 있습니다.",
@@ -161,16 +162,17 @@ export function SoundProvider({
       setEnabled(false);
     }
   }
-  function effect(kind: "select" | "page" | "star" | "success" = "select") {
-    if (
-      enabled &&
-      preferences.effects &&
-      settings.effects_enabled &&
-      !document.hidden
-    ) {
-      engine.current?.volume(preferences.volume);
-      engine.current?.effect(kind);
-    }
+  const canPlay = () =>
+    enabled &&
+    preferences.effects &&
+    settings.effects_enabled &&
+    !document.hidden;
+  function effect(kind: EffectKind = "select") {
+    if (canPlay()) engine.current?.effect(kind);
+  }
+  // 체험형 음표는 사용자가 직접 누른 소리이므로 효과음 설정을 따릅니다.
+  function tone(frequency: number) {
+    if (canPlay()) engine.current?.tone(frequency);
   }
   return (
     <Context.Provider
@@ -184,6 +186,7 @@ export function SoundProvider({
         toggle,
         update,
         effect,
+        tone,
         pauseBackground,
         resumeBackground: () => {
           setError("");

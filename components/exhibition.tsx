@@ -26,6 +26,12 @@ import { filterWorks } from "@/lib/validation";
 import { Artwork } from "./artwork";
 import { WorkDialog } from "./work-dialog";
 import { SoundProvider, useSound } from "./sound-provider";
+import { Sky } from "./landing/sky";
+import { Intro } from "./landing/intro";
+import { WordsInterlude } from "./landing/words-interlude";
+import { OrbitInterlude } from "./landing/orbit-interlude";
+import { PaintInterlude } from "./landing/paint-interlude";
+import { RhythmInterlude } from "./landing/rhythm-interlude";
 
 const fieldCopy = [
   {
@@ -109,7 +115,8 @@ function Universe({
     [view, setView] = useState("grid"),
     [selected, setSelected] = useState<Work | null>(null),
     [panel, setPanel] = useState(false),
-    [intro, setIntro] = useState(false);
+    // intro: 인트로 재생 중, ready: 본문 등장
+    [stage, setStage] = useState<"intro" | "ready">("intro");
   const [economy, setEconomy] = useState(false);
   useEffect(() => {
     const hardware = navigator as Navigator & {
@@ -127,6 +134,7 @@ function Universe({
     enabled,
     toggle,
     effect,
+    tone,
     preferences,
     update,
     reduced,
@@ -144,14 +152,6 @@ function Universe({
   const years = [...new Set(works.map((w) => w.year))].sort(
     (a, b) => (b ?? -1) - (a ?? -1),
   );
-  useEffect(() => {
-    try {
-      if (!sessionStorage.getItem("jian-intro")) {
-        setIntro(true);
-        sessionStorage.setItem("jian-intro", "seen");
-      }
-    } catch {}
-  }, []);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) =>
@@ -187,8 +187,16 @@ function Universe({
           : settings.motion_intensity
       }
       data-economy={String(economy)}
-      data-intro={String(intro)}
+      data-stage={stage}
     >
+      <Sky reduced={reduced} economy={economy} />
+      <Intro
+        reduced={reduced}
+        economy={economy}
+        soundOn={enabled}
+        enableSound={() => void toggle(true)}
+        onReveal={() => setStage("ready")}
+      />
       {mode === "review" && (
         <div className="review-banner" role="status">
           <Sparkles size={14} />
@@ -287,12 +295,13 @@ function Universe({
       )}
       <main>
         <section
+          id="top"
           className="hero"
           aria-labelledby="hero-title"
           style={
             settings.background_id
               ? {
-                  backgroundImage: `linear-gradient(90deg,rgba(248,246,239,.96),rgba(248,246,239,.75)),url(${mediaUrl(settings.background_id)})`,
+                  backgroundImage: `linear-gradient(90deg,rgba(7,11,34,.92),rgba(20,26,68,.55)),url(${mediaUrl(settings.background_id)})`,
                 }
               : undefined
           }
@@ -421,17 +430,24 @@ function Universe({
           </a>
         </section>
         <div className="universe-ribbon" aria-hidden="true">
-          <span>WORDS</span>
-          <Star />
-          <span>SCIENCE</span>
-          <Star />
-          <span>ART</span>
-          <Star />
-          <span>MUSIC</span>
-          <Star />
-          <span>BALLET</span>
-          <Star />
-          <span>ENDLESS CURIOSITY</span>
+          {[0, 1].map((copy) => (
+            <div className="ribbon-track" key={copy}>
+              {[
+                "WORDS",
+                "SCIENCE",
+                "MATH",
+                "ART",
+                "MUSIC",
+                "BALLET",
+                "ENDLESS CURIOSITY",
+              ].map((word) => (
+                <span key={word} className="ribbon-item">
+                  <span>{word}</span>
+                  <Star />
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
         <section id="about" className="about-section section-shell reveal">
           <div>
@@ -460,6 +476,7 @@ function Universe({
             <span className="handwritten">with curiosity, always.</span>
           </div>
         </section>
+        <WordsInterlude onComplete={() => effect("chime")} tone={tone} />
         <section id="collection" className="collection section-shell reveal">
           <div className="section-heading">
             <div>
@@ -608,6 +625,11 @@ function Universe({
             </div>
           )}
         </section>
+        <OrbitInterlude
+          reduced={reduced}
+          economy={economy}
+          onSpawn={() => effect("orbit")}
+        />
         <section className="field-section section-shell reveal">
           <div className="eyebrow">
             <span className="section-index">03</span> MANY WAYS TO WONDER
@@ -683,6 +705,7 @@ function Universe({
             ))}
           </div>
         </section>
+        <PaintInterlude reduced={reduced} onStroke={() => effect("brush")} />
         <section id="journey" className="journey section-shell reveal">
           <div className="journey-heading">
             <div className="eyebrow">
@@ -739,6 +762,7 @@ function Universe({
             ))}
           </div>
         </section>
+        <RhythmInterlude tone={tone} soundOn={enabled} />
         {videos.length > 0 && (
           <section
             className="source-videos section-shell reveal"
@@ -769,7 +793,7 @@ function Universe({
             </div>
           </section>
         )}
-        <section className="closing-note reveal">
+        <section id="nightfall" className="closing-note reveal">
           <Star />
           <p>
             “작은 호기심 하나가
