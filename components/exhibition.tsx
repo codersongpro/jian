@@ -779,7 +779,24 @@ function Universe({
             ))}
           </div>
         </section>
-        <PaintInterlude reduced={reduced} onStroke={() => effect("brush")} />
+        <PaintInterlude
+          reduced={reduced}
+          onStroke={() => effect("brush")}
+          onReveal={() => effect("success")}
+          artworks={[
+            ["drawings", "/works/drawings/page-01.jpg"],
+            ["moonjar", "/works/moonjar/drawing-3226.jpg"],
+            ["brain-journey", "/works/brain-journey/page-01.jpg"],
+            ["fan-painting", "/works/fan-painting/page-01.jpg"],
+          ]
+            .map(([id, src]) => ({ w: works.find((x) => x.id === id), src }))
+            .filter((a) => a.w)
+            .map(({ w, src }) => ({
+              src,
+              title: title(w!),
+              open: () => open(w!),
+            }))}
+        />
         <section id="journey" className="journey section-shell reveal">
           <div className="journey-heading">
             <div className="eyebrow">

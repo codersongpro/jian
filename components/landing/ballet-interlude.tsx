@@ -46,6 +46,7 @@ export function BalletInterlude({
     current = useRef<Pose>(POSES[0]),
     frame = useRef(0),
     demo = useRef<ReturnType<typeof setInterval> | undefined>(undefined),
+    playing = useRef<ReturnType<typeof setTimeout> | undefined>(undefined),
     touched = useRef(false);
   // 안무 노트의 순서(동작 번호 목록). 바꾸면 그 순서대로 춤춥니다.
   const DEFAULT = POSES.map((_, i) => i);
@@ -82,24 +83,23 @@ export function BalletInterlude({
   };
 
   // 한 동작을 고르면 시범과 이어 추기를 멈추고 그 동작으로
-  const pick = (i: number) => {
+  const pick = (i: number, fromPlay = false) => {
     touched.current = true;
     clearInterval(demo.current);
+    if (!fromPlay) clearTimeout(playing.current);
     go(i);
     if (i === TURN) onTurn();
     else tone(NOTES[i]);
   };
   // 노트대로 춤추기: 노트에 적힌(바뀐) 순서대로 처음부터 끝까지
   const playAll = (list = orderRef.current) => {
-    touched.current = true;
-    clearInterval(demo.current);
-    let i = 0;
-    pick(list[0]);
-    demo.current = setInterval(() => {
-      i++;
-      if (i >= list.length) return clearInterval(demo.current);
-      pick(list[i]);
-    }, 1500);
+    clearTimeout(playing.current);
+    const next = (i: number) => {
+      if (i >= list.length) return;
+      pick(list[i], true);
+      playing.current = setTimeout(() => next(i + 1), 1500);
+    };
+    next(0);
   };
   // 노트 순서 바꾸기: from 자리의 동작을 to 자리로 옮깁니다.
   const move = (from: number, to: number) => {
@@ -126,6 +126,7 @@ export function BalletInterlude({
   useEffect(
     () => () => {
       clearInterval(demo.current);
+      clearTimeout(playing.current);
       cancelAnimationFrame(frame.current);
     },
     [],
