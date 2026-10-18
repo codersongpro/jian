@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScrollProgress } from "./use-scroll";
 import { useCopy } from "../lang";
 
@@ -19,13 +19,51 @@ const NOTES = [
 const RIBBON =
   "M-20 300C120 120 220 380 340 250S520 40 600 170S760 380 860 220S980 60 1040 140";
 
+// 지안이가 작곡한 「크리스마스의 행복」 악보에 적힌 화음 (첫째·둘째 줄)
+// 각 화음이 오선 위 음표(0=낮은 도 … 7=높은 도) 중 어떤 음으로 이루어지는지
+const CHORDS: { name: string; notes: number[] }[] = [
+  { name: "C", notes: [0, 2, 4, 7] },
+  { name: "G", notes: [4, 6, 1] },
+  { name: "Am", notes: [5, 7, 2] },
+  { name: "G7", notes: [4, 6, 1, 3] },
+  { name: "C", notes: [0, 2, 4, 7] },
+  { name: "F", notes: [3, 5, 7] },
+  { name: "G", notes: [4, 6, 1] },
+  { name: "C", notes: [0, 2, 4, 7] },
+];
+
+export type Song = { title: string; open: () => void };
+
 export function RhythmInterlude({
   tone,
   soundOn,
+  christmas,
+  songs = [],
 }: {
   tone: (f: number) => void;
   soundOn: boolean;
+  /** 「크리스마스의 행복」 작품 (악보 보기) */
+  christmas?: Song;
+  /** 지안이가 작곡한 다른 노래들 */
+  songs?: Song[];
 }) {
+  const [chord, setChord] = useState(-1),
+    timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => () => clearTimeout(timer.current), []);
+  // 화음을 하나씩 짚으며 음표를 밝히고 연주합니다.
+  const playChords = () => {
+    clearTimeout(timer.current);
+    const step = (i: number) => {
+      if (i >= CHORDS.length) return setChord(-1);
+      setChord(i);
+      CHORDS[i].notes.forEach((n, k) =>
+        setTimeout(() => tone(NOTES[n].f), k * 70),
+      );
+      timer.current = setTimeout(() => step(i + 1), 1100);
+    };
+    step(0);
+  };
+  const lit = chord >= 0 ? CHORDS[chord].notes : [];
   const { t } = useCopy();
   const ref = useRef<HTMLElement>(null),
     path = useRef<SVGPathElement>(null),
@@ -99,7 +137,7 @@ export function RhythmInterlude({
               <button
                 key={n.name}
                 type="button"
-                className="rhythm-note"
+                className={`rhythm-note ${lit.includes(i) ? "lit" : ""}`}
                 aria-label={t.playNote(t.noteNames[i])}
                 style={
                   {
@@ -133,6 +171,38 @@ export function RhythmInterlude({
         <p className="interlude-hint">
           {soundOn ? t.rhythmHintOn : t.rhythmHintOff}
         </p>
+        {/* 지안이의 작곡 노트와 연결 */}
+        <div className="rhythm-songs">
+          <span className="rhythm-songs-label">{t.songsLabel}</span>
+          {christmas && (
+            <div className="rhythm-song">
+              <strong>{christmas.title}</strong>
+              <div className="rhythm-chords" aria-hidden="true">
+                {CHORDS.map((c, i) => (
+                  <b key={i} className={chord === i ? "now" : ""}>
+                    {c.name}
+                  </b>
+                ))}
+              </div>
+              <button type="button" onClick={playChords}>
+                ▶ {t.songPlayChords}
+              </button>
+              <button type="button" className="ghost" onClick={christmas.open}>
+                {t.songOpenScore}
+              </button>
+            </div>
+          )}
+          {songs.map((s) => (
+            <button
+              key={s.title}
+              type="button"
+              className="rhythm-song-link"
+              onClick={s.open}
+            >
+              ♪ {s.title}
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );

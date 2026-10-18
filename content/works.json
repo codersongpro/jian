@@ -642,12 +642,12 @@
     },
     {
       "id": "song-score",
-      "title": "마음을 녹이는 말 · 손으로 쓴 악보",
-      "title_en": "Words That Melt the Heart · Handwritten Score",
+      "title": "사랑은 언제나 · 마음을 녹이는 말",
+      "title_en": "Love Is Always · Words That Melt the Heart",
       "category": "음악",
       "year": null,
-      "description": "지안이가 직접 가사를 쓰고 곡을 붙여 오선지에 손으로 옮긴 노래 악보와 피아노 악보 쓰기 연습.",
-      "description_en": "A song Jian wrote and composed herself, copied by hand onto staff paper, with a piano score practice page.",
+      "description": "지안이가 직접 가사를 쓰고 곡을 붙여 오선지에 손으로 옮긴 노래 두 곡과 피아노 악보 쓰기 연습.",
+      "description_en": "Two songs Jian wrote and composed herself, copied by hand onto staff paper, with a piano score practice page.",
       "content_file": "song-score.md",
       "is_public": true,
       "featured_order": null,
@@ -1154,6 +1154,35 @@
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
         "authorship_note": "손글씨 카드 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "christmas-song",
+      "title": "크리스마스의 행복",
+      "title_en": "The Joy of Christmas",
+      "category": "음악",
+      "year": null,
+      "description": "지안이가 직접 작곡하고 화음(C·G·Am·G7…)과 셈여림, 손가락 번호까지 적어 넣은 피아노 곡 악보.",
+      "description_en": "A piano piece Jian composed herself, with chords (C, G, Am, G7…), dynamics and finger numbers written in.",
+      "content_file": "christmas-song.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/christmas-song.webp",
+      "pages": [
+        {
+          "url": "/works/christmas-song/page-01.jpg",
+          "caption": "크리스마스의 행복 · 작곡 송지안"
+        }
+      ],
+      "provenance": {
+        "category": "음악",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "악보에 '작곡 송지안'이라고 직접 적혀 있음. 전사 없이 원본 그대로 공개."
       }
     }
   ]

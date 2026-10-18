@@ -850,7 +850,17 @@ function Universe({
             ))}
           </div>
         </section>
-        <RhythmInterlude tone={tone} soundOn={enabled} />
+        <RhythmInterlude
+          tone={tone}
+          soundOn={enabled}
+          christmas={(() => {
+            const w = works.find((x) => x.id === "christmas-song");
+            return w ? { title: title(w), open: () => open(w) } : undefined;
+          })()}
+          songs={works
+            .filter((x) => x.id === "song-score")
+            .map((w) => ({ title: title(w), open: () => open(w) }))}
+        />
         <BalletInterlude
           reduced={reduced}
           tone={tone}
