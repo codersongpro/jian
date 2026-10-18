@@ -1,0 +1,364 @@
+.review-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: #e9e8dc;
+  color: #65705d;
+  font-size: 10px;
+  letter-spacing: 0.2px;
+}
+.review-banner a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 22px;
+  border-bottom: 1px solid #bfc5b1;
+}
+.dialog-visual {
+  align-self: start;
+  min-width: 0;
+  width: 100%;
+}
+.dialog-art {
+  width: 100%;
+}
+.page-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 11px;
+}
+.page-navigation button {
+  background: #e8ebdf;
+  padding: 6px 12px;
+  border-radius: 3px;
+}
+.page-navigation button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.page-caption {
+  font-size: 9px;
+  color: #7a826e;
+  text-align: center;
+  margin-top: 10px;
+  overflow-wrap: anywhere;
+}
+.work-provenance {
+  margin: 20px 0;
+  padding: 15px;
+  background: #eceee4;
+  border-left: 2px solid #c5c7b1;
+  font-size: 10px;
+  color: #707b65;
+}
+.work-provenance h3 {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+.work-provenance dl {
+  margin: 0;
+}
+.work-provenance dt {
+  margin-top: 8px;
+  font-size: 9px;
+  color: #8c927f;
+}
+.work-provenance dd {
+  margin: 2px 0;
+  line-height: 1.8;
+}
+.work-provenance summary {
+  cursor: pointer;
+  margin-top: 13px;
+}
+.work-provenance ul {
+  padding-left: 15px;
+  line-height: 1.9;
+}
+.content-text {
+  font-size: 13px;
+  line-height: 1.95;
+  margin-top: 24px;
+  color: #5f705d;
+  overflow-wrap: anywhere;
+}
+.content-text p {
+  white-space: pre-line;
+  margin: 15px 0;
+}
+.content-text h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 23px 0 12px;
+}
+.content-text ul {
+  padding-left: 18px;
+}
+.document-table {
+  overflow: auto;
+  margin: 16px 0;
+}
+.document-table table {
+  border-collapse: collapse;
+  min-width: 470px;
+  font-size: 11px;
+}
+.document-table th,
+.document-table td {
+  padding: 9px;
+  border: 1px solid #d6ddcc;
+  text-align: left;
+  vertical-align: top;
+}
+.document-table th {
+  background: #e9eddf;
+}
+.source-videos {
+  border-top: 1px solid var(--line);
+  padding-top: 58px;
+}
+.source-videos h2 {
+  margin-top: 16px;
+  font-size: 26px;
+}
+.source-videos > p {
+  font-size: 11px;
+  color: #747f68;
+  margin-top: 12px;
+}
+.source-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 25px;
+}
+.source-video-grid > a {
+  border: 1px solid var(--line);
+  padding: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  min-width: 0;
+}
+.source-video-grid > a:hover {
+  background: #eeefe5;
+  transform: translateY(-3px);
+}
+.source-video-grid > a > span {
+  color: var(--accent);
+  font-family: var(--serif);
+  font-size: 23px;
+}
+.source-video-grid strong {
+  font-size: 12px;
+  font-weight: 400;
+  display: block;
+}
+.source-video-grid small {
+  display: block;
+  margin-top: 5px;
+  font-size: 9px;
+  color: #8a927c;
+}
+.source-video-grid > a > svg {
+  margin-left: auto;
+}
+.candidate-library {
+  padding-top: 28px;
+}
+.candidate-library > h2 {
+  font-size: 26px;
+}
+.candidate-library > p,
+.candidate-video-list > p {
+  font-size: 12px;
+  color: #748268;
+  margin-top: 13px;
+  line-height: 1.9;
+}
+.candidate-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 28px;
+}
+.candidate-grid > article {
+  background: #fffdf7;
+  border: 1px solid var(--line);
+  padding: 23px;
+  min-width: 0;
+}
+.candidate-grid h3 {
+  font-size: 17px;
+  font-weight: 400;
+  margin: 10px 0;
+}
+.candidate-grid p {
+  font-size: 12px;
+  color: #76846d;
+  line-height: 1.9;
+}
+.candidate-grid small {
+  font-size: 10px;
+  color: #92977f;
+  display: block;
+  margin-top: 9px;
+}
+.candidate-grid details {
+  margin-top: 17px;
+  font-size: 11px;
+}
+.candidate-grid summary {
+  cursor: pointer;
+  color: #7e8b72;
+}
+.candidate-grid details > p {
+  margin-top: 13px;
+}
+.candidate-grid ul {
+  padding-left: 17px;
+  color: #7b886d;
+}
+.candidate-grid .content-text {
+  max-height: 400px;
+  overflow: auto;
+  padding-right: 10px;
+}
+.candidate-grid .text-link {
+  font-size: 11px;
+  margin-top: 15px;
+}
+.candidate-video-list {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.candidate-video-list h3 {
+  font-size: 20px;
+  font-weight: 400;
+}
+.candidate-video-list > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+.date-basis-note {
+  font-size: 10px !important;
+  max-width: 320px;
+}
+.timeline strong {
+  white-space: nowrap;
+}
+.timeline button:last-child strong {
+  font-size: 15px;
+}
+.timeline {
+  gap: 8px;
+}
+@media (max-width: 800px) {
+  .source-video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .candidate-grid {
+    grid-template-columns: 1fr;
+  }
+  .candidate-grid > article {
+    padding: 20px;
+  }
+  .review-banner {
+    font-size: 9px;
+    gap: 6px;
+  }
+  .review-banner a {
+    margin-left: 8px;
+  }
+  .timeline strong {
+    font-size: 18px;
+  }
+  .timeline button:last-child strong {
+    font-size: 12px;
+  }
+}
+@media (max-width: 560px) {
+  .review-banner {
+    padding: 9px 14px;
+    justify-content: space-between;
+    font-size: 8px;
+  }
+  .review-banner > svg {
+    display: none;
+  }
+  .review-banner a {
+    font-size: 8px;
+    white-space: nowrap;
+  }
+  .source-videos h2 {
+    font-size: 23px;
+    letter-spacing: -1px;
+  }
+  .source-videos > p {
+    font-size: 10px;
+  }
+  .source-video-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .source-video-grid > a {
+    padding: 16px 18px;
+  }
+  .content-text {
+    font-size: 12px;
+  }
+  .content-text h3 {
+    font-size: 15px;
+  }
+  .work-provenance {
+    font-size: 10px;
+  }
+  .page-caption {
+    font-size: 8px;
+  }
+  .timeline strong {
+    font-size: 16px;
+  }
+  .timeline small {
+    font-size: 5px;
+  }
+  .timeline button:last-child strong {
+    font-size: 10px;
+  }
+  .timeline > button {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  .candidate-library > h2 {
+    font-size: 23px;
+  }
+  .candidate-library > p,
+  .candidate-video-list > p {
+    font-size: 11px;
+  }
+  .admin-tabs {
+    gap: 16px;
+  }
+  .admin-tabs > button {
+    font-size: 11px;
+  }
+}
+
+.universe:has(.review-banner) .preferences {
+  top: 132px;
+}
+@media (max-width: 560px) {
+  .universe:has(.review-banner) .preferences {
+    top: 104px;
+  }
+}

@@ -1,0 +1,93 @@
+export const categories = [
+  "전체",
+  "문학",
+  "과학",
+  "수학",
+  "음악",
+  "미술",
+  "발레",
+  "그림책",
+  "공예·디자인",
+  "사회·기획",
+  "앱 기획",
+] as const;
+export type Category = Exclude<(typeof categories)[number], "전체">;
+export type Media = {
+  id: string;
+  work_id: string | null;
+  kind: "image" | "audio";
+  path: string;
+  original_name: string;
+  mime_type: string;
+  approved: boolean;
+  rights_confirmed: boolean;
+  sort_order?: number;
+};
+export type Work = {
+  id: string;
+  title: string;
+  category: Category;
+  year: number | null;
+  description: string;
+  poem: string;
+  is_public: boolean;
+  featured_order: number | null;
+  motion_enabled: boolean;
+  youtube_id: string | null;
+  media: Media[];
+  sample?: boolean;
+  source_id?: string | null;
+  content_text?: string;
+  thumbnail_url?: string;
+  pages?: { url: string; caption: string }[];
+  provenance?: {
+    category: string;
+    date: string | null;
+    date_basis: string;
+    creator_display: string;
+    evidence_level: string;
+    authorship_note: string;
+  } | null;
+  review?: {
+    publish_ready: boolean;
+    review_status: string;
+    review_notes: string[];
+  } | null;
+};
+export type VideoCandidate = {
+  id: string;
+  url: string;
+  title: string | null;
+  publish_ready: boolean;
+  embed_verified: boolean;
+  playback_verified: boolean;
+  work_match_verified: boolean;
+  note: string;
+};
+export type SiteSettings = {
+  id: number;
+  background_id: string | null;
+  theme_id: string | null;
+  effects_enabled: boolean;
+  motion_intensity: "off" | "gentle" | "full";
+};
+export type Preferences = {
+  music: boolean;
+  effects: boolean;
+  volume: number;
+  reduced: boolean;
+};
+export const defaultSettings: SiteSettings = {
+  id: 1,
+  background_id: null,
+  theme_id: null,
+  effects_enabled: true,
+  motion_intensity: "gentle",
+};
+export const defaultPreferences: Preferences = {
+  music: true,
+  effects: true,
+  volume: 0.35,
+  reduced: false,
+};
+export const mediaUrl = (id: string) => `/api/media/${encodeURIComponent(id)}`;
