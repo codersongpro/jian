@@ -2071,3 +2071,78 @@ html {
   margin-top: 0;
   justify-content: center;
 }
+
+/* ---------- 18. 줄바꿈: 한국어는 단어 단위, 제목은 균형 있게, 본문은 외톨이 줄 없이 ---------- */
+.universe,
+.universe .work-dialog {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.universe h1,
+.universe h2,
+.universe h3,
+.universe .eyebrow,
+.universe .interlude-label,
+.universe .hero-subtitle,
+.universe .closing-note p,
+.universe .intro-copy p,
+.universe .math-board-title {
+  text-wrap: balance;
+}
+.universe p,
+.universe li,
+.universe dd,
+.universe .interlude-hint,
+.universe .orbit-status span {
+  text-wrap: pretty;
+}
+/* 제목의 기울임 줄도 따로 균형 있게 나눕니다. */
+.universe h2 em,
+.universe .hero-subtitle strong {
+  display: inline-block;
+  text-wrap: balance;
+}
+.universe .hero-description,
+.universe .section-heading p,
+.universe .about-copy p,
+.universe .math-text,
+.universe .ballet-text,
+.universe .closing-note > span {
+  text-wrap: balance;
+}
+/* 작품 카드의 분야·날짜는 한 덩어리로 */
+.universe .card-meta {
+  flex-wrap: wrap;
+  gap: 2px 10px;
+}
+.universe .card-meta > span {
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .interlude-label > span {
+    display: block;
+    width: max-content;
+    margin: 0 auto 4px;
+    padding-right: 0;
+    border-right: 0;
+  }
+  .math-copy .interlude-label > span,
+  .orbit-copy .interlude-label > span,
+  .paint-head .interlude-label > span,
+  .ballet-copy .interlude-label > span {
+    margin-left: 0;
+  }
+}
+/* 휴대폰: 분야 카드는 한 줄에 하나씩 (좁은 2열에서 단어마다 줄이 바뀌지 않도록) */
+@media (max-width: 560px) {
+  .universe .field-grid {
+    grid-template-columns: 1fr;
+  }
+  .universe .field-card h3 br {
+    display: none;
+  }
+}
+.universe .work-card h3,
+.universe .field-card h3 {
+  text-wrap: pretty;
+}
