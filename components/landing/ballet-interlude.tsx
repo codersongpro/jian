@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { ArrowDown, ArrowUp, RotateCcw } from "lucide-react";
 import { useCopy } from "../lang";
 import { useInView } from "./use-scroll";
 
@@ -46,6 +47,12 @@ export function BalletInterlude({
     frame = useRef(0),
     demo = useRef<ReturnType<typeof setInterval> | undefined>(undefined),
     touched = useRef(false);
+  // 안무 노트의 순서(동작 번호 목록). 바꾸면 그 순서대로 춤춥니다.
+  const DEFAULT = POSES.map((_, i) => i);
+  const [order, setOrder] = useState<number[]>(DEFAULT),
+    orderRef = useRef(order),
+    dragFrom = useRef<number | null>(null);
+  orderRef.current = order;
   const [pose, setPose] = useState(0),
     [angles, setAngles] = useState<Pose>(POSES[0]),
     [spin, setSpin] = useState(0);
@@ -82,17 +89,28 @@ export function BalletInterlude({
     if (i === TURN) onTurn();
     else tone(NOTES[i]);
   };
-  // 노트대로 춤추기: 첫 동작부터 마지막 인사까지 차례로
-  const playAll = () => {
+  // 노트대로 춤추기: 노트에 적힌(바뀐) 순서대로 처음부터 끝까지
+  const playAll = (list = orderRef.current) => {
     touched.current = true;
     clearInterval(demo.current);
     let i = 0;
-    pick(0);
+    pick(list[0]);
     demo.current = setInterval(() => {
       i++;
-      if (i >= POSES.length) return clearInterval(demo.current);
-      pick(i);
+      if (i >= list.length) return clearInterval(demo.current);
+      pick(list[i]);
     }, 1500);
+  };
+  // 노트 순서 바꾸기: from 자리의 동작을 to 자리로 옮깁니다.
+  const move = (from: number, to: number) => {
+    if (to < 0 || to >= order.length || from === to) return;
+    const next = [...order];
+    const [item] = next.splice(from, 1);
+    next.splice(to, 0, item);
+    setOrder(next);
+    touched.current = true;
+    clearInterval(demo.current);
+    go(item);
   };
 
   // 화면에 들어오면 사용자가 누르기 전까지 동작을 차례로 보여 줍니다.
@@ -100,7 +118,10 @@ export function BalletInterlude({
     clearInterval(demo.current);
     if (!visible || touched.current || reduced) return;
     let i = 0;
-    demo.current = setInterval(() => go((i = (i + 1) % POSES.length)), 2200);
+    demo.current = setInterval(() => {
+      i = (i + 1) % orderRef.current.length;
+      go(orderRef.current[i]);
+    }, 2200);
   });
   useEffect(
     () => () => {
@@ -141,34 +162,71 @@ export function BalletInterlude({
             <em>{t.balletTitle[1]}</em>
           </h2>
           <p className="ballet-text">{t.balletText}</p>
-          {/* 안무 노트 카드: 지금 추는 동작에 밑줄 */}
-          <div className="ballet-note" aria-hidden="true">
-            <strong>{t.balletNote}</strong>
-            <ol>
-              {t.balletPoses.map((p, i) => (
-                <li key={p.name} className={pose === i ? "now" : ""}>
-                  {p.name}
+          {/* 안무 노트 카드: 화살표나 끌어서 순서를 바꾸면 그 순서대로 춤춥니다. */}
+          <div className="ballet-note">
+            <div className="ballet-note-head">
+              <strong>{t.balletNote}</strong>
+              {order.join() !== DEFAULT.join() && (
+                <button
+                  type="button"
+                  className="note-reset"
+                  onClick={() => setOrder(DEFAULT)}
+                >
+                  <RotateCcw size={13} /> {t.balletReset}
+                </button>
+              )}
+            </div>
+            <ol aria-label={t.balletReorder}>
+              {order.map((id, at) => (
+                <li
+                  key={id}
+                  className={pose === id ? "now" : ""}
+                  draggable
+                  onDragStart={() => (dragFrom.current = at)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => {
+                    if (dragFrom.current !== null) move(dragFrom.current, at);
+                    dragFrom.current = null;
+                  }}
+                >
+                  <span className="note-num">{at + 1}.</span>
+                  <button
+                    type="button"
+                    className="note-name"
+                    onClick={() => pick(id)}
+                  >
+                    {t.balletPoses[id].name}
+                  </button>
+                  <span className="note-move">
+                    <button
+                      type="button"
+                      aria-label={t.balletUp(t.balletPoses[id].name)}
+                      disabled={at === 0}
+                      onClick={() => move(at, at - 1)}
+                    >
+                      <ArrowUp size={14} />
+                    </button>
+                    <button
+                      type="button"
+                      aria-label={t.balletDown(t.balletPoses[id].name)}
+                      disabled={at === order.length - 1}
+                      onClick={() => move(at, at + 1)}
+                    >
+                      <ArrowDown size={14} />
+                    </button>
+                  </span>
                 </li>
               ))}
             </ol>
           </div>
-          <div className="ballet-steps" role="group" aria-label={t.balletLabel}>
-            {t.balletPoses.map((p, i) => (
-              <button
-                key={p.name}
-                type="button"
-                aria-pressed={pose === i}
-                className={pose === i ? "active" : ""}
-                onClick={() => pick(i)}
-              >
-                <small>{i + 1}</small> {p.name}
-              </button>
-            ))}
-          </div>
           <p className="ballet-desc" aria-live="polite">
             {t.balletPoses[pose].desc}
           </p>
-          <button type="button" className="ballet-play" onClick={playAll}>
+          <button
+            type="button"
+            className="ballet-play"
+            onClick={() => playAll()}
+          >
             ▶ {t.balletPlay}
           </button>
           <p className="interlude-hint">{t.balletHint}</p>

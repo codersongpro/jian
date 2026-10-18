@@ -2146,3 +2146,264 @@ html {
 .universe .field-card h3 {
   text-wrap: pretty;
 }
+
+/* ---------- 19. 안무 노트 순서 바꾸기 ---------- */
+.ballet-note {
+  max-width: 400px;
+}
+.ballet-note-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.note-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #8a6a7c;
+  background: none;
+}
+.ballet-note ol {
+  list-style: none;
+  padding-left: 0;
+}
+.ballet-note li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: grab;
+}
+.ballet-note li:active {
+  cursor: grabbing;
+}
+.note-num {
+  width: 24px;
+  text-align: right;
+  color: #8a6a7c;
+}
+.note-name {
+  flex: 1;
+  text-align: left;
+  background: none;
+  padding: 0 4px;
+  font: inherit;
+  color: inherit;
+}
+.ballet-note li.now .note-name {
+  font-weight: 700;
+  text-decoration: underline wavy #e07a9a;
+  text-underline-offset: 4px;
+}
+.note-move {
+  display: inline-flex;
+  gap: 4px;
+}
+.note-move button {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(58 37 80 / 0.08);
+  color: #3a2550;
+}
+.note-move button:disabled {
+  opacity: 0.25;
+}
+.note-move button:hover:not(:disabled) {
+  background: rgb(58 37 80 / 0.18);
+}
+.ballet-note {
+  background:
+    repeating-linear-gradient(
+        transparent 0 35px,
+        rgb(120 140 190 / 0.25) 35px 36px
+      )
+      0 30px / 100% calc(100% - 30px) no-repeat,
+    #fffaf3;
+}
+
+/* ---------- 20. 사고 실험: 또르와 마꺼리의 사이클로이드 경주 ---------- */
+.cycloid-card {
+  width: var(--content);
+  margin: 60px auto 0;
+  padding: clamp(24px, 4vw, 52px);
+  border-radius: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  background: #fffdf7;
+  box-shadow:
+    inset 0 0 0 1px #e6e2d4,
+    0 30px 70px rgb(53 72 63 / 0.1);
+  color: #2f4038;
+}
+.cycloid-card h2 {
+  margin-top: 12px;
+}
+.cycloid-card h2 em {
+  color: #b0607e;
+}
+.cycloid-text {
+  margin-top: 14px;
+  font-size: 17px;
+  line-height: 1.85;
+  color: #4b5a52;
+}
+.cycloid-guess {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.cycloid-guess > span {
+  flex-basis: 100%;
+  font-size: 14px;
+  color: var(--fg-soft);
+}
+.cycloid-guess button {
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: #f4f0e3;
+  font-size: 15px;
+  color: #2f4038;
+}
+.cycloid-guess button.active {
+  background: #2f4038;
+  color: #fffdf7;
+}
+.cycloid-actions {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+.cycloid-go {
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--gold), #f1d9b4 55%, var(--rose));
+  color: #1b1a33;
+  font-size: 15px;
+  font-weight: 600;
+}
+.cycloid-go:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.cycloid-result {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #fbf3f6;
+  animation: rise 0.6s both;
+}
+.cycloid-result strong {
+  font-size: 17px;
+  color: #b0607e;
+}
+.cycloid-result p,
+.cycloid-roll {
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #4b5a52;
+}
+.cycloid-roll {
+  margin-top: 14px;
+}
+.cycloid-board svg {
+  width: 100%;
+  overflow: visible;
+}
+.cy-ground {
+  stroke: #d9d4c4;
+  stroke-width: 2;
+}
+.cy-line,
+.cy-curve {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+.cy-line {
+  stroke: #e6c98f;
+}
+.cy-curve {
+  stroke: #e7a9c0;
+}
+.cy-flag {
+  fill: #2f4038;
+}
+.cy-tag {
+  font-size: 15px;
+  font-family: var(--sans);
+}
+.cy-tag.gold {
+  fill: #b08a4c;
+}
+.cy-tag.pink {
+  fill: #b0607e;
+}
+.cy-ball {
+  stroke: #fff;
+  stroke-width: 3;
+  filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.18));
+}
+.cy-ball.gold {
+  fill: #e0b25e;
+}
+.cy-ball.pink {
+  fill: #e07a9a;
+}
+.cy-name {
+  font-size: 15px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: #2f4038;
+  font-family: var(--sans);
+}
+.cy-wheel circle:first-child {
+  fill: rgb(185 198 255 / 0.12);
+  stroke: #9fb0e8;
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+}
+.cy-wheel line {
+  stroke: #9fb0e8;
+  stroke-width: 2;
+}
+.cy-dot {
+  fill: #6c7fd0;
+}
+.cycloid-times {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 10px;
+  font-size: 15px;
+}
+.cycloid-times b {
+  font-family: var(--serif);
+  font-size: 22px;
+  margin-left: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.cycloid-times .gold b {
+  color: #b08a4c;
+}
+.cycloid-times .pink b {
+  color: #b0607e;
+}
+@media (max-width: 800px) {
+  .cycloid-card {
+    grid-template-columns: 1fr;
+    border-radius: 24px;
+  }
+}

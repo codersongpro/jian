@@ -34,6 +34,7 @@ import { PaintInterlude } from "./landing/paint-interlude";
 import { RhythmInterlude } from "./landing/rhythm-interlude";
 import { MathInterlude } from "./landing/math-interlude";
 import { BalletInterlude } from "./landing/ballet-interlude";
+import { CycloidCard } from "./landing/cycloid-card";
 import { LangProvider, useCopy } from "./lang";
 import { categoryLabel, type Lang } from "@/lib/i18n";
 
@@ -688,6 +689,10 @@ function Universe({
           reduced={reduced}
           economy={economy}
           onSpawn={() => effect("orbit")}
+        />
+        <CycloidCard
+          reduced={reduced}
+          onFinish={(won) => effect(won ? "success" : "page")}
         />
         <MathInterlude
           tone={tone}
