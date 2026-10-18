@@ -46,7 +46,7 @@ test("constellation and reduced motion retain the ordinary list", async ({
   await page.goto("/");
   await page.getByRole("button", { name: "별자리 보기" }).click();
   await expect(page.getByLabel("작품 별자리")).toBeVisible();
-  await expect(page.locator("[data-work-card]")).toHaveCount(17);
+  await expect(page.locator("[data-work-card]")).toHaveCount(18);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,

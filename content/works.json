@@ -622,6 +622,43 @@
         "evidence_level": "실제 파일 육안 확인",
         "authorship_note": "화이트보드 손글씨 기획 사진. 위쪽 인사 문구 한 줄은 보호자가 쓴 것일 수 있음."
       }
+    },
+    {
+      "id": "song-score",
+      "title": "마음을 녹이는 말 · 손으로 쓴 악보",
+      "title_en": "Words That Melt the Heart · Handwritten Score",
+      "category": "음악",
+      "year": null,
+      "description": "지안이가 직접 가사를 쓰고 곡을 붙여 오선지에 손으로 옮긴 노래 악보와 피아노 악보 쓰기 연습.",
+      "description_en": "A song Jian wrote and composed herself, copied by hand onto staff paper, with a piano score practice page.",
+      "content_file": "song-score.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/song-score.webp",
+      "pages": [
+        {
+          "url": "/works/song-score/page-01.jpg",
+          "caption": "악보 1 · 작사·작곡 by 송지안"
+        },
+        {
+          "url": "/works/song-score/page-02.jpg",
+          "caption": "악보 2"
+        },
+        {
+          "url": "/works/song-score/page-03.jpg",
+          "caption": "피아노 악보 쓰기 연습"
+        }
+      ],
+      "provenance": {
+        "category": "음악",
+        "date": null,
+        "date_basis": "제작일 미확인 (사진 보관일 2026-06-23·2026-07-25, 제작일 아님)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "악보에 '작사·작곡 by 송지안'이라고 직접 적혀 있음. 전사 없이 원본 사진 그대로 공개."
+      }
     }
   ]
 }

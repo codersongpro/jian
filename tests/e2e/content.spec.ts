@@ -4,7 +4,7 @@ test("actual source works retain transcriptions, pages, dates and six unembedded
 }) => {
   await page.goto("/");
   await expect(page.locator(".review-banner")).toHaveCount(0);
-  await expect(page.locator("[data-work-card]")).toHaveCount(17);
+  await expect(page.locator("[data-work-card]")).toHaveCount(18);
   await page
     .locator("[data-work-card]")
     .filter({ hasText: "동시 다섯 편" })
@@ -66,5 +66,5 @@ test("actual source works retain transcriptions, pages, dates and six unembedded
 test("unknown dates stay unknown in the timeline", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: /연도 미상/ }).click();
-  await expect(page.locator("[data-work-card]")).toHaveCount(12);
+  await expect(page.locator("[data-work-card]")).toHaveCount(13);
 });

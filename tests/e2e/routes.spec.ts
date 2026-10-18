@@ -6,7 +6,7 @@ test("repository catalog works without a database and uploads stay protected", a
   expect(catalog.status()).toBe(200);
   const data = await catalog.json();
   expect(data.mode).toBe("repository");
-  expect(data.works).toHaveLength(17);
+  expect(data.works).toHaveLength(18);
   expect(
     data.works.every(
       (work: { is_public: boolean; review?: unknown }) =>

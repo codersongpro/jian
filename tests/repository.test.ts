@@ -6,7 +6,7 @@ import { readRepositoryCatalog } from "../lib/repository";
 
 test("repository works have readable text, valid categories and existing local images", async () => {
   const { works } = await readRepositoryCatalog();
-  assert.equal(works.length, 17);
+  assert.equal(works.length, 18);
   assert.equal(new Set(works.map((work) => work.id)).size, works.length);
   for (const work of works) {
     assert.ok(work.title.trim() && work.content_text?.trim());
@@ -20,7 +20,7 @@ test("repository works have readable text, valid categories and existing local i
       await access(`public${url}`);
     }
   }
-  assert.equal(works.filter((work) => work.year === null).length, 12);
+  assert.equal(works.filter((work) => work.year === null).length, 13);
   assert.equal(works.find((work) => work.id === "moonjar")!.pages!.length, 19);
   assert.match(
     works.find((work) => work.id === "poems")!.content_text!,
