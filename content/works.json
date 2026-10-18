@@ -251,8 +251,8 @@
       "title_en": "Wire and Bead Jewelry",
       "category": "공예·디자인",
       "year": null,
-      "description": "장신구 제작과 포장·라벨까지 이어진 작업 기록.",
-      "description_en": "Making jewelry, all the way to packaging and labels.",
+      "description": "철사와 비즈로 만든 장신구와 철사 꽃·반지, 포장·라벨까지 이어진 작업 기록.",
+      "description_en": "Jewelry, a flower and a ring made from wire and beads, all the way to packaging and labels.",
       "content_file": "craft-wire.md",
       "is_public": true,
       "featured_order": 5,
@@ -267,6 +267,14 @@
         {
           "url": "/works/craft-wire/photo-2.jpg",
           "caption": "제공 자료 2 · photo-2.jpg"
+        },
+        {
+          "url": "/works/craft-wire/new-01.jpg",
+          "caption": "철사로 만든 꽃"
+        },
+        {
+          "url": "/works/craft-wire/new-02.jpg",
+          "caption": "철사로 만든 반지"
         }
       ],
       "provenance": {
@@ -344,8 +352,13 @@
       "featured_order": 8,
       "motion_enabled": true,
       "youtube_id": null,
-      "thumbnail_url": "/works/thumbnails/fall-letter.svg",
-      "pages": [],
+      "thumbnail_url": "/works/thumbnails/fall-letter.webp",
+      "pages": [
+        {
+          "url": "/works/fall-letter/page-01.jpg",
+          "caption": "단풍잎 모양 종이에 쓴 원본 편지"
+        }
+      ],
       "provenance": {
         "category": "영어·문학",
         "date": null,
@@ -612,6 +625,10 @@
         {
           "url": "/works/reading-app/page-01.jpg",
           "caption": "앱 개발 선생님 칠판 · 대상, 기능, 디자인"
+        },
+        {
+          "url": "/works/reading-app/page-02.jpg",
+          "caption": "칠판에 앱을 설계하는 지안이"
         }
       ],
       "provenance": {
@@ -658,6 +675,485 @@
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
         "authorship_note": "악보에 '작사·작곡 by 송지안'이라고 직접 적혀 있음. 전사 없이 원본 사진 그대로 공개."
+      }
+    },
+    {
+      "id": "brain-journey",
+      "title": "몸속 탐험: 뇌와 척수",
+      "title_en": "Inside the Body: Brain and Spinal Cord",
+      "category": "과학",
+      "year": null,
+      "description": "머리뼈와 뇌막, 기억의 방·기관실·화학실 같은 뇌 속 방과 척수를 크레파스로 그린 큰 그림.",
+      "description_en": "A large crayon drawing of the skull, brain membranes, rooms inside the brain such as the memory room and the senses room, and the spinal cord.",
+      "content_file": "brain-journey.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/brain-journey.webp",
+      "pages": [
+        {
+          "url": "/works/brain-journey/page-01.jpg",
+          "caption": "전체 그림"
+        },
+        {
+          "url": "/works/brain-journey/page-02.jpg",
+          "caption": "머리뼈와 뇌막"
+        },
+        {
+          "url": "/works/brain-journey/page-03.jpg",
+          "caption": "기관실 (시각·청각·후각·미각·촉각실)"
+        },
+        {
+          "url": "/works/brain-journey/page-04.jpg",
+          "caption": "기억의 방과 비어 있는 방"
+        },
+        {
+          "url": "/works/brain-journey/page-05.jpg",
+          "caption": "화학실·감정실"
+        },
+        {
+          "url": "/works/brain-journey/page-06.jpg",
+          "caption": "뇌졸중"
+        },
+        {
+          "url": "/works/brain-journey/page-07.jpg",
+          "caption": "척수"
+        }
+      ],
+      "provenance": {
+        "category": "과학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "손그림 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "protect-animals",
+      "title": "동물을 보호해 주세요",
+      "title_en": "Please Protect Animals",
+      "category": "과학",
+      "year": 2026,
+      "description": "천연기념물과 멸종위기종, 보호하는 방법과 멸종위기 등급을 스스로 조사해 쓴 글.",
+      "description_en": "Her own report on natural monuments, endangered species, ways to protect them and the endangerment categories.",
+      "content_file": "protect-animals.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/protect-animals.webp",
+      "pages": [
+        {
+          "url": "/works/protect-animals/page-01.jpg",
+          "caption": "1쪽 · 2026년 4월 26일"
+        },
+        {
+          "url": "/works/protect-animals/page-02.jpg",
+          "caption": "2쪽 · 보호 방법과 멸종위기 범주"
+        }
+      ],
+      "provenance": {
+        "category": "과학",
+        "date": "2026-04-26",
+        "date_basis": "노트에 직접 적은 날짜",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "노트 손글씨 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "food-pyramid",
+      "title": "우리가 아껴줄 동물",
+      "title_en": "Animals We Should Care For",
+      "category": "과학",
+      "year": null,
+      "description": "먹이 피라미드를 그리고, 한 생물이 빠지면 피라미드가 무너진다는 생각을 쓴 노트.",
+      "description_en": "A food pyramid drawing and her idea that if one creature disappears, the whole pyramid falls.",
+      "content_file": "food-pyramid.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/food-pyramid.webp",
+      "pages": [
+        {
+          "url": "/works/food-pyramid/page-01.jpg",
+          "caption": "먹이 피라미드 1"
+        },
+        {
+          "url": "/works/food-pyramid/page-02.jpg",
+          "caption": "먹이 피라미드 2 · 하나가 빠지면"
+        }
+      ],
+      "provenance": {
+        "category": "과학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "노트 손글씨 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "magic-science",
+      "title": "신기한 마법의 과학원리",
+      "title_en": "The Science Behind Magic Tricks",
+      "category": "과학",
+      "year": null,
+      "description": "색이 바뀌는 물과 사라지는 마법 속 과학 원리를 그림과 글로 정리한 포스터.",
+      "description_en": "A poster explaining, in pictures and words, the science behind color-changing water and vanishing tricks.",
+      "content_file": "magic-science.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/magic-science.webp",
+      "pages": [
+        {
+          "url": "/works/magic-science/page-01.jpg",
+          "caption": "포스터 전체"
+        }
+      ],
+      "provenance": {
+        "category": "과학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "손글씨 포스터 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "science-board",
+      "title": "지안 과학 선생님의 칠판",
+      "title_en": "Teacher Jian’s Science Board",
+      "category": "과학",
+      "year": null,
+      "description": "과학 선생님이 되어 인체와 소리, 피아노 건반을 화이트보드에 풀어 쓴 수업 칠판.",
+      "description_en": "Playing science teacher: the human body, sound and piano keys explained on the whiteboard.",
+      "content_file": "science-board.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/science-board.webp",
+      "pages": [
+        {
+          "url": "/works/science-board/page-01.jpg",
+          "caption": "과학 선생님 칠판"
+        }
+      ],
+      "provenance": {
+        "category": "과학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "화이트보드 손글씨 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "thought-experiment",
+      "title": "또르와 마꺼리의 사고 실험",
+      "title_en": "Ttor and Makkeori’s Thought Experiment",
+      "category": "과학",
+      "year": null,
+      "description": "달리는 수레 위의 또르와 땅 위의 마꺼리가 같은 공을 다르게 보는 사고 실험을 칠판에 그린 그림.",
+      "description_en": "A whiteboard drawing of a thought experiment: Ttor on a moving cart and Makkeori on the ground see the same ball differently.",
+      "content_file": "thought-experiment.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/thought-experiment.webp",
+      "pages": [
+        {
+          "url": "/works/thought-experiment/board.jpg",
+          "caption": "칠판 그림"
+        }
+      ],
+      "provenance": {
+        "category": "과학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "화이트보드 그림 원본 사진. 랜딩의 사고 실험 카드가 이 칠판을 바탕으로 함. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "math-board",
+      "title": "지안 수학 선생님의 칠판",
+      "title_en": "Teacher Jian’s Math Board",
+      "category": "수학",
+      "year": null,
+      "description": "‘분수란?’부터 배수판정법까지 강의 목록을 세우고 분수와 약수를 가르친 수학 칠판.",
+      "description_en": "Her math board: a lesson list from “What is a fraction?” to divisibility rules, teaching fractions and divisors.",
+      "content_file": "math-board.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/math-board.webp",
+      "pages": [
+        {
+          "url": "/works/math-board/page-01.jpg",
+          "caption": "분수란? · 강의 목록"
+        },
+        {
+          "url": "/works/math-board/page-02.jpg",
+          "caption": "약수·소인수분해를 가르치는 지안이"
+        }
+      ],
+      "provenance": {
+        "category": "수학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "화이트보드 손글씨 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "designer-board",
+      "title": "지안 디자이너 선생님의 도형 수업",
+      "title_en": "Teacher Jian’s Shapes Lesson",
+      "category": "수학",
+      "year": null,
+      "description": "디자이너 선생님이 되어 도형·점·선·면과 평면도형·입체도형을 정리한 칠판.",
+      "description_en": "Playing design teacher: shapes, points, lines, faces, and flat and solid figures on the whiteboard.",
+      "content_file": "designer-board.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/designer-board.webp",
+      "pages": [
+        {
+          "url": "/works/designer-board/page-01.jpg",
+          "caption": "도형 수업 칠판"
+        }
+      ],
+      "provenance": {
+        "category": "수학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "화이트보드 손글씨 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "piano-notes",
+      "title": "피아노 더블샵·더블플랫 노트",
+      "title_en": "Piano Notes: Double Sharps and Flats",
+      "category": "음악",
+      "year": null,
+      "description": "9살 때 더블샵과 더블플랫을 건반 그림과 함께 스스로 정리한 노트.",
+      "description_en": "Notes she wrote at age 9 explaining double sharps and double flats with keyboard drawings.",
+      "content_file": "piano-notes.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/piano-notes.webp",
+      "pages": [
+        {
+          "url": "/works/piano-notes/page-01.jpg",
+          "caption": "피아노 더블샵·더블플랫"
+        },
+        {
+          "url": "/works/piano-notes/page-02.jpg",
+          "caption": "더블플랫 · 인체 그림"
+        }
+      ],
+      "provenance": {
+        "category": "음악",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "노트 손글씨 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "choreo-notes",
+      "title": "파트르키타 안무 노트",
+      "title_en": "Choreography Notes",
+      "category": "발레",
+      "year": null,
+      "description": "공연 안무를 외우려고 손과 발의 자세, 동작 순서를 칸마다 적은 노트. 랜딩의 발레 장면이 이 노트를 바탕으로 해요.",
+      "description_en": "Notes listing hand and foot positions and the order of steps for a performance. The ballet scene on this page is based on them.",
+      "content_file": "choreo-notes.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/choreo-notes.webp",
+      "pages": [
+        {
+          "url": "/works/choreo-notes/page-01.jpg",
+          "caption": "안무 노트"
+        }
+      ],
+      "provenance": {
+        "category": "발레",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "손글씨 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "today",
+      "title": "오늘",
+      "title_en": "Today",
+      "category": "문학",
+      "year": null,
+      "description": "“나는 오늘이 좋아.”로 시작해 학교에서의 하루를 쓴 손글씨 글.",
+      "description_en": "A handwritten piece that begins “I like today” and tells about her day at school.",
+      "content_file": "today.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/today.webp",
+      "pages": [
+        {
+          "url": "/works/today/page-01.jpg",
+          "caption": "원고"
+        }
+      ],
+      "provenance": {
+        "category": "문학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "손글씨 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "book-story",
+      "title": "어떻게 이 책을 쓰게 되었냐",
+      "title_en": "How I Came to Write This Book",
+      "category": "문학",
+      "year": null,
+      "description": "9살 때 자기가 쓴 책이 어떻게 시작되었는지 직접 적은 글.",
+      "description_en": "At age 9, her own account of how her book began.",
+      "content_file": "book-story.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/book-story.webp",
+      "pages": [
+        {
+          "url": "/works/book-story/page-01.jpg",
+          "caption": "노트 원고"
+        }
+      ],
+      "provenance": {
+        "category": "문학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "노트 손글씨 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "soap-bubble",
+      "title": "비눗방울 마음 카드",
+      "title_en": "Soap Bubble Cards",
+      "category": "사회·기획",
+      "year": null,
+      "description": "누구에게나 자기만의 비눗방울이 있다는 것, 허락받고 들어가고 소중히 여기자는 마음을 그림 카드로 만든 작품.",
+      "description_en": "Picture cards about everyone’s own personal bubble: ask before entering, and treat others’ bubbles as precious.",
+      "content_file": "soap-bubble.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/soap-bubble.webp",
+      "pages": [
+        {
+          "url": "/works/soap-bubble/page-01.jpg",
+          "caption": "비눗방울 카드 1"
+        },
+        {
+          "url": "/works/soap-bubble/page-02.jpg",
+          "caption": "비눗방울 카드 2"
+        }
+      ],
+      "provenance": {
+        "category": "사회·기획",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "손그림 카드 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "save-earth",
+      "title": "Save the Earth",
+      "title_en": "Save the Earth",
+      "category": "사회·기획",
+      "year": null,
+      "description": "Earth Day에 지구를 지키는 일곱 가지 방법을 영어로 쓰고 그린 포스터.",
+      "description_en": "An Earth Day poster with seven ways to save the Earth, written and drawn in English.",
+      "content_file": "save-earth.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/save-earth.webp",
+      "pages": [
+        {
+          "url": "/works/save-earth/page-01.jpg",
+          "caption": "포스터"
+        }
+      ],
+      "provenance": {
+        "category": "사회·기획",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "손글씨 포스터 원본 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "beautiful-cards",
+      "title": "당신은 충분히 아름답습니다",
+      "title_en": "You Are Beautiful Enough",
+      "category": "미술",
+      "year": null,
+      "description": "오려 낸 종이에 글자를 꾸며 쓴 응원 카드.",
+      "description_en": "Cut-paper cards with decorated lettering and a cheering message.",
+      "content_file": "beautiful-cards.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/beautiful-cards.webp",
+      "pages": [
+        {
+          "url": "/works/beautiful-cards/page-01.jpg",
+          "caption": "글자 카드"
+        }
+      ],
+      "provenance": {
+        "category": "미술",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "손글씨 카드 원본 사진. 전사 없이 원본 그대로 공개."
       }
     }
   ]

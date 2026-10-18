@@ -15,7 +15,7 @@ test("exhibition has no media autoplay, filters and is keyboard accessible", asy
     0,
   );
   await page.getByRole("button", { name: "문학", exact: true }).click();
-  await expect(page.locator("[data-work-card]")).toHaveCount(4);
+  await expect(page.locator("[data-work-card]")).toHaveCount(6);
   const card = page.locator("[data-work-card]").first();
   await card.click();
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -46,7 +46,7 @@ test("constellation and reduced motion retain the ordinary list", async ({
   await page.goto("/");
   await page.getByRole("button", { name: "별자리 보기" }).click();
   await expect(page.getByLabel("작품 별자리")).toBeVisible();
-  await expect(page.locator("[data-work-card]")).toHaveCount(18);
+  await expect(page.locator("[data-work-card]")).toHaveCount(33);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
