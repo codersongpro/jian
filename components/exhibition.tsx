@@ -20,7 +20,7 @@ import {
   mediaUrl,
   type Work,
   type SiteSettings,
-  type VideoCandidate,
+  type VideoLink,
 } from "@/lib/model";
 import { filterWorks } from "@/lib/validation";
 import { Artwork } from "./artwork";
@@ -84,8 +84,8 @@ export function Exhibition({
 }: {
   works: Work[];
   settings: SiteSettings;
-  mode: "review" | "setup" | "live" | "unavailable";
-  videos?: VideoCandidate[];
+  mode: "review" | "repository" | "unavailable";
+  videos?: VideoLink[];
 }) {
   return (
     <SoundProvider settings={settings}>
@@ -102,7 +102,7 @@ function Universe({
   works: Work[];
   settings: SiteSettings;
   mode: string;
-  videos: VideoCandidate[];
+  videos: VideoLink[];
 }) {
   const [category, setCategory] = useState("전체"),
     [year, setYear] = useState("전체"),
@@ -482,12 +482,6 @@ function Universe({
               날짜 근거는 작품 상세에서 확인할 수 있습니다.
             </p>
           )}
-          {mode === "setup" && (
-            <p className="collection-notice">
-              새로운 전시를 준비하고 있어요. 공개를 승인한 작품부터 이곳에
-              담습니다.
-            </p>
-          )}
           {mode === "unavailable" && (
             <p className="collection-notice" role="status">
               전시 자료를 잠시 불러올 수 없어요. 조금 뒤 다시 방문해 주세요.
@@ -747,8 +741,8 @@ function Universe({
             <div className="eyebrow">COLLECTED MOMENTS · 제공된 영상 링크</div>
             <h2 id="source-videos-title">다음 이야기를 기다리는 장면들</h2>
             <p>
-              사용자가 지정한 여섯 링크입니다. 제목·내용·작품 연결은 확인
-              중이며, 외부 링크로 열립니다.
+              작품과 함께 남긴 영상 링크입니다. 영상을 선택하면 YouTube에서
+              열립니다.
             </p>
             <div className="source-video-grid">
               {videos.map((video, i) => (
@@ -760,8 +754,12 @@ function Universe({
                 >
                   <span>0{i + 1}</span>
                   <div>
-                    <strong>사용자 지정 영상 {i + 1}</strong>
-                    <small>{video.id} · 내용 확인 전</small>
+                    <strong>{video.title || `영상 ${i + 1}`}</strong>
+                    <small>
+                      {video.title
+                        ? "YouTube에서 보기"
+                        : `${video.id} · 제목 확인 전`}
+                    </small>
                   </div>
                   <ArrowUpRight size={18} />
                 </a>

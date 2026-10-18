@@ -54,10 +54,12 @@ export type Work = {
     review_notes: string[];
   } | null;
 };
-export type VideoCandidate = {
+export type VideoLink = {
   id: string;
   url: string;
   title: string | null;
+};
+export type VideoCandidate = VideoLink & {
   publish_ready: boolean;
   embed_verified: boolean;
   playback_verified: boolean;

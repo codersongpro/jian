@@ -2,7 +2,11 @@ import type { NextConfig } from "next";
 const config: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
   outputFileTracingIncludes: {
-    "/api/admin/candidates": ["./content-bundle/**/*"],
+    "/": ["./content/**/*.md"],
+    "/api/catalog": ["./content/**/*.md"],
+  },
+  outputFileTracingExcludes: {
+    "/*": ["./content-bundle/**/*"],
   },
   poweredByHeader: false,
   async headers() {

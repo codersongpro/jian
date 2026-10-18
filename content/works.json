@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "works": [
+    {
+      "id": "poems",
+      "title": "동시 다섯 편",
+      "category": "문학",
+      "year": 2026,
+      "description": "「할머니」「봄」「무제」「나」「튤립」의 정리본 전사.",
+      "content_file": "poems.md",
+      "is_public": true,
+      "featured_order": 0,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/poems.svg",
+      "pages": [],
+      "provenance": {
+        "category": "문학",
+        "date": "2026-08-17",
+        "date_basis": "Drive 파일 생성일. 개별 시 집필일은 미확인",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "자필 원고와 정리본이 같은 PDF에 있음. 공개 텍스트는 정리본 기준."
+      }
+    },
+    {
+      "id": "family-law",
+      "title": "가족법전",
+      "category": "사회·기획",
+      "year": 2026,
+      "description": "서로 존중하고 약속을 지키기 위해 만든 가족법의 발췌.",
+      "content_file": "family-law.md",
+      "is_public": true,
+      "featured_order": 1,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/family-law.webp",
+      "pages": [
+        {
+          "url": "/works/family-law/page-07.jpg",
+          "caption": "제공 자료 1 · page-07.jpg"
+        },
+        {
+          "url": "/works/family-law/page-10.jpg",
+          "caption": "제공 자료 2 · page-10.jpg"
+        }
+      ],
+      "provenance": {
+        "category": "사회·기획",
+        "date": "2026-08-16",
+        "date_basis": "PDF 판권에 기재된 날짜",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "손글씨 원안이 포함된 편집본. 편집 문장 전체의 학생 단독 저작은 미확인."
+      }
+    },
+    {
+      "id": "river-story",
+      "title": "어리다 강물이야기",
+      "category": "그림책",
+      "year": 2023,
+      "description": "세 강물의 이야기와 손그림으로 구성된 그림책 본문.",
+      "content_file": "river-story.md",
+      "is_public": true,
+      "featured_order": 2,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/river-story.webp",
+      "pages": [
+        {
+          "url": "/works/river-story/page-03.jpg",
+          "caption": "제공 자료 1 · page-03.jpg"
+        },
+        {
+          "url": "/works/river-story/page-04.jpg",
+          "caption": "제공 자료 2 · page-04.jpg"
+        },
+        {
+          "url": "/works/river-story/page-05.jpg",
+          "caption": "제공 자료 3 · page-05.jpg"
+        },
+        {
+          "url": "/works/river-story/page-06.jpg",
+          "caption": "제공 자료 4 · page-06.jpg"
+        },
+        {
+          "url": "/works/river-story/page-07.jpg",
+          "caption": "제공 자료 5 · page-07.jpg"
+        },
+        {
+          "url": "/works/river-story/page-08.jpg",
+          "caption": "제공 자료 6 · page-08.jpg"
+        }
+      ],
+      "provenance": {
+        "category": "그림책",
+        "date": "2023-05-31",
+        "date_basis": "Drive 파일 생성일. 정확한 창작일 미확인",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "PDF 표지에 글·그림 저자 표기 확인. 글 편집·도움 범위 미확인."
+      }
+    },
+    {
+      "id": "moonjar",
+      "title": "달항아리 이야기 1",
+      "category": "미술",
+      "year": 2024,
+      "description": "달항아리와 토끼, 청룡을 연결한 이야기의 손그림 자료.",
+      "content_file": "moonjar.md",
+      "is_public": true,
+      "featured_order": 3,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/moonjar.webp",
+      "pages": [
+        {
+          "url": "/works/moonjar/drawing-3226.jpg",
+          "caption": "제공 자료 1 · drawing-3226.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3227.jpg",
+          "caption": "제공 자료 2 · drawing-3227.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3228.jpg",
+          "caption": "제공 자료 3 · drawing-3228.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3229.jpg",
+          "caption": "제공 자료 4 · drawing-3229.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3230.jpg",
+          "caption": "제공 자료 5 · drawing-3230.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3231.jpg",
+          "caption": "제공 자료 6 · drawing-3231.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3232.jpg",
+          "caption": "제공 자료 7 · drawing-3232.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3233.jpg",
+          "caption": "제공 자료 8 · drawing-3233.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3234.jpg",
+          "caption": "제공 자료 9 · drawing-3234.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3235.jpg",
+          "caption": "제공 자료 10 · drawing-3235.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3236.jpg",
+          "caption": "제공 자료 11 · drawing-3236.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3237.jpg",
+          "caption": "제공 자료 12 · drawing-3237.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3238.jpg",
+          "caption": "제공 자료 13 · drawing-3238.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3239.jpg",
+          "caption": "제공 자료 14 · drawing-3239.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3240.jpg",
+          "caption": "제공 자료 15 · drawing-3240.jpg"
+        },
+        {
+          "url": "/works/moonjar/drawing-3241.jpg",
+          "caption": "제공 자료 16 · drawing-3241.jpg"
+        },
+        {
+          "url": "/works/moonjar/book-page-06.jpg",
+          "caption": "제공 자료 17 · book-page-06.jpg"
+        },
+        {
+          "url": "/works/moonjar/book-page-08.jpg",
+          "caption": "제공 자료 18 · book-page-08.jpg"
+        },
+        {
+          "url": "/works/moonjar/book-page-10.jpg",
+          "caption": "제공 자료 19 · book-page-10.jpg"
+        }
+      ],
+      "provenance": {
+        "category": "그림책·미술",
+        "date": "2024-08-01",
+        "date_basis": "PDF 판권 및 관련 원고 파일 날짜",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "완성 PDF와 대응하는 손그림 사진 확인. HWP 내부 내용은 미검수."
+      }
+    },
+    {
+      "id": "craft-moon",
+      "title": "초승달과 토끼",
+      "category": "공예·디자인",
+      "year": null,
+      "description": "초승달과 토끼를 결합한 입체 작품.",
+      "content_file": "craft-moon.md",
+      "is_public": true,
+      "featured_order": 4,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/craft-moon.webp",
+      "pages": [
+        {
+          "url": "/works/craft-moon/photo.jpg",
+          "caption": "제공 자료 1 · photo.jpg"
+        }
+      ],
+      "provenance": {
+        "category": "입체·공예",
+        "date": null,
+        "date_basis": "제작일 미확인",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "작품 사진 확인. 단독 구상·제작은 보호자 대화 진술에 근거."
+      }
+    },
+    {
+      "id": "craft-wire",
+      "title": "철사와 비즈 장신구",
+      "category": "공예·디자인",
+      "year": null,
+      "description": "장신구 제작과 포장·라벨까지 이어진 작업 기록.",
+      "content_file": "craft-wire.md",
+      "is_public": true,
+      "featured_order": 5,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/craft-wire.webp",
+      "pages": [
+        {
+          "url": "/works/craft-wire/photo-1.jpg",
+          "caption": "제공 자료 1 · photo-1.jpg"
+        },
+        {
+          "url": "/works/craft-wire/photo-2.jpg",
+          "caption": "제공 자료 2 · photo-2.jpg"
+        }
+      ],
+      "provenance": {
+        "category": "공예·디자인",
+        "date": null,
+        "date_basis": "제작일 미확인",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "작품 사진 확인. 단독 구상·제작은 보호자 대화 진술에 근거."
+      }
+    },
+    {
+      "id": "acorn",
+      "title": "토토와 함께하는 도토리 관찰 일지",
+      "category": "과학",
+      "year": null,
+      "description": "토끼 캐릭터와 질문으로 구성한 도토리 탐구 기록.",
+      "content_file": "acorn.md",
+      "is_public": true,
+      "featured_order": 6,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/acorn.webp",
+      "pages": [
+        {
+          "url": "/works/acorn/photo.jpg",
+          "caption": "제공 자료 1 · photo.jpg"
+        }
+      ],
+      "provenance": {
+        "category": "과학·정보 표현",
+        "date": null,
+        "date_basis": "제작일 미확인",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "대화에 첨부된 손글씨·그림 사진 직접 확인."
+      }
+    },
+    {
+      "id": "ai-talk",
+      "title": "AI Talk 앱 제작 계획서",
+      "category": "앱 기획",
+      "year": 2025,
+      "description": "대화 상대가 필요한 사람을 위한 앱의 대상·기능·화면 요소 기획.",
+      "content_file": "ai-talk.md",
+      "is_public": true,
+      "featured_order": 7,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/ai-talk.svg",
+      "pages": [],
+      "provenance": {
+        "category": "앱 기획",
+        "date": "2025-12-31",
+        "date_basis": "원문 계획서 기재일",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "연결 Google Docs 원문과 PDF 내보내기 확인."
+      }
+    },
+    {
+      "id": "fall-letter",
+      "title": "A Letter to Fall",
+      "category": "문학",
+      "year": null,
+      "description": "가을을 친구처럼 대하며 쓴 영어 편지의 본문 전사.",
+      "content_file": "fall-letter.md",
+      "is_public": true,
+      "featured_order": 8,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/fall-letter.svg",
+      "pages": [],
+      "provenance": {
+        "category": "영어·문학",
+        "date": null,
+        "date_basis": "제작일 미확인",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "대화 첨부 사진의 본문 직접 확인. 교정본이 아닌 전사."
+      }
+    }
+  ]
+}

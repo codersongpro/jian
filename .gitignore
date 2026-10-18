@@ -7,5 +7,5 @@ playwright-report/
 *.tsbuildinfo
 next-env.d.ts
 .superpowers/
-# Local review candidates: import privately into Supabase before public release.
+# Original candidate bundle and internal notes. Public selections are in content/ and public/works/.
 content-bundle/

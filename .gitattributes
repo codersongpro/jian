@@ -1,0 +1,2 @@
+# Preserve the supplied Markdown transcriptions, including original CRLF bytes.
+content/*.md -text whitespace=cr-at-eol
