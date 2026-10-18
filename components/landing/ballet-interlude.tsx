@@ -3,22 +3,24 @@ import { useEffect, useRef, useState } from "react";
 import { useCopy } from "../lang";
 import { useInView } from "./use-scroll";
 
-// 발레: 관절로 이어진 발레리나가 동작 버튼에 맞춰 자세를 부드럽게 바꿉니다.
+// 발레: 지안이가 공연 안무를 외우려고 직접 적은 '안무 노트'의 순서대로 발레리나가 춤춥니다.
 // 각도는 '아래로 곧게'가 0도, 양수면 화면 왼쪽으로 돌아갑니다.
 // [왼팔, 왼팔 아래, 오른팔, 오른팔 아래, 왼다리, 왼종아리, 오른다리, 오른종아리, 높이]
 type Pose = number[];
 const POSES: Pose[] = [
-  [18, -35, -18, 35, 3, 0, -3, 0, 0], // 1번 포지션 (팔은 아래로 둥글게)
-  [75, 8, -75, -8, 28, -50, -28, 50, 22], // 플리에 (팔은 옆으로)
-  [160, 30, -160, -30, 2, 0, -2, 0, -14], // 를르베 (팔은 머리 위로)
-  [125, 5, -100, -5, 0, 0, -95, 0, -8], // 아라베스크
-  [55, -85, -55, 85, 0, 0, -75, 135, -14], // 피루엣 (파세)
+  [165, 30, -60, 20, 0, 0, -14, 0, 0], // 포즈: 4번 손(한 팔 위, 한 팔 앞), 4번 발
+  [160, 25, -82, -6, 0, 0, -95, -55, -6], // 에티튜드: 뒤로 든 다리의 무릎을 둥글게
+  [75, 8, -75, -8, 28, -50, -28, 50, 22], // 플리에
+  [40, -70, -40, 70, 2, 0, -2, 0, -14], // 쉐네: 발끝으로 서서 돌기
+  [55, -85, -55, 85, 0, 0, -75, 135, -14], // 파세
+  [140, 0, -140, 0, 0, 0, -22, 0, 0], // 엔딩: 두 팔을 활짝, 한 발 포인
 ];
+const TURN = 3; // 쉐네에서 한 바퀴 돕니다.
 const SHOULDER_L: [number, number] = [187, 172],
   SHOULDER_R: [number, number] = [213, 172],
   HIP_L: [number, number] = [193, 280],
   HIP_R: [number, number] = [207, 280];
-const NOTES = [523.25, 587.33, 659.25, 783.99, 1046.5];
+const NOTES = [523.25, 587.33, 659.25, 783.99, 880, 1046.5];
 
 const rad = (d: number) => (d * Math.PI) / 180;
 const reach = ([x, y]: [number, number], len: number, deg: number) =>
@@ -54,7 +56,7 @@ export function BalletInterlude({
     cancelAnimationFrame(frame.current);
     const from = current.current,
       to = POSES[index];
-    if (index === 4) setSpin((s) => s + 1);
+    if (index === TURN) setSpin((s) => s + 1);
     if (reduced) {
       current.current = to;
       setAngles(to);
@@ -70,6 +72,27 @@ export function BalletInterlude({
       if (k < 1) frame.current = requestAnimationFrame(step);
     };
     frame.current = requestAnimationFrame(step);
+  };
+
+  // 한 동작을 고르면 시범과 이어 추기를 멈추고 그 동작으로
+  const pick = (i: number) => {
+    touched.current = true;
+    clearInterval(demo.current);
+    go(i);
+    if (i === TURN) onTurn();
+    else tone(NOTES[i]);
+  };
+  // 노트대로 춤추기: 첫 동작부터 마지막 인사까지 차례로
+  const playAll = () => {
+    touched.current = true;
+    clearInterval(demo.current);
+    let i = 0;
+    pick(0);
+    demo.current = setInterval(() => {
+      i++;
+      if (i >= POSES.length) return clearInterval(demo.current);
+      pick(i);
+    }, 1500);
   };
 
   // 화면에 들어오면 사용자가 누르기 전까지 동작을 차례로 보여 줍니다.
@@ -117,6 +140,18 @@ export function BalletInterlude({
             <br />
             <em>{t.balletTitle[1]}</em>
           </h2>
+          <p className="ballet-text">{t.balletText}</p>
+          {/* 안무 노트 카드: 지금 추는 동작에 밑줄 */}
+          <div className="ballet-note" aria-hidden="true">
+            <strong>{t.balletNote}</strong>
+            <ol>
+              {t.balletPoses.map((p, i) => (
+                <li key={p.name} className={pose === i ? "now" : ""}>
+                  {p.name}
+                </li>
+              ))}
+            </ol>
+          </div>
           <div className="ballet-steps" role="group" aria-label={t.balletLabel}>
             {t.balletPoses.map((p, i) => (
               <button
@@ -124,21 +159,18 @@ export function BalletInterlude({
                 type="button"
                 aria-pressed={pose === i}
                 className={pose === i ? "active" : ""}
-                onClick={() => {
-                  touched.current = true;
-                  clearInterval(demo.current);
-                  go(i);
-                  if (i === 4) onTurn();
-                  else tone(NOTES[i]);
-                }}
+                onClick={() => pick(i)}
               >
-                {p.name}
+                <small>{i + 1}</small> {p.name}
               </button>
             ))}
           </div>
           <p className="ballet-desc" aria-live="polite">
             {t.balletPoses[pose].desc}
           </p>
+          <button type="button" className="ballet-play" onClick={playAll}>
+            ▶ {t.balletPlay}
+          </button>
           <p className="interlude-hint">{t.balletHint}</p>
         </div>
         <svg

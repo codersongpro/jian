@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import { Minus, Plus, RotateCcw } from "lucide-react";
+import { ArrowUpRight, Minus, Plus, RotateCcw } from "lucide-react";
 import { useCopy } from "../lang";
 
-// 수학: 원을 똑같이 나누고 조각을 칠하면 분수·약분·약수가 바로 보입니다.
-// (지안이의 칠판 수업 '분수란? · 약수'에서 가져온 장면)
+// 수학: '지안 수학 선생님'의 칠판 수업. 강의 목록은 지안이가 직접 쓴 칠판에서 가져왔고,
+// 첫 수업 '분수란?'에서 원을 나눠 칠하면 분수가, 약분하면 다음 수업 '약수'가 이어집니다.
 const MIN = 2,
   MAX = 12,
   R = 150,
@@ -32,15 +32,20 @@ function slice(i: number, n: number) {
 export function MathInterlude({
   tone,
   onWhole,
+  onOpenBoard,
 }: {
   tone: (f: number) => void;
   onWhole: () => void;
+  /** 「지안 선생님의 칠판」 작품 열기 (작품이 없으면 생략) */
+  onOpenBoard?: () => void;
 }) {
   const { t } = useCopy();
   const [n, setN] = useState(8),
     [filled, setFilled] = useState<number[]>([]);
   const k = filled.length,
-    g = k ? gcd(k, n) : 1;
+    g = k ? gcd(k, n) : 1,
+    // 약분이 되는 순간 다음 수업 '약수'로 넘어갑니다.
+    lesson = k > 0 && k < n && g > 1 ? 3 : 0;
 
   const resize = (next: number) => {
     setN(Math.min(MAX, Math.max(MIN, next)));
@@ -63,41 +68,31 @@ export function MathInterlude({
         <div className="interlude-label">
           <span>INTERLUDE · 03</span> {t.mathLabel}
         </div>
+        <p className="math-board-title">{t.mathBoard}</p>
         <h2 id="math-title">
           {t.mathTitle[0]}
           <br />
           <em>{t.mathTitle[1]}</em>
         </h2>
-        <div className="math-readout" aria-live="polite">
-          <span className="fraction" aria-hidden="true">
-            <b>{k}</b>
-            <i />
-            <b>{n}</b>
-          </span>
-          {k > 0 && k < n && g > 1 && (
-            <span className="fraction simplified" aria-hidden="true">
-              <em>=</em>
-              <b>{k / g}</b>
-              <i />
-              <b>{n / g}</b>
-            </span>
+        <p className="math-text">{t.mathText}</p>
+        <div className="math-syllabus">
+          <strong>{t.mathSyllabusTitle}</strong>
+          <ol>
+            {t.mathSyllabus.map((item, i) => (
+              <li
+                key={item}
+                className={i === lesson ? "now" : i < lesson ? "done" : ""}
+                aria-current={i === lesson ? "step" : undefined}
+              >
+                {item}
+              </li>
+            ))}
+          </ol>
+          {onOpenBoard && (
+            <button type="button" className="text-link" onClick={onOpenBoard}>
+              {t.mathOpenBoard} <ArrowUpRight size={14} />
+            </button>
           )}
-          {k === n && (
-            <span className="fraction simplified" aria-hidden="true">
-              <em>=</em>
-              <b>1</b>
-            </span>
-          )}
-          <p>{k === n ? t.mathWhole : t.mathFilled(k, n)}</p>
-        </div>
-        <div className="math-divisors">
-          <span>{t.mathDivisors(n)}</span>
-          {divisors(n).map((d) => (
-            // 약분에 쓰인 최대공약수를 강조
-            <b key={d} className={k > 0 && g === d ? "active" : ""}>
-              {d}
-            </b>
-          ))}
         </div>
         <p className="interlude-hint">{t.mathHint}</p>
       </div>
@@ -156,6 +151,37 @@ export function MathInterlude({
           >
             <RotateCcw size={16} />
           </button>
+        </div>
+        <div className="math-readout" aria-live="polite">
+          <span className="fraction" aria-hidden="true">
+            <b>{k}</b>
+            <i />
+            <b>{n}</b>
+          </span>
+          {k > 0 && k < n && g > 1 && (
+            <span className="fraction simplified" aria-hidden="true">
+              <em>=</em>
+              <b>{k / g}</b>
+              <i />
+              <b>{n / g}</b>
+            </span>
+          )}
+          {k === n && (
+            <span className="fraction simplified" aria-hidden="true">
+              <em>=</em>
+              <b>1</b>
+            </span>
+          )}
+          <p>{k === n ? t.mathWhole : t.mathFilled(k, n)}</p>
+        </div>
+        <div className="math-divisors">
+          <span>{t.mathDivisors(n)}</span>
+          {divisors(n).map((d) => (
+            // 약분에 쓰인 최대공약수를 강조
+            <b key={d} className={k > 0 && g === d ? "active" : ""}>
+              {d}
+            </b>
+          ))}
         </div>
       </div>
     </section>

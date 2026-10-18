@@ -689,7 +689,15 @@ function Universe({
           economy={economy}
           onSpawn={() => effect("orbit")}
         />
-        <MathInterlude tone={tone} onWhole={() => effect("chime")} />
+        <MathInterlude
+          tone={tone}
+          onWhole={() => effect("chime")}
+          onOpenBoard={
+            works.some((w) => w.id === "teacher-board")
+              ? () => open(works.find((w) => w.id === "teacher-board")!)
+              : undefined
+          }
+        />
         <section className="field-section section-shell reveal">
           <div className="eyebrow">
             <span className="section-index">03</span> MANY WAYS TO WONDER

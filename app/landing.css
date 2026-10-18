@@ -1932,3 +1932,142 @@ html {
 .math-slice:focus:not(:focus-visible) {
   outline: none;
 }
+
+/* ---------- 17. 수학·발레 서사 ---------- */
+.math-board-title {
+  margin-top: 18px;
+  font-family: var(--font-kr), var(--serif);
+  font-size: 18px;
+  color: #3b5b8c;
+  letter-spacing: 0.04em;
+}
+.math-copy h2 {
+  margin-top: 8px;
+}
+.math-text {
+  margin-top: 16px;
+  font-size: 17px;
+  line-height: 1.85;
+  color: #4b5a52;
+  max-width: 34em;
+}
+.math-syllabus {
+  margin-top: 22px;
+  padding: 18px 20px 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow:
+    inset 0 0 0 1px #e4e2d8,
+    0 14px 30px rgb(53 72 63 / 0.08);
+  max-width: 420px;
+}
+.math-syllabus strong {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--fg-soft);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.math-syllabus ol {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  font-family: var(--font-kr), var(--serif);
+  font-size: 16px;
+  color: #2f4038;
+}
+.math-syllabus li {
+  position: relative;
+  padding: 3px 0 3px 22px;
+}
+.math-syllabus li::before {
+  content: "–";
+  position: absolute;
+  left: 4px;
+  color: #b8b4a4;
+}
+.math-syllabus li.now {
+  color: #c0392b;
+  font-weight: 700;
+}
+.math-syllabus li.now::before {
+  content: "▶";
+  font-size: 11px;
+  top: 7px;
+  color: #c0392b;
+}
+.math-syllabus li.done {
+  color: #9aa193;
+  text-decoration: line-through;
+}
+.math-syllabus .text-link {
+  margin-top: 10px;
+  font-size: 15px;
+}
+.ballet-text {
+  margin-top: 14px;
+  font-size: 17px;
+  line-height: 1.85;
+  color: #ffe9ef;
+  max-width: 32em;
+}
+.ballet-note {
+  margin-top: 20px;
+  padding: 14px 18px;
+  max-width: 360px;
+  border-radius: 6px;
+  color: #3a2550;
+  background:
+    repeating-linear-gradient(
+      transparent 0 27px,
+      rgb(120 140 190 / 0.25) 27px 28px
+    ),
+    #fffaf3;
+  box-shadow: 0 16px 30px rgb(30 10 40 / 0.25);
+  transform: rotate(-1.2deg);
+}
+.ballet-note strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #8a6a7c;
+  margin-bottom: 4px;
+}
+.ballet-note ol {
+  margin: 0;
+  padding-left: 22px;
+  font-family: var(--font-kr), var(--serif);
+  font-size: 16px;
+  line-height: 28px;
+}
+.ballet-note li.now {
+  font-weight: 700;
+  text-decoration: underline wavy #e07a9a;
+  text-underline-offset: 4px;
+}
+.ballet-steps button small {
+  opacity: 0.7;
+  margin-right: 2px;
+}
+.ballet-play {
+  margin-top: 6px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, #ffd9e4, var(--gold));
+  color: #3a2550;
+  font-size: 15px;
+  font-weight: 600;
+}
+.ballet-play:hover {
+  transform: translateY(-2px);
+}
+.math-stage .math-readout {
+  margin-top: 4px;
+  justify-content: center;
+  text-align: center;
+}
+.math-stage .math-divisors {
+  margin-top: 0;
+  justify-content: center;
+}
