@@ -5,6 +5,8 @@ import { Artwork } from "./artwork";
 import { AudioPlayer, VideoPlayer } from "./media-player";
 import { mediaUrl, type Work } from "@/lib/model";
 import { ContentText } from "./content-text";
+import { useCopy } from "./lang";
+import { categoryLabel } from "@/lib/i18n";
 
 export function WorkDialog({
   work,
@@ -16,6 +18,7 @@ export function WorkDialog({
   const dialog = useRef<HTMLDialogElement>(null);
   const [zoom, setZoom] = useState(false);
   const [page, setPage] = useState(0);
+  const { lang, t } = useCopy();
   useEffect(() => {
     const el = dialog.current;
     if (!el || !work) return;
@@ -53,7 +56,7 @@ export function WorkDialog({
       <div className="dialog-inner">
         <button
           className="icon-button dialog-close"
-          aria-label="작품 닫기"
+          aria-label={t.dialogClose}
           onClick={onClose}
         >
           <X />
@@ -61,7 +64,7 @@ export function WorkDialog({
         <div className="dialog-visual">
           <button
             className="dialog-art"
-            aria-label={zoom ? "이미지 축소" : "이미지 확대"}
+            aria-label={zoom ? t.zoomOut : t.zoomIn}
             onClick={() => setZoom(!zoom)}
           >
             {images.length ? (
@@ -76,13 +79,13 @@ export function WorkDialog({
             )}
             <span>
               <ZoomIn size={16} />
-              {zoom ? "축소" : "크게 감상하기"}
+              {zoom ? t.zoomOutShort : t.zoomInShort}
             </span>
           </button>
           {images.length > 1 && (
-            <nav className="page-navigation" aria-label="작품 페이지">
+            <nav className="page-navigation" aria-label={t.pagesLabel}>
               <button disabled={page === 0} onClick={() => setPage(page - 1)}>
-                이전
+                {t.prev}
               </button>
               <span aria-live="polite">
                 {page + 1} / {images.length}
@@ -91,7 +94,7 @@ export function WorkDialog({
                 disabled={page === images.length - 1}
                 onClick={() => setPage(page + 1)}
               >
-                다음
+                {t.next}
               </button>
             </nav>
           )}
@@ -105,34 +108,37 @@ export function WorkDialog({
               target="_blank"
               rel="noopener noreferrer"
             >
-              제공된 이미지 크게 열기 <ArrowUpRight size={13} />
+              {t.openImage} <ArrowUpRight size={13} />
             </a>
           )}
         </div>
         <div className="dialog-copy">
           <div className="eyebrow">
-            {work.category} · {work.year ?? "제작일 미확인"}
-            {work.sample ? " · 전시용 예시" : ""}
+            {categoryLabel(work.category, lang)} · {work.year ?? t.unknownDate}
+            {work.sample ? t.sampleTag : ""}
           </div>
-          <h2 id="work-title">{work.title}</h2>
-          <p>{work.description}</p>
+          <h2 id="work-title">
+            {(lang === "en" && work.title_en) || work.title}
+          </h2>
+          <p>{(lang === "en" && work.description_en) || work.description}</p>
+          {t.originalNote && <p className="dialog-note">{t.originalNote}</p>}
           {work.provenance && (
             <section className="work-provenance">
-              <h3>제공 자료의 기록</h3>
+              <h3>{t.recordTitle}</h3>
               <dl>
-                <dt>자료 날짜</dt>
+                <dt>{t.recordDate}</dt>
                 <dd>
-                  {work.provenance.date || "미확인"} ·{" "}
+                  {work.provenance.date || t.recordUnknown} ·{" "}
                   {work.provenance.date_basis}
                 </dd>
-                <dt>원래 분야</dt>
+                <dt>{t.recordCategory}</dt>
                 <dd>{work.provenance.category}</dd>
-                <dt>전사·편집 안내</dt>
+                <dt>{t.recordNote}</dt>
                 <dd>{work.provenance.authorship_note}</dd>
               </dl>
               {!work.is_public && work.review && (
                 <details>
-                  <summary>공개 전 확인할 사항</summary>
+                  <summary>{t.recordReview}</summary>
                   <ul>
                     {work.review.review_notes.map((note) => (
                       <li key={note}>{note}</li>
@@ -156,9 +162,7 @@ export function WorkDialog({
           {work.youtube_id && <VideoPlayer id={work.youtube_id} />}
           <div className="dialog-note">
             <ArrowUpRight size={14} />
-            {work.sample
-              ? "실제 작품은 전시 준비 후 만날 수 있어요."
-              : "하나의 호기심에서 시작된 이야기"}
+            {work.sample ? t.dialogFootSample : t.dialogFoot}
           </div>
         </div>
       </div>

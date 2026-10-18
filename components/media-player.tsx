@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Play } from "lucide-react";
 import { useSound } from "./sound-provider";
+import { useCopy } from "./lang";
 
 export function AudioPlayer({ src, title }: { src: string; title: string }) {
   const ref = useRef<HTMLAudioElement>(null),
@@ -11,6 +12,8 @@ export function AudioPlayer({ src, title }: { src: string; title: string }) {
     frame = useRef(0);
   const { pauseBackground, reduced } = useSound();
   const [error, setError] = useState("");
+  const { lang } = useCopy();
+  const en = lang === "en";
   function stop() {
     cancelAnimationFrame(frame.current);
     const el = canvas.current;
@@ -75,7 +78,7 @@ export function AudioPlayer({ src, title }: { src: string; title: string }) {
   }, []);
   return (
     <div className="audio-player">
-      <div className="eyebrow">ORIGINAL AUDIO · 작품 오디오</div>
+      <div className="eyebrow">ORIGINAL AUDIO{en ? "" : " · 작품 오디오"}</div>
       <p>{title}</p>
       <audio
         ref={ref}
@@ -87,7 +90,9 @@ export function AudioPlayer({ src, title }: { src: string; title: string }) {
         onEnded={stop}
         onError={() =>
           setError(
-            "오디오를 불러올 수 없습니다. 공개 상태와 파일을 확인해 주세요.",
+            en
+              ? "The audio could not be loaded."
+              : "오디오를 불러올 수 없습니다. 공개 상태와 파일을 확인해 주세요.",
           )
         }
         aria-label={title}
@@ -141,6 +146,8 @@ export function VideoPlayer({ id }: { id: string }) {
   pause.current = pauseBackground;
   const [load, setLoad] = useState(false),
     [error, setError] = useState(false);
+  const { lang } = useCopy();
+  const en = lang === "en";
   useEffect(() => {
     if (!load) return;
     let active = true;
@@ -182,21 +189,27 @@ export function VideoPlayer({ id }: { id: string }) {
       {!load ? (
         <button className="video-consent" onClick={() => setLoad(true)}>
           <Play size={30} />
-          <span>공연·연주 영상 불러오기</span>
-          <small>YouTube에 연결됩니다 · 자동 재생 없음</small>
+          <span>
+            {en ? "Load performance video" : "공연·연주 영상 불러오기"}
+          </span>
+          <small>
+            {en
+              ? "Connects to YouTube · no autoplay"
+              : "YouTube에 연결됩니다 · 자동 재생 없음"}
+          </small>
         </button>
       ) : (
         <div className="video-frame" ref={host} />
       )}{" "}
       {error && (
         <p role="alert">
-          영상을 불러올 수 없습니다.{" "}
+          {en ? "The video could not be loaded." : "영상을 불러올 수 없습니다."}{" "}
           <a
             href={`https://www.youtube.com/watch?v=${id}`}
             target="_blank"
             rel="noreferrer"
           >
-            YouTube에서 보기
+            {en ? "Watch on YouTube" : "YouTube에서 보기"}
           </a>
         </p>
       )}

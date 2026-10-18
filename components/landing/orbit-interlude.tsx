@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { fitCanvas, seeded, useInView } from "./use-scroll";
+import { useCopy } from "../lang";
 
 // 과학·수학: 누르면 새 별이 태어나 궤도를 돌고, 꾹 누르면 그 자리에 중력이 생깁니다.
 type Body = {
@@ -32,6 +33,7 @@ export function OrbitInterlude({
     visible = useRef(false),
     loop = useRef<() => void>(() => {});
   const [count, setCount] = useState(0);
+  const { t } = useCopy();
 
   // 시작할 때 세 개의 행성을 원 궤도에 올려 둡니다.
   const circular = (
@@ -189,7 +191,7 @@ export function OrbitInterlude({
         <canvas
           ref={canvas}
           className="orbit-canvas"
-          aria-label="눌러서 새 별을 궤도에 올리는 중력 놀이"
+          aria-label={t.orbitCanvas}
           role="img"
           onPointerDown={(e) => {
             const p = point(e);
@@ -233,12 +235,12 @@ export function OrbitInterlude({
         />
         <div className="orbit-copy">
           <div className="interlude-label">
-            <span>INTERLUDE · 02</span> 과학·수학 — 끌어당기는 힘
+            <span>INTERLUDE · 02</span> {t.orbitLabel}
           </div>
           <h2 id="orbit-title">
-            세상의 모든 것은
+            {t.orbitTitle[0]}
             <br />
-            <em>서로를 끌어당겨요.</em>
+            <em>{t.orbitTitle[1]}</em>
           </h2>
           <p className="orbit-formula" aria-hidden="true">
             F = G · m₁m₂ / r²
@@ -246,9 +248,9 @@ export function OrbitInterlude({
         </div>
         <div className="orbit-status">
           <span>
-            궤도를 도는 별 <strong>{String(count).padStart(2, "0")}</strong>
+            {t.orbitCount} <strong>{String(count).padStart(2, "0")}</strong>
           </span>
-          <span>누르면 별이 태어나요 · 꾹 누르면 중력이 생겨요</span>
+          <span>{t.orbitHint}</span>
         </div>
       </div>
     </section>

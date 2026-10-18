@@ -27,6 +27,9 @@ export type Media = {
 export type Work = {
   id: string;
   title: string;
+  /** 영어 페이지용 제목·소개 (없으면 한국어를 그대로 표시) */
+  title_en?: string;
+  description_en?: string;
   category: Category;
   year: number | null;
   description: string;

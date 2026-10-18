@@ -32,34 +32,28 @@ import { WordsInterlude } from "./landing/words-interlude";
 import { OrbitInterlude } from "./landing/orbit-interlude";
 import { PaintInterlude } from "./landing/paint-interlude";
 import { RhythmInterlude } from "./landing/rhythm-interlude";
+import { LangProvider, useCopy } from "./lang";
+import { categoryLabel, type Lang } from "@/lib/i18n";
 
 const fieldCopy = [
   {
     category: "문학",
     label: "WORDS & WONDER",
-    title: "마음이 글이 되는 순간",
-    text: "일상에서 주운 작은 생각들을 한 글자씩, 나만의 이야기로 엮어요.",
     symbol: "01 / LITERATURE",
   },
   {
     category: "과학",
     label: "SCIENCE & PATTERNS",
-    title: "세상에 물음표를 건네다",
-    text: "왜 그럴까? 어떻게 될까? 하나의 질문이 또 다른 발견으로 이어져요.",
     symbol: "02 / DISCOVERY",
   },
   {
     category: "미술",
     label: "ART & EXPRESSION",
-    title: "색과 선으로 펼치는 상상",
-    text: "눈에 보이는 것 너머, 마음에 담긴 풍경을 자유롭게 그려요.",
     symbol: "03 / CREATION",
   },
   {
     category: "음악",
     label: "NOTES & MOVEMENT",
-    title: "소리와 몸짓으로 전하는 말",
-    text: "작은 음표와 발끝의 곡선이 말로 다 못한 이야기를 들려줘요.",
     symbol: "04 / HARMONY",
   },
 ];
@@ -87,16 +81,25 @@ export function Exhibition({
   settings,
   mode,
   videos = [],
+  lang = "ko",
 }: {
   works: Work[];
   settings: SiteSettings;
   mode: "review" | "repository" | "unavailable";
   videos?: VideoLink[];
+  lang?: Lang;
 }) {
   return (
-    <SoundProvider settings={settings} autoplay>
-      <Universe works={works} settings={settings} mode={mode} videos={videos} />
-    </SoundProvider>
+    <LangProvider lang={lang}>
+      <SoundProvider settings={settings} autoplay>
+        <Universe
+          works={works}
+          settings={settings}
+          mode={mode}
+          videos={videos}
+        />
+      </SoundProvider>
+    </LangProvider>
   );
 }
 function Universe({
@@ -119,6 +122,13 @@ function Universe({
     [stage, setStage] = useState<"intro" | "ready">("intro"),
     [replay, setReplay] = useState(0);
   const [economy, setEconomy] = useState(false);
+  const { lang, t } = useCopy();
+  const title = (w: Work) => (lang === "en" && w.title_en) || w.title,
+    blurb = (w: Work) => (lang === "en" && w.description_en) || w.description;
+  // 영어 페이지에서는 <html lang>도 영어로 바꿉니다.
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
   useEffect(() => {
     const hardware = navigator as Navigator & {
       deviceMemory?: number;
@@ -247,26 +257,34 @@ function Universe({
         </div>
       )}
       <a href="#collection" className="skip-link">
-        작품 목록으로 건너뛰기
+        {t.skip}
       </a>
       <header className="site-header">
-        <a href="#" className="brand" aria-label="Jian’s Universe 홈">
+        <a href="#" className="brand" aria-label={t.home}>
           <Star />
           <span>
             jian’s universe<span className="brand-dot">.</span>
           </span>
         </a>
-        <nav aria-label="메인 메뉴">
-          <a href="#about">작은 우주 소개</a>
-          <a href="#collection">작품 둘러보기</a>
-          <a href="#journey">성장의 기록</a>
+        <nav aria-label={t.navLabel}>
+          <a href="#about">{t.navAbout}</a>
+          <a href="#collection">{t.navCollection}</a>
+          <a href="#journey">{t.navJourney}</a>
         </nav>
         <div className="header-controls">
+          <a
+            className="lang-switch"
+            href={t.langSwitchHref}
+            hrefLang={lang === "en" ? "ko" : "en"}
+            aria-label={t.langSwitchLabel}
+          >
+            {t.langSwitch}
+          </a>
           <button
             disabled={!ready}
             data-sound-control
             className={`sound-toggle ${wanted ? "is-on" : ""}`}
-            aria-label={wanted ? "사운드 끄기" : "사운드 켜기"}
+            aria-label={wanted ? t.soundOff : t.soundOn}
             onClick={() => void toggle()}
           >
             {wanted ? <Volume2 size={15} /> : <VolumeX size={15} />}
@@ -275,7 +293,7 @@ function Universe({
           <button
             disabled={!ready}
             className="icon-button settings-button"
-            aria-label="감상 설정"
+            aria-label={t.settings}
             aria-expanded={panel}
             onClick={() => setPanel(!panel)}
           >
@@ -284,12 +302,12 @@ function Universe({
         </div>
       </header>
       {panel && (
-        <section className="preferences" aria-label="감상 설정 패널">
+        <section className="preferences" aria-label={t.settingsPanel}>
           <div className="eyebrow">MAKE YOURSELF AT HOME</div>
-          <h2>나만의 감상 방식</h2>
-          <p>소리 없이도 충분히 아름다운 우주예요.</p>
+          <h2>{t.settingsTitle}</h2>
+          <p>{t.settingsText}</p>
           <label>
-            <span>배경 음악</span>
+            <span>{t.music}</span>
             <input
               type="checkbox"
               checked={preferences.music}
@@ -297,7 +315,7 @@ function Universe({
             />
           </label>
           <label>
-            <span>효과음</span>
+            <span>{t.effects}</span>
             <input
               type="checkbox"
               checked={preferences.effects}
@@ -305,7 +323,7 @@ function Universe({
             />
           </label>
           <label>
-            <span>모션 최소화</span>
+            <span>{t.reduceMotion}</span>
             <input
               type="checkbox"
               checked={preferences.reduced}
@@ -313,9 +331,9 @@ function Universe({
             />
           </label>
           <label>
-            <span>볼륨</span>
+            <span>{t.volume}</span>
             <input
-              aria-label="볼륨"
+              aria-label={t.volume}
               type="range"
               min="0"
               max="1"
@@ -326,7 +344,7 @@ function Universe({
           </label>
           {enabled && paused && (
             <button className="text-link" onClick={resumeBackground}>
-              배경 음악 재개 <ArrowRight size={14} />
+              {t.resumeMusic} <ArrowRight size={14} />
             </button>
           )}
           {error && <p role="alert">{error}</p>}
@@ -357,21 +375,20 @@ function Universe({
               <Star className="title-star" />
             </h1>
             <p className="hero-subtitle">
-              작은 호기심에서 시작된
+              {t.heroSubtitle[0]}
               <br />
-              <strong>커다란 이야기</strong>
+              <strong>{t.heroSubtitle[1]}</strong>
             </p>
             <p className="hero-description">
-              글로, 그림으로, 소리와 몸짓으로.
+              {t.heroDescription[0]}
               <br />
-              지안이의 생각이 반짝이는 작은 우주에 오신 걸 환영해요.
+              {t.heroDescription[1]}
             </p>
             <a className="primary-button" href="#collection">
-              지안이의 우주 둘러보기 <ArrowUpRight size={17} />
+              {t.heroCta} <ArrowUpRight size={17} />
             </a>
             <div className="hero-footnote">
-              <span className="mini-orbit">✧</span> 생각이 작품이 되고, 작품이
-              하나의 세계가 되는 곳
+              <span className="mini-orbit">✧</span> {t.heroFootnote}
             </div>
           </div>
           <div
@@ -438,13 +455,13 @@ function Universe({
                 data-motion={String(w.motion_enabled)}
                 className={`hero-card hero-card-${i + 1}`}
                 onClick={() => open(w, "star")}
-                aria-label={`${w.title} 미리보기`}
+                aria-label={t.preview(title(w))}
               >
                 <div className="hero-card-art">
                   <Artwork work={w} />
                 </div>
                 <span className="hero-card-caption">
-                  <span>{w.title}</span>
+                  <span>{title(w)}</span>
                   <ArrowUpRight size={13} />
                 </span>
               </button>
@@ -453,9 +470,9 @@ function Universe({
               <div className="hero-empty">
                 <Star />
                 <p>
-                  새로운 이야기를
+                  {t.heroEmpty[0]}
                   <br />
-                  준비하고 있어요.
+                  {t.heroEmpty[1]}
                 </p>
               </div>
             )}
@@ -495,23 +512,20 @@ function Universe({
               UNIVERSE
             </div>
             <h2>
-              좋아하는 것들이 모여
+              {t.aboutTitle[0]}
               <br />
-              <em>나라는 우주가 돼요.</em>
+              <em>{t.aboutTitle[1]}</em>
             </h2>
           </div>
           <div className="about-copy">
             <Star />
-            <p>
-              한 편의 동시, 한 장의 그림, 끝없는 물음표.
-              <br />
-              지안이의 시선으로 바라본 세상을 차곡차곡 모았습니다.
-            </p>
-            <p>
-              잘하는 것보다 좋아하는 마음을,
-              <br />
-              완성보다 자라나는 과정을 담는 작은 전시관입니다.
-            </p>
+            {t.aboutText.map(([a, b]) => (
+              <p key={a}>
+                {a}
+                <br />
+                {b}
+              </p>
+            ))}
             <span className="handwritten">with curiosity, always.</span>
           </div>
         </section>
@@ -523,9 +537,10 @@ function Universe({
                 <span className="section-index">02</span> THE COLLECTION
               </div>
               <h2>
-                반짝이는 생각의 조각들<span className="heading-spark">✳</span>
+                {t.collectionTitle}
+                <span className="heading-spark">✳</span>
               </h2>
-              <p>하나하나의 작품 속에 담긴 이야기를 만나 보세요.</p>
+              <p>{t.collectionText}</p>
             </div>
             <span className="collection-count">
               {String(works.length).padStart(2, "0")}{" "}
@@ -534,33 +549,42 @@ function Universe({
           </div>
           {mode === "review" && (
             <p className="collection-notice">
-              <Sparkles size={14} /> 제공된 실제 자료입니다. 전사·편집 여부와
-              날짜 근거는 작품 상세에서 확인할 수 있습니다.
+              <Sparkles size={14} /> {t.reviewNotice}
             </p>
           )}
           {mode === "unavailable" && (
             <p className="collection-notice" role="status">
-              전시 자료를 잠시 불러올 수 없어요. 조금 뒤 다시 방문해 주세요.
+              {t.unavailable}
             </p>
           )}
           <div className="collection-toolbar">
-            <div className="filters" role="group" aria-label="작품 분야">
-              {categories.map((c) => (
-                <button
-                  disabled={!ready}
-                  key={c}
-                  className={category === c ? "active" : ""}
-                  aria-pressed={category === c}
-                  onClick={() => choose(c)}
-                >
-                  {c === "전체" ? "전체 작품" : c}
-                </button>
-              ))}
+            <div className="filters" role="group" aria-label={t.filtersLabel}>
+              {/* 작품이 있는 분야만, 작품 수와 함께 보여 줍니다. */}
+              {categories
+                .filter(
+                  (c) => c === "전체" || works.some((w) => w.category === c),
+                )
+                .map((c) => (
+                  <button
+                    disabled={!ready}
+                    key={c}
+                    className={category === c ? "active" : ""}
+                    aria-pressed={category === c}
+                    onClick={() => choose(c)}
+                  >
+                    {c === "전체" ? t.allWorks : categoryLabel(c, lang)}
+                    <span className="filter-count" aria-hidden="true">
+                      {c === "전체"
+                        ? works.length
+                        : works.filter((w) => w.category === c).length}
+                    </span>
+                  </button>
+                ))}
             </div>
             <div className="view-controls">
               <button
                 disabled={!ready}
-                aria-label="목록 보기"
+                aria-label={t.gridView}
                 aria-pressed={view === "grid"}
                 className={view === "grid" ? "active" : ""}
                 onClick={() => setView("grid")}
@@ -569,7 +593,7 @@ function Universe({
               </button>
               <button
                 disabled={!ready}
-                aria-label="별자리 보기"
+                aria-label={t.starView}
                 aria-pressed={view === "stars"}
                 className={view === "stars" ? "active" : ""}
                 onClick={() => setView("stars")}
@@ -579,7 +603,7 @@ function Universe({
             </div>
           </div>
           {view === "stars" && (
-            <div className="constellation" aria-label="작품 별자리">
+            <div className="constellation" aria-label={t.constellation}>
               <svg
                 viewBox="0 0 900 300"
                 preserveAspectRatio="none"
@@ -605,8 +629,8 @@ function Universe({
                   onClick={() => open(w, "star")}
                 >
                   <Star />
-                  <span>{w.title}</span>
-                  <small>{w.category}</small>
+                  <span>{title(w)}</span>
+                  <small>{categoryLabel(w.category, lang)}</small>
                 </button>
               ))}
             </div>
@@ -629,11 +653,11 @@ function Universe({
                   </span>
                 </div>
                 <div className="card-meta">
-                  <span>{w.category}</span>
-                  <span>{w.year ?? "제작일 미확인"}</span>
+                  <span>{categoryLabel(w.category, lang)}</span>
+                  <span>{w.year ?? t.unknownDate}</span>
                 </div>
-                <h3>{w.title}</h3>
-                <p>{w.description}</p>
+                <h3>{title(w)}</h3>
+                <p>{blurb(w)}</p>
               </button>
             ))}
           </div>
@@ -641,9 +665,9 @@ function Universe({
             <div className="empty-collection">
               <Star />
               <p>
-                아직 이곳에 도착하지 않은 별이에요.
+                {t.emptyCollection[0]}
                 <br />
-                다른 분야의 이야기를 먼저 만나 보세요.
+                {t.emptyCollection[1]}
               </p>
               <button
                 disabled={!ready}
@@ -653,7 +677,7 @@ function Universe({
                   setYear("전체");
                 }}
               >
-                전체 작품 보기 <ArrowRight size={14} />
+                {t.showAll} <ArrowRight size={14} />
               </button>
             </div>
           )}
@@ -669,13 +693,14 @@ function Universe({
           </div>
           <div className="field-heading">
             <h2>
-              호기심에는
+              {t.fieldsTitle[0]}
               <br />
-              <em>여러 가지 모양이 있어요.</em>
+              <em>{t.fieldsTitle[1]}</em>
             </h2>
             <p>
-              서로 다른 세계가 만나
-              <br />더 넓은 상상이 펼쳐집니다.
+              {t.fieldsText[0]}
+              <br />
+              {t.fieldsText[1]}
             </p>
           </div>
           <div className="field-grid">
@@ -701,8 +726,8 @@ function Universe({
                   )}
                 </span>
                 <span className="eyebrow">{f.label}</span>
-                <h3>{f.title}</h3>
-                <p>{f.text}</p>
+                <h3>{t.fields[i].title}</h3>
+                <p>{t.fields[i].text}</p>
                 <div className="field-bottom">
                   <span>{f.symbol}</span>
                   <ArrowUpRight size={18} />
@@ -746,16 +771,13 @@ function Universe({
               LITTLE
             </div>
             <h2>
-              오늘의 작은 별이
+              {t.journeyTitle[0]}
               <br />
-              <em>내일의 우주가 되도록.</em>
+              <em>{t.journeyTitle[1]}</em>
             </h2>
-            <p>작품을 따라 걸으며 성장의 순간들을 만나요.</p>
+            <p>{t.journeyText}</p>
             {works.some((w) => w.provenance) && (
-              <p className="date-basis-note">
-                자료에 남은 연도입니다. 파일 등록일·판권일은 창작일과 다를 수
-                있어요.
-              </p>
+              <p className="date-basis-note">{t.dateBasis}</p>
             )}
           </div>
           <div className="timeline">
@@ -768,7 +790,7 @@ function Universe({
               }}
             >
               <span className="timeline-dot" />
-              <strong>모든 순간</strong>
+              <strong>{t.allMoments}</strong>
               <small>THE WHOLE JOURNEY</small>
             </button>
             {years.map((y) => (
@@ -787,9 +809,9 @@ function Universe({
                 }}
               >
                 <span className="timeline-dot" />
-                <strong>{y ?? "연도 미상"}</strong>
+                <strong>{y ?? t.unknownYear}</strong>
                 <small>
-                  {works.filter((w) => w.year === y).length}개의 생각
+                  {t.thoughts(works.filter((w) => w.year === y).length)}
                 </small>
               </button>
             ))}
@@ -801,9 +823,9 @@ function Universe({
             className="source-videos section-shell reveal"
             aria-labelledby="source-videos-title"
           >
-            <div className="eyebrow">MOVING MOMENTS · 지안이의 영상</div>
-            <h2 id="source-videos-title">소리와 몸짓으로 남긴 장면들</h2>
-            <p>영상을 누르면 YouTube에서 열립니다.</p>
+            <div className="eyebrow">{t.videosEyebrow}</div>
+            <h2 id="source-videos-title">{t.videosTitle}</h2>
+            <p>{t.videosText}</p>
             <div className="source-video-grid video-cards">
               {videos.map((video, i) => (
                 <a
@@ -811,7 +833,7 @@ function Universe({
                   href={video.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${video.title || `지안이의 영상 ${i + 1}`} · YouTube에서 보기`}
+                  aria-label={`${video.title || t.videoName(i + 1)} · ${t.watchOnYoutube}`}
                 >
                   <span className="video-thumb">
                     <img
@@ -827,7 +849,7 @@ function Universe({
                   </span>
                   <span className="video-meta">
                     <span>{String(i + 1).padStart(2, "0")}</span>
-                    <strong>{video.title || `지안이의 영상 ${i + 1}`}</strong>
+                    <strong>{video.title || t.videoName(i + 1)}</strong>
                     <ArrowUpRight size={18} />
                   </span>
                 </a>
@@ -838,9 +860,9 @@ function Universe({
         <section id="nightfall" className="closing-note reveal">
           <Star />
           <p>
-            “작은 호기심 하나가
+            {t.closing[0]}
             <br />
-            어디까지 데려다줄지, 아직은 모르니까요.”
+            {t.closing[1]}
           </p>
           <span>KEEP WONDERING. KEEP GROWING.</span>
         </section>
@@ -850,7 +872,7 @@ function Universe({
           <Star />
           <span>jian’s universe.</span>
         </a>
-        <p>작은 호기심에서 시작된 커다란 이야기</p>
+        <p>{t.footer}</p>
         <div>
           <span>© {new Date().getFullYear()} JIAN’S UNIVERSE</span>
         </div>
@@ -861,9 +883,7 @@ function Universe({
         data-sound-control
         className={`music-fab ${enabled && preferences.music && !paused ? "is-playing" : ""}`}
         aria-label={
-          enabled && preferences.music && !paused
-            ? "배경 음악 끄기"
-            : "배경 음악 켜기"
+          enabled && preferences.music && !paused ? t.musicOff : t.musicOnLabel
         }
         aria-pressed={enabled && preferences.music && !paused}
         onClick={toggleMusic}
@@ -876,10 +896,10 @@ function Universe({
         </span>
         <span className="music-label">
           {enabled && preferences.music && !paused
-            ? "배경 음악 ON"
+            ? t.musicPlaying
             : wanted && !enabled
-              ? "화면을 누르면 음악이 시작돼요"
-              : "배경 음악 OFF"}
+              ? t.musicWaiting
+              : t.musicStopped}
         </span>
       </button>
       <WorkDialog work={selected} onClose={() => setSelected(null)} />

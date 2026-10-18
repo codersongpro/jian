@@ -1,5 +1,6 @@
 import type { Work } from "@/lib/model";
 import { mediaUrl } from "@/lib/model";
+import { useCopy } from "./lang";
 
 export function Artwork({
   work,
@@ -8,12 +9,14 @@ export function Artwork({
   work: Work;
   className?: string;
 }) {
+  const { lang, t } = useCopy();
+  const name = (lang === "en" && work.title_en) || work.title;
   if (work.thumbnail_url)
     return (
       <img
         className={`original-art ${className}`}
         src={work.thumbnail_url}
-        alt={`${work.title} · 제공된 미리보기 자료`}
+        alt={t.imageAlt(name)}
         loading="lazy"
       />
     );

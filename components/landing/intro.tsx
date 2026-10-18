@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Volume2 } from "lucide-react";
 import { fitCanvas, seeded } from "./use-scroll";
+import { useCopy } from "../lang";
 
 // 인트로 시간표(ms, 총 8초): 빛 한 점 → 별가루 폭발 → 이름으로 모임 → 머무름 → 화면이 열림(0.7초)
 const T = {
@@ -75,6 +76,7 @@ export function Intro({
   replay?: number;
 }) {
   const [phase, setPhase] = useState<Phase>("veil");
+  const { t } = useCopy();
   const canvas = useRef<HTMLCanvasElement>(null);
   const reveal = useRef(onReveal);
   reveal.current = onReveal;
@@ -262,16 +264,16 @@ export function Intro({
         <>
           <div className="intro-copy" aria-hidden="true">
             <span>A LITTLE MIND, AN INFINITE UNIVERSE</span>
-            <p>작은 호기심에서 시작된 커다란 이야기</p>
+            <p>{t.introSubtitle}</p>
           </div>
           <div className="intro-actions">
             {!soundOn && (
               <button type="button" data-sound-control onClick={enableSound}>
-                <Volume2 size={14} /> 음악과 함께 보기
+                <Volume2 size={14} /> {t.introSound}
               </button>
             )}
             <button type="button" onClick={() => finish.current()}>
-              인트로 건너뛰기
+              {t.introSkip}
             </button>
           </div>
         </>

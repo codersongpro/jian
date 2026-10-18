@@ -1,13 +1,10 @@
 "use client";
 import { useMemo, useRef } from "react";
 import { seeded, useScrollProgress } from "./use-scroll";
+import { useCopy } from "../lang";
 
 // 문학: 흩어진 글자 별들이 스크롤에 맞춰 한 문장으로 모입니다.
-const LINES = [
-  "지안이의 생각 하나하나가",
-  "별이 되어",
-  "지안이만의 우주를 만들어요.",
-];
+
 const NOTES = [523.25, 587.33, 659.25, 783.99, 880, 1046.5];
 
 export function WordsInterlude({
@@ -19,6 +16,8 @@ export function WordsInterlude({
 }) {
   const ref = useRef<HTMLElement>(null),
     completed = useRef(false);
+  const { lang, t } = useCopy(),
+    LINES = t.wordsLines;
   const glyphs = useMemo(() => {
     const rand = seeded(19);
     let n = 0;
@@ -38,7 +37,7 @@ export function WordsInterlude({
         };
       }),
     );
-  }, []);
+  }, [LINES]);
   useScrollProgress(ref, (p) => {
     if (p > 0.7 && !completed.current) {
       completed.current = true;
@@ -53,7 +52,7 @@ export function WordsInterlude({
     >
       <div className="interlude-stage">
         <div className="interlude-label">
-          <span>INTERLUDE · 01</span> 문학 — 글자가 별이 될 때
+          <span>INTERLUDE · 01</span> {t.wordsLabel}
         </div>
         <svg
           className="words-constellation"
@@ -65,7 +64,7 @@ export function WordsInterlude({
         </svg>
         <h2
           id="words-title"
-          className="words-sentence"
+          className={`words-sentence words-${lang}`}
           aria-label={LINES.join(" ")}
         >
           {glyphs.map((line, li) => (
@@ -89,9 +88,7 @@ export function WordsInterlude({
             </span>
           ))}
         </h2>
-        <p className="interlude-hint">
-          스크롤하면 흩어진 글자가 모여요 · 글자를 눌러 보세요
-        </p>
+        <p className="interlude-hint">{t.wordsHint}</p>
       </div>
     </section>
   );

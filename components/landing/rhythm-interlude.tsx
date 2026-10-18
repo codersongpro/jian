@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useScrollProgress } from "./use-scroll";
+import { useCopy } from "../lang";
 
 // 음악·발레: 스크롤에 맞춰 리본 곡선이 그려지고, 춤추는 별이 곡선을 따라 움직입니다.
 // 오선 위 음표를 누르면 소리가 나요.
@@ -23,6 +24,7 @@ export function RhythmInterlude({
   tone: (f: number) => void;
   soundOn: boolean;
 }) {
+  const { t } = useCopy();
   const ref = useRef<HTMLElement>(null),
     path = useRef<SVGPathElement>(null),
     dancer = useRef<SVGGElement>(null),
@@ -54,12 +56,12 @@ export function RhythmInterlude({
       <div className="interlude-stage">
         <div className="rhythm-copy">
           <div className="interlude-label">
-            <span>INTERLUDE · 04</span> 음악·발레 — 소리와 몸짓
+            <span>INTERLUDE · 04</span> {t.rhythmLabel}
           </div>
           <h2 id="rhythm-title">
-            말로 다 못한 이야기는
+            {t.rhythmTitle[0]}
             <br />
-            <em>음표와 발끝이 대신 전해요.</em>
+            <em>{t.rhythmTitle[1]}</em>
           </h2>
         </div>
         <div className="rhythm-board">
@@ -90,13 +92,13 @@ export function RhythmInterlude({
               <path d="M0-12 2.6-3.6 11.4-3.7 4.3 1.5 7 10 0 4.8-7 10-4.3 1.5-11.4-3.7-2.6-3.6Z" />
             </g>
           </svg>
-          <div className="rhythm-notes" role="group" aria-label="음표 연주하기">
+          <div className="rhythm-notes" role="group" aria-label={t.notesLabel}>
             {NOTES.map((n, i) => (
               <button
                 key={n.name}
                 type="button"
                 className="rhythm-note"
-                aria-label={`${n.name} 음 연주`}
+                aria-label={t.playNote(t.noteNames[i])}
                 style={
                   {
                     left: `${n.x / 10}%`,
@@ -127,9 +129,7 @@ export function RhythmInterlude({
           </div>
         </div>
         <p className="interlude-hint">
-          {soundOn
-            ? "음표를 눌러 멜로디를 만들어 보세요"
-            : "음표를 눌러 보세요 · 소리를 켜면 멜로디가 들려요"}
+          {soundOn ? t.rhythmHintOn : t.rhythmHintOff}
         </p>
       </div>
     </section>

@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Eraser } from "lucide-react";
 import { fitCanvas, useInView } from "./use-scroll";
+import { useCopy } from "../lang";
 
 // 미술: 드래그하면 수채 물감이 번지듯 그려집니다. 가만히 있으면 보이지 않는 붓이 먼저 시범을 보여요.
 const PAINTS = [
@@ -25,6 +26,7 @@ export function PaintInterlude({
     touched = useRef(false),
     demo = useRef(0),
     distance = useRef(0);
+  const { t } = useCopy();
   const [paint, setPaint] = useState(0),
     [painted, setPainted] = useState(false);
   const paintRef = useRef(paint);
@@ -134,20 +136,20 @@ export function PaintInterlude({
       <div className="paint-head">
         <div>
           <div className="interlude-label">
-            <span>INTERLUDE · 03</span> 미술 — 색과 선의 놀이
+            <span>INTERLUDE · 03</span> {t.paintLabel}
           </div>
           <h2 id="paint-title">
-            마음에 담긴 풍경을
+            {t.paintTitle[0]}
             <br />
-            <em>직접 칠해 보세요.</em>
+            <em>{t.paintTitle[1]}</em>
           </h2>
         </div>
-        <div className="paint-tools" role="group" aria-label="물감 고르기">
+        <div className="paint-tools" role="group" aria-label={t.paintPick}>
           {PAINTS.map((p, i) => (
             <button
               key={p.name}
               type="button"
-              aria-label={p.name}
+              aria-label={t.paints[i]}
               aria-pressed={paint === i}
               className={paint === i ? "active" : ""}
               style={
@@ -162,7 +164,7 @@ export function PaintInterlude({
             type="button"
             className="paint-clear"
             onClick={clear}
-            aria-label="새 종이로 바꾸기"
+            aria-label={t.paintClear}
           >
             <Eraser size={16} />
           </button>
@@ -173,7 +175,7 @@ export function PaintInterlude({
           ref={canvas}
           className="paint-canvas"
           role="img"
-          aria-label="드래그해서 물감으로 그리는 도화지"
+          aria-label={t.paintCanvas}
           onPointerDown={(e) => {
             touched.current = true;
             cancelAnimationFrame(demo.current);
@@ -202,9 +204,7 @@ export function PaintInterlude({
           onPointerLeave={() => (last.current = null)}
           onPointerCancel={() => (last.current = null)}
         />
-        {!painted && (
-          <span className="paint-hint">여기를 쓱— 문질러 보세요</span>
-        )}
+        {!painted && <span className="paint-hint">{t.paintHint}</span>}
       </div>
     </section>
   );

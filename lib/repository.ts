@@ -18,6 +18,8 @@ export async function readRepositoryCatalog() {
         return {
           id: entry.id,
           title: entry.title,
+          title_en: (entry as { title_en?: string }).title_en,
+          description_en: (entry as { description_en?: string }).description_en,
           category: entry.category as Category,
           year: entry.year,
           description: entry.description,

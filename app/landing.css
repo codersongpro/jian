@@ -1593,3 +1593,29 @@ html {
   flex: 1;
   font-weight: 400;
 }
+
+/* 영어 문장은 글자가 많아 조금 작게 */
+.words-sentence.words-en {
+  font-size: clamp(20px, 5vw, 72px) !important;
+  font-family: var(--serif);
+}
+
+/* ---------- 14. 언어 전환·분야 개수 ---------- */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-c);
+  font-size: 13px;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.lang-switch:hover {
+  background: color-mix(in oklab, transparent, var(--fg) 10%);
+}
+.filter-count {
+  margin-left: 6px;
+  font-size: 12px;
+  opacity: 0.65;
+}
