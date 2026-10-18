@@ -75,6 +75,10 @@ const ko = {
     "다른 분야의 이야기를 먼저 만나 보세요.",
   ],
   showAll: "전체 작품 보기",
+  showMore: (n: number) => `더 보기 (${n}개 더)`,
+  showAllWorks: "모두 펼치기",
+  showLess: "접기",
+
   fieldsTitle: ["호기심에는", "여러 가지 모양이 있어요."],
   fieldsText: ["서로 다른 세계가 만나", "더 넓은 상상이 펼쳐집니다."],
   fields: [
@@ -183,6 +187,44 @@ const ko = {
   cycloidBoard: "지안이의 칠판 원본 보기",
   cycloidFigure:
     "수레 위 또르와 땅 위 마꺼리가 통 안에서 튀는 공을 보는 사고 실험",
+  brainLabel: "과학 — 지안이의 뇌 속 탐험",
+  brainTitle: ["뇌세포 친구를 따라", "뇌 속 방을 구경해요."],
+  brainText:
+    "지안이는 뇌를 여러 방이 있는 집처럼 그렸어요. 방을 누르면 지안이가 그린 뇌세포가 그 방으로 달려가요.",
+  brainHint: "방을 눌러 보세요 · 척수를 누르면 소식이 뇌로 올라가요",
+  brainOpen: "지안이의 그림 「몸속 탐험: 뇌와 척수」 보기",
+  brainFigure: "지안이가 그린 뇌 지도. 방을 누르면 뇌세포가 그 방으로 이동해요",
+  brainSecretMsg: "쉿! 비밀방은 지안이만 알아요.",
+  brainRooms: {
+    empty: {
+      name: "비어 있는 방",
+      text: "아직 비어 있는 방이에요. 앞으로 새로 알게 될 것들이 들어올 자리 같아요.",
+    },
+    memory: {
+      name: "기억의 방",
+      text: "뇌세포들이 알록달록한 기억 조각을 들고 모여 있어요. 오늘 있었던 일도 여기에 차곡차곡 담겨요.",
+    },
+    senses: {
+      name: "기관실",
+      text: "시각실·청각실·후각실·미각실·촉각실로 나뉜 방이에요. 눈·귀·코·혀·손에서 온 소식을 각 방에서 받아요.",
+    },
+    feelings: {
+      name: "화학실·감정실",
+      text: "에너지와 단백질, 호르몬이 오가는 방이에요. 기분을 만드는 뇌세포들이 바쁘게 일해요.",
+    },
+    skull: {
+      name: "머리뼈와 뇌막",
+      text: "단단한 머리뼈와 말랑한 뇌막, 튼튼한 뇌막이 말랑한 뇌를 겹겹이 감싸 지켜 줘요.",
+    },
+    vessel: {
+      name: "혈관과 뇌졸중",
+      text: "빨간 길은 피가 지나가는 혈관이에요. 지안이는 이 길이 막히면 생기는 뇌졸중도 그려 두었어요.",
+    },
+    spine: {
+      name: "척수",
+      text: "몸과 뇌를 잇는 길이에요. 뇌세포가 사다리를 타고 소식을 싣고 오르내려요.",
+    },
+  },
   mathLabel: "수학 — 지안 수학 선생님의 교실",
   mathBoard: "〈 지안 수학 선생님 〉",
   mathTitle: ["‘분수란?’", "지안 선생님의 첫 수업이에요."],
@@ -316,6 +358,10 @@ const en: Copy = {
     "Try the stories from another field first.",
   ],
   showAll: "Show all works",
+  showMore: (n: number) => `Show more (${n} more)`,
+  showAllWorks: "Show all",
+  showLess: "Show less",
+
   fieldsTitle: ["Curiosity comes", "in many shapes."],
   fieldsText: ["When different worlds meet,", "imagination grows wider."],
   fields: [
@@ -433,6 +479,44 @@ const en: Copy = {
   cycloidBoard: "See Jian’s original whiteboard",
   cycloidFigure:
     "Ttor on a moving cart and Makkeori on the ground watch a ball bounce inside a tube",
+  brainLabel: "Science — a trip inside Jian’s brain",
+  brainTitle: ["Follow a brain-cell friend", "through the rooms of the brain."],
+  brainText:
+    "Jian drew the brain as a house full of rooms. Tap a room and the brain cell she drew runs over to it.",
+  brainHint: "Tap a room · tap the spinal cord to send news up to the brain",
+  brainOpen: "See Jian’s drawing “Inside the Body: Brain and Spinal Cord”",
+  brainFigure: "Jian’s brain map. Tap a room and a brain cell moves there",
+  brainSecretMsg: "Shh! Only Jian knows the secret room.",
+  brainRooms: {
+    empty: {
+      name: "Empty room",
+      text: "A room that is still empty — perhaps a place for everything she will learn next.",
+    },
+    memory: {
+      name: "Memory room",
+      text: "Brain cells gather here holding colorful pieces of memory. Today’s moments are stored here too.",
+    },
+    senses: {
+      name: "Senses room",
+      text: "Split into rooms for sight, hearing, smell, taste and touch, each receiving news from the eyes, ears, nose, tongue and hands.",
+    },
+    feelings: {
+      name: "Chemistry & feelings room",
+      text: "Energy, protein and hormones come and go here, and busy brain cells make feelings.",
+    },
+    skull: {
+      name: "Skull and membranes",
+      text: "A hard skull and soft and strong membranes wrap the squishy brain in layers to protect it.",
+    },
+    vessel: {
+      name: "Blood vessels and stroke",
+      text: "The red paths are blood vessels. Jian also drew a stroke, which happens when a path gets blocked.",
+    },
+    spine: {
+      name: "Spinal cord",
+      text: "The road that links the body and the brain. Brain cells climb the ladder carrying news up and down.",
+    },
+  },
   mathLabel: "Math — Teacher Jian’s math class",
   mathBoard: "〈 Teacher Jian’s Math 〉",
   mathTitle: ["“What is a fraction?”", "Teacher Jian’s first lesson."],

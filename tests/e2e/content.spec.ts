@@ -4,6 +4,9 @@ test("actual source works retain transcriptions, pages, dates and six unembedded
 }) => {
   await page.goto("/");
   await expect(page.locator(".review-banner")).toHaveCount(0);
+  // 처음에는 9개만 보이고, '모두 펼치기'로 전부 볼 수 있음
+  await expect(page.locator("[data-work-card]")).toHaveCount(9);
+  await page.getByRole("button", { name: "모두 펼치기" }).click();
   await expect(page.locator("[data-work-card]")).toHaveCount(34);
   await page
     .locator("[data-work-card]")
@@ -66,5 +69,8 @@ test("actual source works retain transcriptions, pages, dates and six unembedded
 test("unknown dates stay unknown in the timeline", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: /연도 미상/ }).click();
+  // 처음에는 9개만 보이고, '모두 펼치기'로 전부 볼 수 있음
+  await expect(page.locator("[data-work-card]")).toHaveCount(9);
+  await page.getByRole("button", { name: "모두 펼치기" }).click();
   await expect(page.locator("[data-work-card]")).toHaveCount(28);
 });

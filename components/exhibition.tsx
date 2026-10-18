@@ -35,6 +35,7 @@ import { RhythmInterlude } from "./landing/rhythm-interlude";
 import { MathInterlude } from "./landing/math-interlude";
 import { BalletInterlude } from "./landing/ballet-interlude";
 import { CycloidCard } from "./landing/cycloid-card";
+import { BrainCard } from "./landing/brain-card";
 import { LangProvider, useCopy } from "./lang";
 import { categoryLabel, type Lang } from "@/lib/i18n";
 
@@ -125,6 +126,10 @@ function Universe({
     [stage, setStage] = useState<"intro" | "ready">("intro"),
     [replay, setReplay] = useState(0);
   const [economy, setEconomy] = useState(false);
+  // 작품이 많아 스크롤이 길어지지 않도록 처음에는 일부만 보여 줍니다.
+  const PAGE = 9;
+  const [limit, setLimit] = useState(PAGE);
+  useEffect(() => setLimit(PAGE), [category, year]);
   const { lang, t } = useCopy();
   const title = (w: Work) => (lang === "en" && w.title_en) || w.title,
     blurb = (w: Work) => (lang === "en" && w.description_en) || w.description;
@@ -639,7 +644,7 @@ function Universe({
             </div>
           )}
           <div className="work-grid" aria-live="polite">
-            {visible.map((w, i) => (
+            {visible.slice(0, limit).map((w, i) => (
               <button
                 disabled={!ready}
                 key={w.id}
@@ -664,6 +669,43 @@ function Universe({
               </button>
             ))}
           </div>
+          {visible.length > PAGE && (
+            <div className="show-more">
+              {limit < visible.length ? (
+                <>
+                  <button
+                    type="button"
+                    className="show-more-main"
+                    onClick={() => setLimit((n) => n + PAGE)}
+                  >
+                    {t.showMore(Math.min(PAGE, visible.length - limit))}
+                  </button>
+                  <button
+                    type="button"
+                    className="text-link"
+                    onClick={() => setLimit(visible.length)}
+                  >
+                    {t.showAllWorks}
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="text-link"
+                  onClick={() => {
+                    setLimit(PAGE);
+                    document
+                      .getElementById("collection")
+                      ?.scrollIntoView({
+                        behavior: reduced ? "auto" : "smooth",
+                      });
+                  }}
+                >
+                  {t.showLess}
+                </button>
+              )}
+            </div>
+          )}
           {!visible.length && (
             <div className="empty-collection">
               <Star />
@@ -693,6 +735,14 @@ function Universe({
         <CycloidCard
           reduced={reduced}
           onFinish={(won) => effect(won ? "success" : "page")}
+        />
+        <BrainCard
+          tone={tone}
+          onOpen={
+            works.some((w) => w.id === "brain-journey")
+              ? () => open(works.find((w) => w.id === "brain-journey")!)
+              : undefined
+          }
         />
         <MathInterlude
           tone={tone}

@@ -46,6 +46,9 @@ test("constellation and reduced motion retain the ordinary list", async ({
   await page.goto("/");
   await page.getByRole("button", { name: "별자리 보기" }).click();
   await expect(page.getByLabel("작품 별자리")).toBeVisible();
+  // 처음에는 9개만 보이고, '모두 펼치기'로 전부 볼 수 있음
+  await expect(page.locator("[data-work-card]")).toHaveCount(9);
+  await page.getByRole("button", { name: "모두 펼치기" }).click();
   await expect(page.locator("[data-work-card]")).toHaveCount(34);
   expect(
     await page.evaluate(
