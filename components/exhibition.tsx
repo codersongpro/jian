@@ -32,6 +32,8 @@ import { WordsInterlude } from "./landing/words-interlude";
 import { OrbitInterlude } from "./landing/orbit-interlude";
 import { PaintInterlude } from "./landing/paint-interlude";
 import { RhythmInterlude } from "./landing/rhythm-interlude";
+import { MathInterlude } from "./landing/math-interlude";
+import { BalletInterlude } from "./landing/ballet-interlude";
 import { LangProvider, useCopy } from "./lang";
 import { categoryLabel, type Lang } from "@/lib/i18n";
 
@@ -687,6 +689,7 @@ function Universe({
           economy={economy}
           onSpawn={() => effect("orbit")}
         />
+        <MathInterlude tone={tone} onWhole={() => effect("chime")} />
         <section className="field-section section-shell reveal">
           <div className="eyebrow">
             <span className="section-index">03</span> MANY WAYS TO WONDER
@@ -818,6 +821,11 @@ function Universe({
           </div>
         </section>
         <RhythmInterlude tone={tone} soundOn={enabled} />
+        <BalletInterlude
+          reduced={reduced}
+          tone={tone}
+          onTurn={() => effect("shimmer")}
+        />
         {videos.length > 0 && (
           <section
             className="source-videos section-shell reveal"

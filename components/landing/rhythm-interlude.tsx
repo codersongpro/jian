@@ -58,7 +58,7 @@ export function RhythmInterlude({
       <div className="interlude-stage">
         <div className="rhythm-copy">
           <div className="interlude-label">
-            <span>INTERLUDE · 04</span> {t.rhythmLabel}
+            <span>INTERLUDE · 05</span> {t.rhythmLabel}
           </div>
           <h2 id="rhythm-title">
             {t.rhythmTitle[0]}

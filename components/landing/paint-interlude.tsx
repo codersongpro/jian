@@ -136,7 +136,7 @@ export function PaintInterlude({
       <div className="paint-head">
         <div>
           <div className="interlude-label">
-            <span>INTERLUDE · 03</span> {t.paintLabel}
+            <span>INTERLUDE · 04</span> {t.paintLabel}
           </div>
           <h2 id="paint-title">
             {t.paintTitle[0]}

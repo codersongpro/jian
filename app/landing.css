@@ -1624,3 +1624,311 @@ html {
     display: none;
   }
 }
+
+/* ---------- 15. 수학: 분수 원 ---------- */
+.math-interlude {
+  width: var(--content);
+  margin: 0 auto;
+  padding: 110px 0 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 5vw, 80px);
+  align-items: center;
+}
+.math-copy h2 {
+  margin-top: 14px;
+}
+.math-readout {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+.math-readout p {
+  flex-basis: 100%;
+  font-size: 16px;
+  color: var(--fg-soft);
+}
+.fraction {
+  display: inline-grid;
+  justify-items: center;
+  font-family: var(--serif);
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
+  color: #2f4038;
+}
+.fraction b {
+  font-weight: 600;
+}
+.fraction i {
+  width: 1.2em;
+  height: 3px;
+  margin: 8px 0;
+  border-radius: 2px;
+  background: var(--gold-deep);
+}
+.fraction.simplified {
+  grid-template-columns: auto auto;
+  column-gap: 14px;
+  color: var(--gold-deep);
+}
+.fraction.simplified em {
+  grid-row: 1 / span 3;
+  align-self: center;
+  font-style: normal;
+  color: var(--fg-soft);
+}
+.fraction.simplified b,
+.fraction.simplified i {
+  grid-column: 2;
+}
+.math-divisors {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--fg-soft);
+}
+.math-divisors span {
+  margin-right: 6px;
+}
+.math-divisors b {
+  min-width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid #e0dccd;
+  font-family: var(--serif);
+  font-weight: 600;
+  color: #2f4038;
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+.math-divisors b.active {
+  background: var(--gold-deep);
+  border-color: var(--gold-deep);
+  color: #fff;
+}
+.math-copy .interlude-hint {
+  text-align: left;
+  margin-top: 20px;
+}
+.math-stage {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+.math-circle {
+  width: min(100%, 420px);
+  overflow: visible;
+}
+.math-plate {
+  fill: #fffdf6;
+  filter: drop-shadow(0 24px 40px rgb(53 72 63 / 0.15));
+}
+.math-slice {
+  fill: #f6f1e2;
+  stroke: #ffffff;
+  stroke-width: 3;
+  cursor: pointer;
+  transition:
+    fill 0.35s,
+    transform 0.35s cubic-bezier(0.3, 1.5, 0.5, 1);
+  transform-box: view-box;
+  transform-origin: 170px 170px;
+}
+.math-slice:hover {
+  fill: #efe6cc;
+}
+.math-slice.filled {
+  fill: hsl(calc(30deg + var(--hue) * 0.4) 62% 72%);
+  transform: scale(1.03);
+}
+.math-slice:focus-visible {
+  outline: none;
+  stroke: #897298;
+  stroke-width: 4;
+}
+.math-center {
+  fill: #c49a55;
+  pointer-events: none;
+}
+.math-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  color: #2f4038;
+}
+.math-controls button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fffdf7;
+  box-shadow: 0 0 0 1px #e2dfd2;
+}
+.math-controls button:hover:not(:disabled) {
+  box-shadow: 0 0 0 2px var(--gold-deep);
+}
+.math-controls span {
+  min-width: 70px;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+/* ---------- 16. 발레: 무대 위 발레리나 ---------- */
+.ballet-interlude {
+  padding: 40px 0;
+}
+.ballet-stage {
+  position: relative;
+  width: var(--content);
+  margin: auto;
+  border-radius: 32px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 420px);
+  align-items: center;
+  gap: 24px;
+  padding: clamp(28px, 5vw, 64px);
+  color: #f4efe3;
+  background:
+    radial-gradient(
+      ellipse 50% 60% at 75% 30%,
+      rgb(255 220 230 / 0.35),
+      transparent 70%
+    ),
+    linear-gradient(170deg, #3a2550, #6d3f63 60%, #a8657a);
+  box-shadow: 0 40px 100px rgb(60 30 70 / 0.3);
+}
+.ballet-copy .interlude-label {
+  color: #ead8e6;
+}
+.ballet-copy .interlude-label > span {
+  color: var(--star);
+}
+.ballet-copy h2 {
+  margin-top: 14px;
+  color: #fff6ee;
+}
+.ballet-copy h2 em {
+  color: #ffd9e4;
+}
+.ballet-steps {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ballet-steps button {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  background: rgb(255 255 255 / 0.08);
+  color: #fff6ee;
+  font-size: 15px;
+}
+.ballet-steps button:hover {
+  background: rgb(255 255 255 / 0.16);
+}
+.ballet-steps button.active {
+  background: #fff1f4;
+  color: #6d3f63;
+  border-color: #fff1f4;
+}
+.ballet-desc {
+  margin-top: 18px;
+  min-height: 1.8em;
+  font-size: 17px;
+  color: #ffe9ef;
+}
+.ballet-copy .interlude-hint {
+  text-align: left;
+  color: #ead8e6;
+}
+.ballet-figure {
+  width: 100%;
+  max-height: 70vh;
+}
+.ballet-floor {
+  fill: rgb(30 10 40 / 0.35);
+}
+.ballet-body .limb,
+.ballet-body .toe,
+.ballet-body .neck {
+  fill: none;
+  stroke: #fff4ea;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ballet-body .arm {
+  stroke-width: 8;
+}
+.ballet-body .leg {
+  stroke-width: 10;
+}
+.ballet-body .toe {
+  stroke-width: 6;
+  stroke: #ffc9d6;
+}
+.ballet-body .neck {
+  stroke-width: 9;
+}
+.ballet-body .head {
+  fill: #fff4ea;
+}
+.ballet-body .bun {
+  fill: #5a3348;
+}
+.ballet-body .bodice {
+  fill: #ffc9d6;
+}
+.ballet-body .tutu {
+  fill: rgb(255 214 226 / 0.9);
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+.ballet-body.spinning {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pirouette 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes pirouette {
+  25% {
+    scale: 0.2 1;
+  }
+  50% {
+    scale: -1 1;
+  }
+  75% {
+    scale: -0.2 1;
+  }
+}
+@media (max-width: 800px) {
+  .math-interlude {
+    grid-template-columns: 1fr;
+    padding-top: 80px;
+  }
+  .math-stage {
+    order: 2;
+  }
+  .ballet-stage {
+    grid-template-columns: 1fr;
+    border-radius: 24px;
+  }
+  .ballet-figure {
+    max-height: 52vh;
+  }
+}
+/* 마우스로 누를 때는 테두리 없이, 키보드 이동 때만 표시 */
+.math-slice:focus:not(:focus-visible) {
+  outline: none;
+}
