@@ -116,7 +116,8 @@ function Universe({
     [selected, setSelected] = useState<Work | null>(null),
     [panel, setPanel] = useState(false),
     // intro: 인트로 재생 중, ready: 본문 등장
-    [stage, setStage] = useState<"intro" | "ready">("intro");
+    [stage, setStage] = useState<"intro" | "ready">("intro"),
+    [replay, setReplay] = useState(0);
   const [economy, setEconomy] = useState(false);
   useEffect(() => {
     const hardware = navigator as Navigator & {
@@ -171,6 +172,21 @@ function Universe({
       .forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
+  // 히어로 아래까지 내려갔다가 맨 위로 돌아오면 인트로를 다시 재생합니다.
+  useEffect(() => {
+    if (reduced) return;
+    let away = false;
+    const watch = () => {
+      if (scrollY > innerHeight * 0.8) away = true;
+      else if (away && scrollY < 8) {
+        away = false;
+        setStage("intro");
+        setReplay((n) => n + 1);
+      }
+    };
+    addEventListener("scroll", watch, { passive: true });
+    return () => removeEventListener("scroll", watch);
+  }, [reduced]);
   // 페이지 안 링크(#…)는 클릭할 때만 부드럽게 이동합니다.
   useEffect(() => {
     const jump = (e: MouseEvent) => {
@@ -220,6 +236,7 @@ function Universe({
         soundOn={enabled}
         enableSound={() => void start(true)}
         onReveal={() => setStage("ready")}
+        replay={replay}
       />
       {mode === "review" && (
         <div className="review-banner" role="status">

@@ -64,18 +64,22 @@ export function Intro({
   soundOn,
   enableSound,
   onReveal,
+  replay = 0,
 }: {
   reduced: boolean;
   economy: boolean;
   soundOn: boolean;
   enableSound: () => void;
   onReveal: (played: boolean) => void;
+  /** 값이 바뀔 때마다 인트로를 처음부터 다시 재생 */
+  replay?: number;
 }) {
   const [phase, setPhase] = useState<Phase>("veil");
   const canvas = useRef<HTMLCanvasElement>(null);
   const reveal = useRef(onReveal);
   reveal.current = onReveal;
-  const finish = useRef<() => void>(() => {});
+  const finish = useRef<() => void>(() => {}),
+    leaveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   // 접속할 때마다 재생. 모션 최소화면 바로 본문을 보여 줍니다.
   useEffect(() => {
@@ -94,6 +98,21 @@ export function Intro({
   useEffect(() => {
     if (reduced && phase === "playing") finish.current();
   }, [reduced, phase]);
+
+  // 맨 위로 다시 올라오면 인트로를 다시 재생합니다.
+  useEffect(() => {
+    if (!replay || reduced) return;
+    clearTimeout(leaveTimer.current);
+    setPhase("playing");
+  }, [replay, reduced]);
+
+  // 재생 중에 아래로 스크롤하면 바로 본문으로 넘어갑니다.
+  useEffect(() => {
+    if (phase !== "playing") return;
+    const skip = () => scrollY > 40 && finish.current();
+    addEventListener("scroll", skip, { passive: true });
+    return () => removeEventListener("scroll", skip);
+  }, [phase]);
 
   useEffect(() => {
     if (phase !== "playing" || !canvas.current) return;
@@ -159,7 +178,7 @@ export function Intro({
         cancelAnimationFrame(frame);
         setPhase("leaving");
         reveal.current(true);
-        setTimeout(() => setPhase("done"), 700);
+        leaveTimer.current = setTimeout(() => setPhase("done"), 700);
       };
       finish.current = done;
       const draw = (now: number) => {
