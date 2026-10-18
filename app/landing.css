@@ -1619,3 +1619,8 @@ html {
   font-size: 12px;
   opacity: 0.65;
 }
+@media (max-width: 640px) {
+  .orbit-formula {
+    display: none;
+  }
+}

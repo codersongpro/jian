@@ -3,8 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { fitCanvas, seeded, useInView } from "./use-scroll";
 import { useCopy } from "../lang";
 
-// 과학·수학: 누르면 새 별이 태어나 궤도를 돌고, 꾹 누르면 그 자리에 중력이 생깁니다.
+// 과학·수학: 가운데 'JIAN PLANET'이 중력으로 여러 지식(별)을 끌어당깁니다.
+// 누르면 새로운 지식이 날아와 끌려 들어오고, 행성에 닿은 지식은 흡수되어 행성이 자랍니다.
+// 꾹 누르면 그 자리에 잠시 중력이 생깁니다.
 type Body = {
+  label: number;
   x: number;
   y: number;
   vx: number;
@@ -14,7 +17,13 @@ type Body = {
   trail: [number, number][];
 };
 const HUES = ["#f3d6a0", "#b9c6ff", "#e7b6c8", "#a8e0d0", "#fff4dc"];
-const MAX = 28;
+const MAX = 28,
+  GM = 1800;
+// 좁은 화면에서는 위쪽 제목을 피해 행성을 아래로 내립니다.
+const center = (w: number, h: number) => ({
+  cx: w / 2,
+  cy: w < 640 ? h * 0.6 : h / 2,
+});
 
 export function OrbitInterlude({
   reduced,
@@ -31,24 +40,41 @@ export function OrbitInterlude({
     dust = useRef<{ a: number; d: number; s: number; o: number }[]>([]),
     well = useRef<{ x: number; y: number } | null>(null),
     visible = useRef(false),
-    loop = useRef<() => void>(() => {});
+    loop = useRef<() => void>(() => {}),
+    planet = useRef(34),
+    flash = useRef(0),
+    next = useRef(0);
   const [count, setCount] = useState(0);
   const { t } = useCopy();
+  // 그리는 중에도 최신 언어의 지식 이름을 쓰도록 참조로 보관
+  const names = useRef(t.knowledge);
+  names.current = t.knowledge;
+  const sub = useRef(t.planetSub);
+  sub.current = t.planetSub;
 
-  // 시작할 때 세 개의 행성을 원 궤도에 올려 둡니다.
-  const circular = (
+  // speed 1이면 원 궤도, 1보다 작으면 안쪽으로 끌려 들어오는 타원 궤도
+  const orbiting = (
     x: number,
     y: number,
     cx: number,
     cy: number,
-    hue: string,
-    r = 3,
+    speed = 1,
   ): Body => {
     const dx = x - cx,
       dy = y - cy,
       d = Math.hypot(dx, dy) || 1,
-      v = Math.sqrt(1800 / d);
-    return { x, y, vx: (-dy / d) * v, vy: (dx / d) * v, r, hue, trail: [] };
+      v = Math.sqrt(GM / d) * speed,
+      label = next.current++;
+    return {
+      label,
+      x,
+      y,
+      vx: (-dy / d) * v,
+      vy: (dx / d) * v,
+      r: 3 + (label % 3),
+      hue: HUES[label % HUES.length],
+      trail: [],
+    };
   };
 
   useEffect(() => {
@@ -61,19 +87,36 @@ export function OrbitInterlude({
       s: 0.4 + rand() * 1.2,
       o: 0.2 + rand() * 0.6,
     }));
-    const { w, h } = fitCanvas(el);
-    bodies.current = [
-      circular(w / 2 + 90, h / 2, w / 2, h / 2, HUES[0], 4),
-      circular(w / 2, h / 2 - 160, w / 2, h / 2, HUES[1], 5),
-      circular(w / 2 - 230, h / 2 + 40, w / 2, h / 2, HUES[2], 3.5),
-    ];
-    setCount(3);
+    const { w, h } = fitCanvas(el),
+      reach = Math.min(w, h) / 2,
+      base = Math.max(20, Math.min(34, reach * 0.12));
+    const font =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--font-body")
+        .trim() || "sans-serif";
+    const display =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--font-display")
+        .trim() || "serif";
+    // 처음에는 여섯 가지 지식이 행성 둘레를 돌고 있습니다.
+    next.current = 0;
+    planet.current = base;
+    const start = center(w, h);
+    bodies.current = [0.42, 0.62, 0.82, 0.5, 0.72, 0.92].map((k, i) => {
+      const a = i * 1.05 + 0.3;
+      return orbiting(
+        start.cx + Math.cos(a) * reach * k,
+        start.cy + Math.sin(a) * reach * k * 0.8,
+        start.cx,
+        start.cy,
+      );
+    });
+    setCount(bodies.current.length);
     let frame = 0,
       time = 0;
     const step = () => {
       const { ctx, w, h } = fitCanvas(el),
-        cx = w / 2,
-        cy = h / 2;
+        { cx, cy } = center(w, h);
       time += 1;
       ctx.clearRect(0, 0, w, h);
       // 회전하는 먼지 원반
@@ -89,15 +132,60 @@ export function OrbitInterlude({
         );
       }
       ctx.globalAlpha = 1;
-      // 중심별
-      const sun = ctx.createRadialGradient(cx, cy, 0, cx, cy, 70);
-      sun.addColorStop(0, "rgba(255,240,205,1)");
-      sun.addColorStop(0.25, "rgba(243,206,140,.85)");
-      sun.addColorStop(1, "rgba(243,206,140,0)");
-      ctx.fillStyle = sun;
+      // JIAN PLANET: 빛무리 → 고리 뒷부분 → 행성 → 고리 앞부분 → 이름
+      const R = planet.current,
+        glowR = R * 2.6 + flash.current * 30;
+      const glow = ctx.createRadialGradient(cx, cy, R * 0.6, cx, cy, glowR);
+      glow.addColorStop(0, `rgba(243,206,140,${0.45 + flash.current * 0.4})`);
+      glow.addColorStop(1, "rgba(243,206,140,0)");
+      ctx.fillStyle = glow;
       ctx.beginPath();
-      ctx.arc(cx, cy, 70, 0, Math.PI * 2);
+      ctx.arc(cx, cy, glowR, 0, Math.PI * 2);
       ctx.fill();
+      flash.current *= 0.92;
+      const ring = (front: boolean) => {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(-0.35);
+        ctx.strokeStyle = "rgba(255,236,200,.75)";
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.ellipse(
+          0,
+          0,
+          R * 1.85,
+          R * 0.48,
+          0,
+          front ? 0 : Math.PI,
+          front ? Math.PI : Math.PI * 2,
+        );
+        ctx.stroke();
+        ctx.restore();
+      };
+      ring(false);
+      const body = ctx.createRadialGradient(
+        cx - R * 0.35,
+        cy - R * 0.4,
+        R * 0.1,
+        cx,
+        cy,
+        R,
+      );
+      body.addColorStop(0, "#fff3d6");
+      body.addColorStop(0.45, "#f0c98e");
+      body.addColorStop(1, "#c98aa6");
+      ctx.fillStyle = body;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fill();
+      ring(true);
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#fff6e0";
+      ctx.font = `600 ${Math.max(13, R * 0.42)}px ${display}`;
+      ctx.fillText("JIAN PLANET", cx, cy + R + 30);
+      ctx.fillStyle = "rgba(216,210,240,.85)";
+      ctx.font = `12px ${font}`;
+      ctx.fillText(sub.current, cx, cy + R + 48);
       if (well.current) {
         const g = ctx.createRadialGradient(
           well.current.x,
@@ -125,7 +213,7 @@ export function OrbitInterlude({
             b.vx += (m * dx) / (d2 * d);
             b.vy += (m * dy) / (d2 * d);
           };
-          pull(cx, cy, 1800);
+          pull(cx, cy, GM);
           if (well.current) pull(well.current.x, well.current.y, 2600);
           b.x += b.vx;
           b.y += b.vy;
@@ -149,13 +237,35 @@ export function OrbitInterlude({
         ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
+        // 지식 이름
+        ctx.fillStyle = b.hue;
+        ctx.globalAlpha = 0.95;
+        ctx.textAlign = "left";
+        ctx.font = `13px ${font}`;
+        ctx.fillText(
+          names.current[b.label % names.current.length],
+          b.x + b.r + 6,
+          b.y + 4,
+        );
+        ctx.globalAlpha = 1;
+      }
+      // 행성에 닿은 지식은 흡수되고, 행성이 조금 자랍니다.
+      const grown = bodies.current.filter(
+        (b) => Math.hypot(b.x - cx, b.y - cy) < planet.current + b.r,
+      ).length;
+      if (grown) {
+        bodies.current = bodies.current.filter(
+          (b) => Math.hypot(b.x - cx, b.y - cy) >= planet.current + b.r,
+        );
+        planet.current = Math.min(base * 1.6, planet.current + grown * 1.2);
+        flash.current = 1;
       }
       // 화면 밖으로 멀리 날아간 별은 정리
       const before = bodies.current.length;
       bodies.current = bodies.current.filter(
         (b) => b.x > -w && b.x < w * 2 && b.y > -h && b.y < h * 2,
       );
-      if (bodies.current.length !== before) setCount(bodies.current.length);
+      void before;
       if (!reduced && visible.current) frame = requestAnimationFrame(step);
     };
     loop.current = () => {
@@ -206,20 +316,19 @@ export function OrbitInterlude({
               well.current = null;
               return;
             }
+            // 누른 자리에서 새로운 지식이 날아와 행성 쪽으로 끌려 들어갑니다.
             const p = point(e);
-            const next = [
+            bodies.current = [
               ...bodies.current,
-              circular(
+              orbiting(
                 p.x,
                 p.y,
-                p.w / 2,
-                p.h / 2,
-                HUES[bodies.current.length % HUES.length],
-                2.5 + Math.random() * 2.5,
+                center(p.w, p.h).cx,
+                center(p.w, p.h).cy,
+                0.55 + Math.random() * 0.3,
               ),
             ].slice(-MAX);
-            bodies.current = next;
-            setCount(next.length);
+            setCount((n) => n + 1);
             onSpawn();
             loop.current();
           }}
