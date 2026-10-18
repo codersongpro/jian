@@ -2407,3 +2407,120 @@ html {
     border-radius: 24px;
   }
 }
+
+/* 또르와 마꺼리 (지안이의 칠판 그림을 따라) */
+.cycloid-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: #4b5a52;
+}
+.cycloid-check input {
+  accent-color: #b0607e;
+  width: 18px;
+  height: 18px;
+}
+.cycloid-result {
+  animation: none;
+}
+.cycloid-result p {
+  margin-top: 0;
+}
+.cycloid-result p.pink {
+  margin-top: 8px;
+  color: #b0607e;
+}
+.cycloid-board-link {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 15px;
+  color: #2f4038;
+}
+.cycloid-board-link img {
+  width: 120px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #e2dfd2;
+}
+.cy-cart {
+  fill: #fffdf7;
+  stroke: #2f4038;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+.cy-wheel {
+  fill: #fffdf7;
+  stroke: #2f4038;
+  stroke-width: 3;
+}
+.cy-spoke {
+  stroke: #2f4038;
+  stroke-width: 2;
+}
+.cy-tube {
+  fill: rgb(255 240 225 / 0.7);
+  stroke: #2f4038;
+  stroke-width: 3;
+}
+.cy-ball {
+  fill: #f2c94c;
+  stroke: #d9a520;
+  stroke-width: 2;
+}
+.cy-trail {
+  fill: none;
+  stroke: #f2c94c;
+  stroke-width: 4;
+  stroke-dasharray: 10 9;
+  stroke-linecap: round;
+}
+.cy-curve {
+  fill: none;
+  stroke: #e7a9c0;
+  stroke-width: 3;
+}
+.cy-dot {
+  fill: #e07a9a;
+}
+.frog ellipse,
+.frog circle:not(.eye) {
+  fill: #fffdf7;
+  stroke: #2f4038;
+  stroke-width: 2.5;
+}
+.frog .eye {
+  fill: #2f4038;
+}
+.frog .smile,
+.frog .legs {
+  fill: none;
+  stroke: #2f4038;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.frog text,
+.cy-clock {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: #2f4038;
+}
+.cy-clock {
+  font-weight: 400;
+  font-size: 14px;
+  fill: #b08a4c;
+}
+.cy-clock.pink {
+  fill: #b0607e;
+}
+@media (max-width: 800px) {
+  /* 휴대폰에서는 그림을 먼저 보여 줍니다. */
+  .cycloid-board {
+    order: -1;
+  }
+}
