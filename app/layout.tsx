@@ -26,11 +26,24 @@ const body = Gowun_Dodum({
   preload: false,
 });
 
+const title = "JIAN’S UNIVERSE — 작은 호기심, 커다란 이야기",
+  description =
+    "글, 그림, 과학, 음악과 발레. 지안이의 생각이 반짝이는 작은 디지털 전시관.";
+// 공유 미리보기(카카오톡·문자·SNS). 이미지는 app/opengraph-image.png를 자동으로 씁니다.
 export const metadata: Metadata = {
-  title: "JIAN'S UNIVERSE — 작은 호기심, 커다란 이야기",
-  description:
-    "글, 그림, 과학, 음악과 발레. 지안이의 생각이 반짝이는 작은 디지털 전시관.",
+  metadataBase: new URL("https://jian.songpro.app"),
+  title,
+  description,
   robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    siteName: "JIAN’S UNIVERSE",
+    title,
+    description,
+    url: "/",
+    locale: "ko_KR",
+  },
+  twitter: { card: "summary_large_image", title, description },
 };
 export const viewport: Viewport = { themeColor: "#0b1030" };
 export default function RootLayout({
