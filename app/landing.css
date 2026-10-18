@@ -992,7 +992,7 @@ html {
 }
 .rhythm-staff path {
   fill: none;
-  stroke: rgb(255 255 255 / 0.22);
+  stroke: rgb(255 255 255 / 0.32);
   stroke-width: 1;
 }
 .rhythm-ribbon {
@@ -1021,7 +1021,7 @@ html {
   padding: 0;
   opacity: var(--show);
   transform: translateY(
-      calc(sin(calc((var(--p, 0) * 16 + var(--i) * 0.9) * 1rad)) * -10px)
+      calc(sin(calc((var(--p, 0) * 16 + var(--i) * 0.9) * 1rad)) * -4px)
     )
     scale(calc(0.6 + 0.4 * var(--show)));
   border-radius: 12px;
