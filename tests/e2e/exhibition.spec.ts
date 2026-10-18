@@ -15,7 +15,7 @@ test("exhibition has no media autoplay, filters and is keyboard accessible", asy
     0,
   );
   await page.getByRole("button", { name: "문학", exact: true }).click();
-  await expect(page.locator("[data-work-card]")).toHaveCount(2);
+  await expect(page.locator("[data-work-card]")).toHaveCount(4);
   const card = page.locator("[data-work-card]").first();
   await card.click();
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -46,39 +46,13 @@ test("constellation and reduced motion retain the ordinary list", async ({
   await page.goto("/");
   await page.getByRole("button", { name: "별자리 보기" }).click();
   await expect(page.getByLabel("작품 별자리")).toBeVisible();
-  await expect(page.locator("[data-work-card]")).toHaveCount(9);
+  await expect(page.locator("[data-work-card]")).toHaveCount(17);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBeTruthy();
 });
-test("repository management opens GitHub editing without requiring a database", async ({
-  page,
-}) => {
-  await page.goto("/admin");
-  await expect(
-    page.getByRole("heading", { name: "GitHub로 작품 관리" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: "작품 목록 편집", exact: true }),
-  ).toHaveAttribute(
-    "href",
-    "https://github.com/codersongpro/jian/edit/main/content/works.json",
-  );
-  await expect(page.getByRole("link", { name: "작품 본문 편집" })).toHaveCount(
-    9,
-  );
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= innerWidth,
-    ),
-  ).toBe(true);
-  await expect(
-    page.getByRole("button", { name: "로그인", exact: true }),
-  ).toHaveCount(0);
-});
-
 test("background music starts on first interaction and stays off once turned off", async ({
   page,
 }) => {
@@ -150,7 +124,9 @@ test("background music starts on first interaction and stays off once turned off
         requestAnimationFrame(() => requestAnimationFrame(resolve)),
       ),
   );
-  expect(await started()).toBe(beforeVolume);
+  // 볼륨을 바꿔도 곡을 처음부터 다시 틀지 않음(재시작이면 첫 마디 23개 이상이 한꺼번에 시작).
+  // 배경 음악은 8초마다 다음 마디를 예약하므로 그 사이 일부 음이 시작될 수는 있습니다.
+  expect((await started()) - beforeVolume).toBeLessThan(20);
   await expect
     .poll(() =>
       page.evaluate(

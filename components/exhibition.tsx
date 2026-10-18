@@ -227,9 +227,6 @@ function Universe({
           <span>
             자료 검토 미리보기 · {works.length}개 작품 묶음 · 공개 검수 대기
           </span>
-          <a href="/admin">
-            전시 관리 <ArrowUpRight size={12} />
-          </a>
         </div>
       )}
       <a href="#collection" className="skip-link">
@@ -787,30 +784,35 @@ function Universe({
             className="source-videos section-shell reveal"
             aria-labelledby="source-videos-title"
           >
-            <div className="eyebrow">COLLECTED MOMENTS · 제공된 영상 링크</div>
-            <h2 id="source-videos-title">다음 이야기를 기다리는 장면들</h2>
-            <p>
-              작품과 함께 남긴 영상 링크입니다. 영상을 선택하면 YouTube에서
-              열립니다.
-            </p>
-            <div className="source-video-grid">
+            <div className="eyebrow">MOVING MOMENTS · 지안이의 영상</div>
+            <h2 id="source-videos-title">소리와 몸짓으로 남긴 장면들</h2>
+            <p>영상을 누르면 YouTube에서 열립니다.</p>
+            <div className="source-video-grid video-cards">
               {videos.map((video, i) => (
                 <a
                   key={video.id}
                   href={video.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${video.title || `지안이의 영상 ${i + 1}`} · YouTube에서 보기`}
                 >
-                  <span>0{i + 1}</span>
-                  <div>
-                    <strong>{video.title || `영상 ${i + 1}`}</strong>
-                    <small>
-                      {video.title
-                        ? "YouTube에서 보기"
-                        : `${video.id} · 제목 확인 전`}
-                    </small>
-                  </div>
-                  <ArrowUpRight size={18} />
+                  <span className="video-thumb">
+                    <img
+                      src={`https://i.ytimg.com/vi/${encodeURIComponent(video.id)}/hqdefault.jpg`}
+                      alt=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        e.currentTarget.style.visibility = "hidden";
+                      }}
+                    />
+                    <span className="video-play" aria-hidden="true" />
+                  </span>
+                  <span className="video-meta">
+                    <span>{String(i + 1).padStart(2, "0")}</span>
+                    <strong>{video.title || `지안이의 영상 ${i + 1}`}</strong>
+                    <ArrowUpRight size={18} />
+                  </span>
                 </a>
               ))}
             </div>
@@ -834,9 +836,6 @@ function Universe({
         <p>작은 호기심에서 시작된 커다란 이야기</p>
         <div>
           <span>© {new Date().getFullYear()} JIAN’S UNIVERSE</span>
-          <a href="/admin" aria-label="관리자 화면">
-            관리자 <ArrowUpRight size={12} />
-          </a>
         </div>
       </footer>
       {/* 배경 음악 켜고 끄기: 화면 오른쪽 아래에 늘 떠 있는 버튼 */}

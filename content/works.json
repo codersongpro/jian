@@ -37,6 +37,14 @@
       "thumbnail_url": "/works/thumbnails/family-law.webp",
       "pages": [
         {
+          "url": "/works/family-law/hand-01.jpg",
+          "caption": "화이트보드에 쓴 제1조 1항·2항"
+        },
+        {
+          "url": "/works/family-law/hand-02.jpg",
+          "caption": "화이트보드에 쓴 제1조 3항·4항"
+        },
+        {
           "url": "/works/family-law/page-07.jpg",
           "caption": "제공 자료 1 · page-07.jpg"
         },
@@ -51,7 +59,7 @@
         "date_basis": "PDF 판권에 기재된 날짜",
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
-        "authorship_note": "손글씨 원안이 포함된 편집본. 편집 문장 전체의 학생 단독 저작은 미확인."
+        "authorship_note": "화이트보드 손글씨 원안 사진과 편집본 발췌. 편집본 문장 전체의 학생 단독 저작은 미확인."
       }
     },
     {
@@ -327,6 +335,258 @@
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
         "authorship_note": "대화 첨부 사진의 본문 직접 확인. 교정본이 아닌 전사."
+      }
+    },
+    {
+      "id": "sea-poem",
+      "title": "바다",
+      "category": "문학",
+      "year": null,
+      "description": "“나는 바다가 좋다.”로 이어지는 손글씨 동시와 색연필 바다 그림.",
+      "content_file": "sea-poem.md",
+      "is_public": true,
+      "featured_order": 2,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/sea-poem.webp",
+      "pages": [
+        {
+          "url": "/works/sea-poem/page-01.jpg",
+          "caption": "손글씨 원고와 바다 그림"
+        }
+      ],
+      "provenance": {
+        "category": "문학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "자필 원고 사진. 전사 없이 원본 그대로 공개."
+      }
+    },
+    {
+      "id": "drawings",
+      "title": "연필과 색연필 그림",
+      "category": "미술",
+      "year": null,
+      "description": "꽃과 꿀벌, 이름 글자 디자인, 생각 나무를 직접 그린 그림 세 점.",
+      "content_file": "drawings.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/drawings.webp",
+      "pages": [
+        {
+          "url": "/works/drawings/page-01.jpg",
+          "caption": "꽃과 꿀벌"
+        },
+        {
+          "url": "/works/drawings/page-02.jpg",
+          "caption": "Jian 이름 글자 디자인"
+        },
+        {
+          "url": "/works/drawings/page-03.jpg",
+          "caption": "생각 나무"
+        }
+      ],
+      "provenance": {
+        "category": "미술",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "종이 그림 원본 사진."
+      }
+    },
+    {
+      "id": "fan-painting",
+      "title": "그림 부채",
+      "category": "공예·디자인",
+      "year": null,
+      "description": "하얀 부채에 직접 무늬와 그림을 그려 꾸민 부채 세 점.",
+      "content_file": "fan-painting.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/fan-painting.webp",
+      "pages": [
+        {
+          "url": "/works/fan-painting/page-01.jpg",
+          "caption": "그림을 그린 부채 세 점"
+        }
+      ],
+      "provenance": {
+        "category": "공예·디자인",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "직접 꾸민 부채 사진."
+      }
+    },
+    {
+      "id": "comment-clinic",
+      "title": "악플 고치기 진단서",
+      "category": "사회·기획",
+      "year": null,
+      "description": "나쁜 말을 고운 말로 바꾸는 방법을 스스로 정리한 손글씨 진단서.",
+      "content_file": "comment-clinic.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/comment-clinic.webp",
+      "pages": [
+        {
+          "url": "/works/comment-clinic/page-01.jpg",
+          "caption": "악플 고치기 진단서"
+        }
+      ],
+      "provenance": {
+        "category": "사회·기획",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "손글씨 활동지 사진."
+      }
+    },
+    {
+      "id": "teacher-board",
+      "title": "지안 선생님의 칠판",
+      "category": "공부 기록",
+      "year": null,
+      "description": "선생님이 되어 화이트보드에 직접 꾸민 아침 인사, 앞 글자 수수께끼, 저울 수학 문제.",
+      "content_file": "teacher-board.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/teacher-board.webp",
+      "pages": [
+        {
+          "url": "/works/teacher-board/page-02.jpg",
+          "caption": "아침 칠판 수업"
+        },
+        {
+          "url": "/works/teacher-board/page-03.jpg",
+          "caption": "수학 기호와 문장 칠판"
+        },
+        {
+          "url": "/works/teacher-board/page-04.jpg",
+          "caption": "칠판 손글씨"
+        }
+      ],
+      "provenance": {
+        "category": "공부 기록",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "화이트보드 손글씨 사진. 가족 사진이 보이는 부분은 공개 사진에 없음."
+      }
+    },
+    {
+      "id": "study-notes",
+      "title": "영어·사회 공부 노트",
+      "category": "공부 기록",
+      "year": null,
+      "description": "영어 문법과 수업 내용, 사회 핵심 단어를 스스로 정리한 손글씨 노트.",
+      "content_file": "study-notes.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/study-notes.webp",
+      "pages": [
+        {
+          "url": "/works/study-notes/page-01.jpg",
+          "caption": "영어 문법 Lesson 1 노트"
+        },
+        {
+          "url": "/works/study-notes/page-02.jpg",
+          "caption": "영어 수업 복습 글"
+        },
+        {
+          "url": "/works/study-notes/page-03.jpg",
+          "caption": "MT Review"
+        },
+        {
+          "url": "/works/study-notes/page-04.jpg",
+          "caption": "Grammar Lesson 2 노트"
+        },
+        {
+          "url": "/works/study-notes/page-05.jpg",
+          "caption": "사회 핵심 단어 정리"
+        }
+      ],
+      "provenance": {
+        "category": "공부 기록",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "손글씨 노트 사진."
+      }
+    },
+    {
+      "id": "english-essays",
+      "title": "영어 글쓰기",
+      "category": "문학",
+      "year": null,
+      "description": "도시와 농장에 대해 자기 생각을 쓴 영어 글 두 편.",
+      "content_file": "english-essays.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/english-essays.webp",
+      "pages": [
+        {
+          "url": "/works/english-essays/page-01.jpg",
+          "caption": "도시와 농장에 대한 영어 글"
+        },
+        {
+          "url": "/works/english-essays/page-02.jpg",
+          "caption": "농장에 대한 영어 글(태블릿 손글씨)"
+        }
+      ],
+      "provenance": {
+        "category": "영어·문학",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "종이와 태블릿에 직접 쓴 글의 사진."
+      }
+    },
+    {
+      "id": "reading-app",
+      "title": "책 읽어 주는 앱 기획",
+      "category": "앱 기획",
+      "year": null,
+      "description": "대상·기능·디자인을 나눠 화이트보드에 직접 설계한 책 읽어 주는 앱 기획.",
+      "content_file": "reading-app.md",
+      "is_public": true,
+      "featured_order": 3,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/reading-app.webp",
+      "pages": [
+        {
+          "url": "/works/reading-app/page-01.jpg",
+          "caption": "앱 개발 선생님 칠판 · 대상, 기능, 디자인"
+        }
+      ],
+      "provenance": {
+        "category": "앱 기획",
+        "date": null,
+        "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "화이트보드 손글씨 기획 사진. 위쪽 인사 문구 한 줄은 보호자가 쓴 것일 수 있음."
       }
     }
   ]

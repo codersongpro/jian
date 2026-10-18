@@ -1493,3 +1493,103 @@ html {
   animation: none;
   height: 10px;
 }
+
+/* 성장의 기록: 연도 버튼이 많거나 화면이 좁으면 가로로 밀어서 봅니다. */
+.universe .timeline {
+  overflow-x: auto;
+  scrollbar-width: none;
+  justify-content: flex-start;
+  gap: 22px;
+  padding: 26px 4px 6px;
+}
+.universe .timeline::-webkit-scrollbar {
+  display: none;
+}
+.universe .timeline > button {
+  flex: none;
+}
+/* 연결선을 점 높이에 맞춤 (점: 데스크톱 버튼 위 19px, 모바일 5px) */
+.universe .timeline::before {
+  top: 11px;
+}
+@media (max-width: 800px) {
+  .universe .timeline::before {
+    top: 25px;
+  }
+}
+
+/* ---------- 13. 지안이의 영상 ---------- */
+.universe .video-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+  margin-top: 32px;
+}
+.universe .video-cards > a {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgb(255 253 247 / 0.75);
+  box-shadow: 0 0 0 1px #e6e4d8;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s;
+}
+.universe .video-cards > a:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px rgb(53 72 63 / 0.14);
+}
+.video-thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(circle at 30% 30%, rgb(185 198 255 / 0.5), transparent 60%),
+    linear-gradient(140deg, #1b1748, #4a3466);
+}
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.video-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 58px;
+  height: 58px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: rgb(14 18 48 / 0.65);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.7);
+}
+.video-play::after {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 18px;
+  border-left: 17px solid #fff6e0;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+}
+.video-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  font-size: 16px;
+  color: #2f4038;
+}
+.video-meta > span {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--gold-deep);
+}
+.video-meta strong {
+  flex: 1;
+  font-weight: 400;
+}

@@ -3,7 +3,7 @@ import { useMemo, useRef } from "react";
 import { seeded, useScrollProgress } from "./use-scroll";
 
 // 문학: 흩어진 글자 별들이 스크롤에 맞춰 한 문장으로 모입니다.
-const LINES = ["작은 생각 하나가", "한 글자씩 별이 되어", "이야기가 돼요."];
+const LINES = ["내 생각 하나 하나가", "별이 되어", "나만의 우주를 만들어요."];
 const NOTES = [523.25, 587.33, 659.25, 783.99, 880, 1046.5];
 
 export function WordsInterlude({
@@ -76,9 +76,6 @@ export function WordsInterlude({
                     key={i}
                     className="glyph"
                     style={style}
-                    onPointerEnter={(e) =>
-                      e.pointerType === "mouse" && tone(NOTES[i % NOTES.length])
-                    }
                     onClick={() => tone(NOTES[i % NOTES.length])}
                   >
                     {ch}

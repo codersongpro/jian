@@ -6,7 +6,7 @@ test("repository catalog works without a database and uploads stay protected", a
   expect(catalog.status()).toBe(200);
   const data = await catalog.json();
   expect(data.mode).toBe("repository");
-  expect(data.works).toHaveLength(9);
+  expect(data.works).toHaveLength(17);
   expect(
     data.works.every(
       (work: { is_public: boolean; review?: unknown }) =>
@@ -24,10 +24,12 @@ test("repository catalog works without a database and uploads stay protected", a
   );
   expect(media.status()).toBe(503);
   expect(media.headers()["cache-control"]).toContain("no-store");
+  // 관리자 화면과 관리자 API는 제거됨
+  expect((await request.get("http://127.0.0.1:3000/admin")).status()).toBe(404);
   const upload = await request.post("http://127.0.0.1:3000/api/admin/media", {
     data: {},
   });
-  expect(upload.status()).toBe(401);
+  expect(upload.status()).toBe(404);
 });
 
 test("production serves selected works without exposing the private review bundle", async ({
@@ -51,12 +53,5 @@ test("production serves selected works without exposing the private review bundl
   }
   expect(
     (await request.get("http://127.0.0.1:3000/api/admin/candidates")).status(),
-  ).toBe(401);
-  expect(
-    (
-      await request.post("http://127.0.0.1:3000/api/admin/candidates", {
-        data: { id: "poems" },
-      })
-    ).status(),
-  ).toBe(401);
+  ).toBe(404);
 });

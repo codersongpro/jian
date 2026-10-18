@@ -10,6 +10,7 @@ export const categories = [
   "공예·디자인",
   "사회·기획",
   "앱 기획",
+  "공부 기록",
 ] as const;
 export type Category = Exclude<(typeof categories)[number], "전체">;
 export type Media = {

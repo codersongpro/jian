@@ -4,7 +4,7 @@ test("actual source works retain transcriptions, pages, dates and six unembedded
 }) => {
   await page.goto("/");
   await expect(page.locator(".review-banner")).toHaveCount(0);
-  await expect(page.locator("[data-work-card]")).toHaveCount(9);
+  await expect(page.locator("[data-work-card]")).toHaveCount(17);
   await page
     .locator("[data-work-card]")
     .filter({ hasText: "동시 다섯 편" })
@@ -41,6 +41,16 @@ test("actual source works retain transcriptions, pages, dates and six unembedded
   await page.keyboard.press("Escape");
   await expect(page.locator(".source-video-grid a")).toHaveCount(6);
   await expect(page.locator("iframe")).toHaveCount(0);
+  // 카드 이미지는 화면에 들어올 때 불러오므로(지연 로딩) 하나씩 화면에 보이게 한 뒤 확인
+  const images = page.locator("[data-work-card] img");
+  for (let i = 0; i < (await images.count()); i++) {
+    await images.nth(i).scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        images.nth(i).evaluate((image) => (image as HTMLImageElement).complete),
+      )
+      .toBe(true);
+  }
   const broken = await page
     .locator("[data-work-card] img")
     .evaluateAll(
@@ -56,5 +66,5 @@ test("actual source works retain transcriptions, pages, dates and six unembedded
 test("unknown dates stay unknown in the timeline", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: /연도 미상/ }).click();
-  await expect(page.locator("[data-work-card]")).toHaveCount(4);
+  await expect(page.locator("[data-work-card]")).toHaveCount(12);
 });
