@@ -64,6 +64,9 @@ export function SoundProvider({
     starting = useRef(false);
   const currentVolume = useRef(preferences.volume);
   currentVolume.current = preferences.volume;
+  const soundWanted = useRef(preferences.sound),
+    autoTried = useRef(false);
+  soundWanted.current = preferences.sound;
   useEffect(() => {
     setReady(true);
     engine.current?.volume(preferences.volume);
@@ -157,7 +160,8 @@ export function SoundProvider({
     try {
       const { SoundEngine } = await import("@/lib/sound");
       engine.current ??= new SoundEngine();
-      await engine.current.activate(preferences.volume);
+      // 아직 막혀 있으면 켜진 것으로 표시하지 않고 다음 동작 때 다시 시도합니다.
+      if (!(await engine.current.activate(preferences.volume))) return;
       setError("");
       setPaused(false);
       setEnabled(true);
@@ -192,6 +196,28 @@ export function SoundProvider({
     setPaused(false);
     if (!enabled) void start();
   }
+  // 처음부터 배경 음악: 페이지가 열리자마자 시작을 시도합니다.
+  // 브라우저가 허용하면(재방문·사이트 안 이동 등) 바로 들리고, 막히면 아래처럼 첫 상호작용 때 시작합니다.
+  useEffect(() => {
+    if (
+      !autoplay ||
+      !ready ||
+      !preferences.sound ||
+      enabled ||
+      autoTried.current
+    )
+      return;
+    autoTried.current = true;
+    void (async () => {
+      try {
+        const { SoundEngine } = await import("@/lib/sound");
+        engine.current ??= new SoundEngine();
+        const running = await engine.current.activate(currentVolume.current);
+        // 기다리는 사이 방문자가 소리를 껐다면 켜지 않습니다.
+        if (running && soundWanted.current) setEnabled(true);
+      } catch {}
+    })();
+  });
   // 브라우저는 사용자 동작 전에 소리를 막으므로, 첫 터치·클릭·키 입력 때 시작합니다.
   useEffect(() => {
     if (!autoplay || !preferences.sound || enabled) return;
@@ -199,9 +225,16 @@ export function SoundProvider({
     const begin = (e: Event) => {
       if ((e.target as Element | null)?.closest?.("[data-sound-control]"))
         return;
+      engine.current?.wake();
       void start();
     };
-    const events = ["pointerdown", "keydown", "touchstart"] as const;
+    const events = [
+      "pointerdown",
+      "keydown",
+      "touchstart",
+      "touchend",
+      "click",
+    ] as const;
     events.forEach((t) =>
       addEventListener(t, begin, { capture: true, passive: true }),
     );
