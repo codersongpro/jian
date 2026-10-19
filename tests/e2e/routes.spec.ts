@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { TOTAL_WORKS } from "../expected";
 test("repository catalog works without a database and uploads stay protected", async ({
   request,
 }) => {
@@ -6,7 +7,7 @@ test("repository catalog works without a database and uploads stay protected", a
   expect(catalog.status()).toBe(200);
   const data = await catalog.json();
   expect(data.mode).toBe("repository");
-  expect(data.works).toHaveLength(34);
+  expect(data.works).toHaveLength(TOTAL_WORKS);
   expect(
     data.works.every(
       (work: { is_public: boolean; review?: unknown }) =>

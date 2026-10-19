@@ -3,10 +3,12 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import { categories } from "../lib/model";
 import { readRepositoryCatalog } from "../lib/repository";
+import { MIN_WORKS, TOTAL_WORKS } from "./expected";
 
 test("repository works have readable text, valid categories and existing local images", async () => {
   const { works } = await readRepositoryCatalog();
-  assert.equal(works.length, 34);
+  assert.equal(works.length, TOTAL_WORKS);
+  assert.ok(works.length >= MIN_WORKS);
   assert.equal(new Set(works.map((work) => work.id)).size, works.length);
   for (const work of works) {
     assert.ok(work.title.trim() && work.content_text?.trim());

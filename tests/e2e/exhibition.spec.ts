@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { TOTAL_WORKS, countIn } from "../expected";
 
 test("exhibition has no media autoplay, filters and is keyboard accessible", async ({
   page,
@@ -15,7 +16,9 @@ test("exhibition has no media autoplay, filters and is keyboard accessible", asy
     0,
   );
   await page.getByRole("button", { name: "문학", exact: true }).click();
-  await expect(page.locator("[data-work-card]")).toHaveCount(6);
+  await expect(page.locator("[data-work-card]")).toHaveCount(
+    Math.min(countIn("문학"), 9),
+  );
   const card = page.locator("[data-work-card]").first();
   await card.click();
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -49,7 +52,7 @@ test("constellation and reduced motion retain the ordinary list", async ({
   // 처음에는 9개만 보이고, '모두 펼치기'로 전부 볼 수 있음
   await expect(page.locator("[data-work-card]")).toHaveCount(9);
   await page.getByRole("button", { name: "모두 펼치기" }).click();
-  await expect(page.locator("[data-work-card]")).toHaveCount(34);
+  await expect(page.locator("[data-work-card]")).toHaveCount(TOTAL_WORKS);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,

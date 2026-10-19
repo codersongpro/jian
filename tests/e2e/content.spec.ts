@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { TOTAL_WORKS, UNDATED_WORKS } from "../expected";
 test("actual source works retain transcriptions, pages, dates and six unembedded videos", async ({
   page,
 }) => {
@@ -7,7 +8,7 @@ test("actual source works retain transcriptions, pages, dates and six unembedded
   // 처음에는 9개만 보이고, '모두 펼치기'로 전부 볼 수 있음
   await expect(page.locator("[data-work-card]")).toHaveCount(9);
   await page.getByRole("button", { name: "모두 펼치기" }).click();
-  await expect(page.locator("[data-work-card]")).toHaveCount(34);
+  await expect(page.locator("[data-work-card]")).toHaveCount(TOTAL_WORKS);
   await page
     .locator("[data-work-card]")
     .filter({ hasText: "동시 다섯 편" })
@@ -72,5 +73,5 @@ test("unknown dates stay unknown in the timeline", async ({ page }) => {
   // 처음에는 9개만 보이고, '모두 펼치기'로 전부 볼 수 있음
   await expect(page.locator("[data-work-card]")).toHaveCount(9);
   await page.getByRole("button", { name: "모두 펼치기" }).click();
-  await expect(page.locator("[data-work-card]")).toHaveCount(28);
+  await expect(page.locator("[data-work-card]")).toHaveCount(UNDATED_WORKS);
 });
