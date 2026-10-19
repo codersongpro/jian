@@ -61,7 +61,7 @@ GitHub에서 파일을 열고 연필 아이콘으로 수정한 뒤 **Commit chan
 
 - Claude Code 세션에 Google Drive 커넥터가 연결되어 있어야 합니다.
 - 이미지 변환에는 [`scripts/inbox_photo.py`](scripts/inbox_photo.py)와 ImageMagick을 사용합니다.
-- 얼굴, 실명, 학교명, 주소가 보이는 사진은 반영하지 않고 보고합니다.
+- 얼굴, 실명, 학교명, 주소가 보이는 사진은 반영하지 않고 보고합니다. 학원 이름이나 상표가 인쇄된 것은 그대로 반영합니다.
 - 테스트의 작품 수는 [`tests/expected.ts`](tests/expected.ts)가 `works.json`에서 계산하므로 작품을 추가해도 테스트를 고칠 필요가 없습니다.
 
 YouTube 링크 6개는 지정 순서를 보존했습니다. 제목을 확인했다면 `content/videos.json`의 `title`을 수정할 수 있습니다. 영상은 외부 링크로 열리며 자동 임베드·자동 재생하지 않습니다.

@@ -1184,6 +1184,64 @@
         "evidence_level": "실제 파일 육안 확인",
         "authorship_note": "악보에 '작곡 송지안'이라고 직접 적혀 있음. 전사 없이 원본 그대로 공개."
       }
+    },
+    {
+      "id": "family-debate",
+      "title": "우리가족 토론 이벤트",
+      "title_en": "Our Family Debate Event",
+      "category": "사회·기획",
+      "year": 2026,
+      "description": "토론 시간·장소·방법을 적고, 접힌 칸을 펼치면 참석·모름·미참석을 표시하게 만든 가족 토론 초대장 두 장.",
+      "description_en": "Two invitations to a family debate listing the time, place and rules, with a fold-out flap for marking attend, not sure or not attending.",
+      "content_file": "family-debate.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/family-debate.webp",
+      "pages": [
+        {
+          "url": "/works/family-debate/page-01.jpg",
+          "caption": "초대장 두 장과 펼친 참여 방법 칸"
+        }
+      ],
+      "provenance": {
+        "category": "사회·기획",
+        "date": "2026-06-13",
+        "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성"
+      }
+    },
+    {
+      "id": "color-water-diary",
+      "title": "색이 변하는 물의 마법",
+      "title_en": "The Magic of Water That Changes Color",
+      "category": "공부 기록",
+      "year": 2026,
+      "description": "섞으면 색이 바뀌는 물을 배우고, 화학 반응과 온도에 따른 분자의 움직임을 얼굴 그린 네모·세모 그림으로 설명한 두 쪽 일기.",
+      "description_en": "A two-page journal entry on water that changes color when mixed, explaining chemical reactions and how temperature speeds up molecules with drawings of square and triangle characters.",
+      "content_file": "color-water-diary.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/color-water-diary.webp",
+      "pages": [
+        {
+          "url": "/works/color-water-diary/page-01.jpg",
+          "caption": "일기 두 쪽"
+        }
+      ],
+      "provenance": {
+        "category": "공부 기록",
+        "date": "2026-06-14",
+        "date_basis": "일기에 적힌 날짜. 사진 촬영일(EXIF)과 같음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 일기에 적힌 제목, 소개는 사진 분석으로 작성"
+      }
     }
   ]
 }
