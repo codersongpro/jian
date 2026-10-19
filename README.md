@@ -55,12 +55,12 @@ GitHub에서 파일을 열고 연필 아이콘으로 수정한 뒤 **Commit chan
 1. **올리기 (가족)**: 휴대폰 드라이브 앱으로 사진만 올리면 됩니다. 설명이 없으면 Claude가 사진을 분석해 제목·분야·소개를 쓰고, 같은 작품의 여러 장도 사진을 보고 묶습니다. 덧붙이고 싶은 이야기(지안이 붙인 이름, 만든 곳, 지안이 한 말)가 있을 때만 파일 이름을 한 줄 설명으로 바꾸거나, 폴더를 만들어 폴더 이름에 씁니다. 날짜는 쓰지 않아도 됩니다. 자세한 방법은 폴더 안 「📌 사용 안내」 문서에 있습니다.
 2. **반영 (사용자)**: 이 저장소의 Claude Code 세션에서 **"반영해줘"** 라고 말합니다. Claude는 [`.claude/skills/jian-inbox/SKILL.md`](.claude/skills/jian-inbox/SKILL.md) 절차대로 다음을 진행합니다.
    - 사진 분석, 카테고리 분류, 제목·소개(한/영) 작성
-   - 촬영일 자동 인식, 위치 정보 제거
+   - 촬영 날짜·시간과 촬영 시·군(예: 충청북도 청주시) 자동 표시, 사진 파일 속 정확한 GPS 좌표는 제거
    - main 대상 PR 생성
 3. **공개 (사용자)**: PR과 Vercel 미리보기를 확인하고 병합하면 공개됩니다. 처리된 사진은 드라이브의 「반영 완료」 폴더로 옮겨집니다.
 
 - Claude Code 세션에 Google Drive 커넥터가 연결되어 있어야 합니다.
-- 이미지 변환에는 [`scripts/inbox_photo.py`](scripts/inbox_photo.py)와 ImageMagick을 사용합니다.
+- 이미지 변환에는 [`scripts/inbox_photo.py`](scripts/inbox_photo.py)와 ImageMagick을 사용합니다. 시·군 판정은 통계청 2013 경계를 시·군 단위로 합친 [`scripts/data/korea-sigun.json`](scripts/data/korea-sigun.json)으로 오프라인에서 합니다(생성: [`scripts/build_sigun_data.py`](scripts/build_sigun_data.py)). 2014년 이후 통합·편입은 반영했지만, 시·군 경계 근처에서 찍은 사진은 이웃 시·군으로 판정될 수 있습니다.
 - 얼굴, 실명, 학교명, 주소가 보이는 사진은 반영하지 않고 보고합니다. 학원 이름이나 상표가 인쇄된 것은 그대로 반영합니다.
 - 테스트의 작품 수는 [`tests/expected.ts`](tests/expected.ts)가 `works.json`에서 계산하므로 작품을 추가해도 테스트를 고칠 필요가 없습니다.
 

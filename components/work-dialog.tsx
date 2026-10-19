@@ -131,6 +131,21 @@ export function WorkDialog({
                   {work.provenance.date || t.recordUnknown} ·{" "}
                   {work.provenance.date_basis}
                 </dd>
+                {(work.provenance.photo_taken ||
+                  work.provenance.photo_place) && (
+                  <>
+                    <dt>{t.recordPhoto}</dt>
+                    <dd>
+                      {[
+                        work.provenance.photo_taken,
+                        (lang === "en" && work.provenance.photo_place_en) ||
+                          work.provenance.photo_place,
+                      ]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </dd>
+                  </>
+                )}
                 <dt>{t.recordCategory}</dt>
                 <dd>{work.provenance.category}</dd>
                 <dt>{t.recordNote}</dt>

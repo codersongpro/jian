@@ -30,6 +30,17 @@ test("repository works have readable text, valid categories and existing local i
   );
 });
 
+test("photo places stay at city or county level without coordinates", async () => {
+  const { works } = await readRepositoryCatalog();
+  for (const work of works) {
+    const { photo_place, photo_place_en, photo_taken } = work.provenance ?? {};
+    if (photo_place) assert.match(photo_place, /^[가-힣]+( [가-힣]+[시군])?$/);
+    if (photo_place_en) assert.doesNotMatch(photo_place_en, /\d/);
+    if (photo_taken)
+      assert.match(photo_taken, /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/);
+  }
+});
+
 test("repository catalog and committed metadata contain no private review records", async () => {
   const catalog = await readRepositoryCatalog();
   assert.ok(catalog.works.every((work) => work.is_public && !work.review));

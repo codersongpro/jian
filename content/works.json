@@ -822,7 +822,10 @@
         "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
-        "authorship_note": "손글씨 포스터 원본 사진. 전사 없이 원본 그대로 공개."
+        "authorship_note": "손글씨 포스터 원본 사진. 전사 없이 원본 그대로 공개.",
+        "photo_taken": "2026-06-27 19:18",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
       }
     },
     {
@@ -1211,7 +1214,10 @@
         "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
-        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성"
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성",
+        "photo_taken": "2026-06-13 17:22",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
       }
     },
     {
@@ -1240,7 +1246,10 @@
         "date_basis": "일기에 적힌 날짜. 사진 촬영일(EXIF)과 같음",
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
-        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 일기에 적힌 제목, 소개는 사진 분석으로 작성"
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 일기에 적힌 제목, 소개는 사진 분석으로 작성",
+        "photo_taken": "2026-06-14 11:00",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
       }
     }
   ]

@@ -51,6 +51,11 @@ export type Work = {
     creator_display: string;
     evidence_level: string;
     authorship_note: string;
+    /** 사진 촬영 날짜·시간 (예: 2026-06-13 15:20) */
+    photo_taken?: string;
+    /** 사진 촬영 위치, 시·군 단위까지만 (예: 경기도 성남시) */
+    photo_place?: string;
+    photo_place_en?: string;
   } | null;
   review?: {
     publish_ready: boolean;

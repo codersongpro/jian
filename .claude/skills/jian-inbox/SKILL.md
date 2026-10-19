@@ -39,7 +39,8 @@ Google Drive 커넥터가 필요하다. 연결되어 있지 않으면 사용자�
 - `download_file_content(fileId)`로 받는다. 큰 사진은 결과가 파일로 저장되었다는 안내와 경로가 나오므로 **그 JSON 경로를 그대로** 스크립트 입력으로 넘긴다. 작은 사진이 본문에 바로 나오면 그 JSON을 스크래치패드에 저장해서 넘긴다. base64를 대화에 옮겨 적지 않는다.
 - 작품 id는 영문 소문자·숫자·하이픈 슬러그로 정한다(예: `fall-tree`). `content/works.json`의 기존 id와 겹치지 않게 한다.
 - 파일 위치: 본문 `public/works/<id>/page-01.jpg`, `page-02.jpg` …, 대표 사진만 `--thumb public/works/thumbnails/<id>.webp`.
-- 스크립트가 촬영일 읽기, 회전 보정, **GPS·기기 정보 제거**, 크기 축소(본문 긴 변 1536px, 썸네일 640px)를 한다. 출력 JSON의 `date`를 기록해 둔다.
+- 스크립트가 촬영 날짜·시간 읽기, 촬영 위치를 **시·군 이름으로 변환**(`scripts/data/korea-sigun.json`, 오프라인), 회전 보정, **정확한 GPS 좌표·기기 정보 제거**, 크기 축소(본문 긴 변 1536px, 썸네일 640px)를 한다. 출력 JSON의 `date`, `time`, `place`, `place_en`을 기록해 둔다.
+- 위치는 **시·군 단위까지만** 공개한다(사용자 결정, 2026-10-19). 좌표나 읍·면·동, 구 이름은 어디에도 적지 않는다.
 - 변환이 끝나면 저장된 도구 결과 파일(원본 base64)은 지운다.
 
 ## 4. 사진 확인 (공개 전 안전 점검)
@@ -100,7 +101,10 @@ Google Drive 커넥터가 필요하다. 연결되어 있지 않으면 사용자�
     "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
     "creator_display": "Jian",
     "evidence_level": "실제 파일 육안 확인",
-    "authorship_note": "보호자가 수신함에 올린 사진. 메모: “가을 나무 - 학교 미술 시간에 그림”"
+    "authorship_note": "보호자가 수신함에 올린 사진. 메모: “가을 나무 - 학교 미술 시간에 그림”",
+    "photo_taken": "2026-10-18 15:30",
+    "photo_place": "경기도 성남시",
+    "photo_place_en": "Seongnam-si, Gyeonggi-do"
   }
 }
 ```
@@ -111,6 +115,7 @@ Google Drive 커넥터가 필요하다. 연결되어 있지 않으면 사용자�
   2. 없으면 촬영일(EXIF). `date_basis`: `사진 촬영일(EXIF). 실제 완성일과 다를 수 있음`
   3. 촬영일 정보가 없으면 Drive `createdTime`의 날짜(한국 시간). `date_basis`: `Drive 업로드일(사진에 촬영일 정보 없음)`
   - `year`는 정해진 날짜의 연도다.
+- `photo_taken`은 대표 사진의 스크립트 출력 `date`와 `time`을 합친 값이다. `photo_place`·`photo_place_en`은 `place`·`place_en`이다. 값이 없으면(촬영 정보 없음, 국외) 그 필드를 넣지 않는다. 작품 상세 창의 「사진 촬영」 줄에 표시된다.
 - 캡션은 사진마다 무엇이 보이는지 짧게 쓴다(예: `전체 그림`, `뒷면`, `세부: 날개`).
 - `featured_order`는 항상 `null`이다. 대표 작품 지정은 사용자가 한다.
 
