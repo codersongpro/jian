@@ -79,7 +79,17 @@ export class SoundEngine {
       convolver.connect(this.master);
     }
     this.volume(volume);
-    await this.context.resume();
+    // 브라우저가 자동 재생을 막으면 resume()이 끝나지 않을 수 있어 잠깐만 기다립니다.
+    await Promise.race([
+      this.context.resume().catch(() => {}),
+      new Promise((resolve) => setTimeout(resolve, 1000)),
+    ]);
+    return this.context.state === "running";
+  }
+
+  // 사용자 동작 안에서 곧바로 깨웁니다(모바일은 손가락을 뗄 때 소리가 허용됨).
+  wake() {
+    void this.context?.resume().catch(() => {});
   }
 
   volume(volume: number) {

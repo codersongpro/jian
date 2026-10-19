@@ -94,8 +94,8 @@ test("background music starts on first interaction and stays off once turned off
           }
         ).soundProbe.contexts.length,
     );
-  // 브라우저 정책상 사용자 동작 전에는 소리 엔진을 만들지 않음
-  expect(await count()).toBe(0);
+  // 페이지가 열리자마자 시작을 시도하므로 소리 엔진은 하나만 만들어짐(막히면 첫 동작 때 재생)
+  expect(await count()).toBeLessThanOrEqual(1);
   await page.getByRole("heading", { name: "JIAN’S UNIVERSE" }).click();
   await expect(
     page.getByRole("button", { name: "배경 음악 끄기", exact: true }),
