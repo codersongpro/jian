@@ -1218,7 +1218,7 @@
       "id": "color-water-diary",
       "title": "색이 변하는 물의 마법",
       "title_en": "The Magic of Water That Changes Color",
-      "category": "공부 기록",
+      "category": "과학",
       "year": 2026,
       "description": "섞으면 색이 바뀌는 물을 배우고, 화학 반응과 온도에 따른 분자의 움직임을 얼굴 그린 네모·세모 그림으로 설명한 두 쪽 일기.",
       "description_en": "A two-page journal entry on water that changes color when mixed, explaining chemical reactions and how temperature speeds up molecules with drawings of square and triangle characters.",
@@ -1235,7 +1235,7 @@
         }
       ],
       "provenance": {
-        "category": "공부 기록",
+        "category": "과학",
         "date": "2026-06-14",
         "date_basis": "일기에 적힌 날짜. 사진 촬영일(EXIF)과 같음",
         "creator_display": "Jian",
