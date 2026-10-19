@@ -15,14 +15,23 @@
       "motion_enabled": true,
       "youtube_id": null,
       "thumbnail_url": "/works/thumbnails/poems.svg",
-      "pages": [],
+      "pages": [
+        {
+          "url": "/works/poems/page-01.jpg",
+          "caption": "「튤립」 자필 원고"
+        },
+        {
+          "url": "/works/poems/page-02.jpg",
+          "caption": "「튤립」「나」 자필 원고"
+        }
+      ],
       "provenance": {
         "category": "문학",
         "date": "2026-08-17",
         "date_basis": "Drive 파일 생성일. 개별 시 집필일은 미확인",
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
-        "authorship_note": "자필 원고와 정리본이 같은 PDF에 있음. 공개 텍스트는 정리본 기준."
+        "authorship_note": "자필 원고와 정리본이 같은 PDF에 있음. 공개 텍스트는 정리본 기준. 2026-10-19 수신함 사진으로 「튤립」「나」 자필 원고 사진 추가."
       }
     },
     {
@@ -892,8 +901,8 @@
       "title_en": "Teacher Jian’s Math Board",
       "category": "수학",
       "year": null,
-      "description": "‘분수란?’부터 배수판정법까지 강의 목록을 세우고 분수와 약수를 가르친 수학 칠판.",
-      "description_en": "Her math board: a lesson list from “What is a fraction?” to divisibility rules, teaching fractions and divisors.",
+      "description": "‘분수란?’부터 배수판정법까지 강의 목록을 세우고 분수와 약수, 기하학을 가르친 수학 칠판.",
+      "description_en": "Her math board: a lesson list from “What is a fraction?” to divisibility rules, teaching fractions, divisors and geometry.",
       "content_file": "math-board.md",
       "is_public": true,
       "featured_order": null,
@@ -908,6 +917,10 @@
         {
           "url": "/works/math-board/page-02.jpg",
           "caption": "약수·소인수분해를 가르치는 지안이"
+        },
+        {
+          "url": "/works/math-board/page-03.jpg",
+          "caption": "기하학이란? · 도형을 나타내요"
         }
       ],
       "provenance": {
@@ -916,7 +929,7 @@
         "date_basis": "제작일 미확인 (2026-10-18 보호자 제공 사진)",
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
-        "authorship_note": "화이트보드 손글씨 원본 사진. 전사 없이 원본 그대로 공개."
+        "authorship_note": "화이트보드 손글씨 원본 사진. 전사 없이 원본 그대로 공개. 2026-10-19 수신함 사진으로 ‘기하학이란?’ 칠판 사진 추가(사진 촬영 2025-12-14)."
       }
     },
     {
@@ -1248,6 +1261,332 @@
         "evidence_level": "실제 파일 육안 확인",
         "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 일기에 적힌 제목, 소개는 사진 분석으로 작성",
         "photo_taken": "2026-06-14 11:00",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "ballet-moves",
+      "title": "발레 동작안무",
+      "title_en": "Ballet Moves Plan",
+      "category": "발레",
+      "year": 2026,
+      "description": "발과 손의 준비 자세와 0~12초 동작 순서를 글과 막대 사람 그림으로 나눠 적은 발레 안무 노트.",
+      "description_en": "A ballet choreography note splitting the opening positions and the first 12 seconds of moves into feet and arms, with words and stick-figure drawings.",
+      "content_file": "ballet-moves.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/ballet-moves.webp",
+      "pages": [
+        {
+          "url": "/works/ballet-moves/page-01.jpg",
+          "caption": "안무 노트 전체"
+        }
+      ],
+      "provenance": {
+        "category": "발레",
+        "date": "2026-01-06",
+        "date_basis": "노트에 적힌 날짜. 사진 촬영일(EXIF)과 같음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 노트에 적힌 제목, 소개는 사진 분석으로 작성",
+        "photo_taken": "2026-01-06 23:12",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "potato-chip-bag",
+      "title": "랜덤 포까칩",
+      "title_en": "Random Potato Chips",
+      "category": "공예·디자인",
+      "year": 2026,
+      "description": "종이 위아래를 톱니 모양으로 잘라 과자 봉지처럼 만들고 앞면에 상품 이름과 광고 문구, 뒷면에 만드는 순서를 그린 과자 봉지 디자인.",
+      "description_en": "A paper snack bag with zigzag-cut ends: the product name and slogans on the front, and the steps for making the chips drawn on the back.",
+      "content_file": "potato-chip-bag.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/potato-chip-bag.webp",
+      "pages": [
+        {
+          "url": "/works/potato-chip-bag/page-01.jpg",
+          "caption": "앞면"
+        },
+        {
+          "url": "/works/potato-chip-bag/page-02.jpg",
+          "caption": "뒷면: 만드는 순서"
+        }
+      ],
+      "provenance": {
+        "category": "공예·디자인",
+        "date": "2026-02-09",
+        "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 봉지에 적힌 이름, 소개는 사진 분석으로 작성",
+        "photo_taken": "2026-02-09 22:27",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "leg-muscles",
+      "title": "다리와 발의 근육",
+      "title_en": "Muscles of the Leg and Foot",
+      "category": "과학",
+      "year": 2026,
+      "description": "다리 모양으로 오린 흰 종이 세 장에 근육 이름, 가지처럼 뻗은 선, 뼈대를 나눠 그린 인체 그림.",
+      "description_en": "Three leg-shaped paper cutouts, one each for labeled muscles, branching lines, and the bones.",
+      "content_file": "leg-muscles.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/leg-muscles.webp",
+      "pages": [
+        {
+          "url": "/works/leg-muscles/page-01.jpg",
+          "caption": "종이 세 장"
+        }
+      ],
+      "provenance": {
+        "category": "과학",
+        "date": "2026-02-12",
+        "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성",
+        "photo_taken": "2026-02-12 09:54",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "wire-welcome",
+      "title": "Welcome!",
+      "title_en": "Welcome!",
+      "category": "공예·디자인",
+      "year": 2026,
+      "description": "금색 철사를 구부려 ‘welcome’ 글자를, 은색 철사로 느낌표와 물결선을 만들어 벽에 붙인 철사 공예.",
+      "description_en": "Gold wire bent into the word “welcome,” with an exclamation mark and a wavy line in silver wire, taped to a wall.",
+      "content_file": "wire-welcome.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/wire-welcome.webp",
+      "pages": [
+        {
+          "url": "/works/wire-welcome/page-01.jpg",
+          "caption": "벽에 붙인 철사 글자"
+        }
+      ],
+      "provenance": {
+        "category": "공예·디자인",
+        "date": "2026-02-28",
+        "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 철사 글자, 소개는 사진 분석으로 작성. 옆의 벽 조절기가 나오지 않게 잘라 냄",
+        "photo_taken": "2026-02-28 09:59",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "jewel-dresses",
+      "title": "보석 드레스",
+      "title_en": "Jeweled Dresses",
+      "category": "공예·디자인",
+      "year": 2026,
+      "description": "종이를 드레스 모양으로 오려 색칠하고 보석 스티커·진주·스팽글을 붙여 꾸민 드레스 다섯 벌.",
+      "description_en": "Five paper dresses cut out, colored, and decorated with gem stickers, pearls and sequins.",
+      "content_file": "jewel-dresses.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/jewel-dresses.webp",
+      "pages": [
+        {
+          "url": "/works/jewel-dresses/page-01.jpg",
+          "caption": "드레스 네 벌"
+        },
+        {
+          "url": "/works/jewel-dresses/page-02.jpg",
+          "caption": "보석 드레스 한 벌"
+        }
+      ],
+      "provenance": {
+        "category": "공예·디자인",
+        "date": "2026-03-14",
+        "date_basis": "사진 촬영일(EXIF, 두 장 중 이른 날). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성",
+        "photo_taken": "2026-03-15 10:00",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "paper-solids",
+      "title": "종이로 만든 입체 도형",
+      "title_en": "Paper Solids",
+      "category": "공예·디자인",
+      "year": 2026,
+      "description": "은색 반짝이 종이와 줄무늬 종이를 접고 붙여 만든 뿔·공 모양 입체 다섯 개.",
+      "description_en": "Five cone- and ball-like solids folded and glued from shiny silver paper and striped paper.",
+      "content_file": "paper-solids.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/paper-solids.webp",
+      "pages": [
+        {
+          "url": "/works/paper-solids/page-01.jpg",
+          "caption": "입체 다섯 개"
+        }
+      ],
+      "provenance": {
+        "category": "공예·디자인",
+        "date": "2026-03-15",
+        "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성",
+        "photo_taken": "2026-03-15 22:26"
+      }
+    },
+    {
+      "id": "tree-growth",
+      "title": "나무의 성장",
+      "title_en": "How a Tree Grows",
+      "category": "미술",
+      "year": 2026,
+      "description": "갈색 줄기와 가지에 파란 꽃과 살구색 꽃을 피우고 오른쪽 위에 해를 그린 나무 그림.",
+      "description_en": "A tree with a brown trunk and branches full of blue and apricot flowers, with the sun in the top right corner.",
+      "content_file": "tree-growth.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/tree-growth.webp",
+      "pages": [
+        {
+          "url": "/works/tree-growth/page-01.jpg",
+          "caption": "전체 그림"
+        }
+      ],
+      "provenance": {
+        "category": "미술",
+        "date": "2026-04-22",
+        "date_basis": "그림에 적힌 날짜. 사진 촬영일(EXIF)과 같음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 그림에 적힌 제목(첫 글자 일부가 사진 밖), 소개는 사진 분석으로 작성",
+        "photo_taken": "2026-04-22 13:56",
+        "photo_place": "서울특별시",
+        "photo_place_en": "Seoul"
+      }
+    },
+    {
+      "id": "rhythm-game",
+      "title": "리듬의 달인 도전!",
+      "title_en": "Rhythm Master Challenge!",
+      "category": "앱 기획",
+      "year": 2026,
+      "description": "게임 장르와 방식, 버튼 수, 색 디자인을 표로 나눠 공책에 적은 리듬 게임 기획.",
+      "description_en": "A rhythm game plan in a notebook, with a table for the genre, how it plays, the number of buttons and the colors.",
+      "content_file": "rhythm-game.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/rhythm-game.webp",
+      "pages": [
+        {
+          "url": "/works/rhythm-game/page-01.jpg",
+          "caption": "기획 노트"
+        }
+      ],
+      "provenance": {
+        "category": "앱 기획",
+        "date": "2026-05-01",
+        "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 노트에 적힌 제목, 소개는 사진 분석으로 작성. 옆의 인쇄된 교재가 나오지 않게 잘라 냄",
+        "photo_taken": "2026-05-01 17:09",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "body-organs",
+      "title": "우리 몸속 기관",
+      "title_en": "Organs Inside the Body",
+      "category": "과학",
+      "year": 2026,
+      "description": "폐·간·위·큰창자·작은창자를 종이에 그려 오리고 겹친 뒤 비닐로 감싼 몸속 기관 모형.",
+      "description_en": "A model of the organs inside the body: lungs, liver, stomach and intestines drawn on paper, cut out, layered and wrapped in plastic.",
+      "content_file": "body-organs.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/body-organs.webp",
+      "pages": [
+        {
+          "url": "/works/body-organs/page-01.jpg",
+          "caption": "기관 모형"
+        }
+      ],
+      "provenance": {
+        "category": "과학",
+        "date": "2026-05-17",
+        "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성",
+        "photo_taken": "2026-05-17 10:54",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "star-letter",
+      "title": "별나라에 초대해 주신 분께",
+      "title_en": "To Whoever Invited Us to the Land of Stars",
+      "category": "문학",
+      "year": 2026,
+      "description": "별나라에 초대받은 지구의 대표로서 아기 곰을 보내겠다고 별나라에 쓴 편지.",
+      "description_en": "A letter to the Land of Stars, written on behalf of Earth, saying a baby bear will be sent to visit.",
+      "content_file": "star-letter.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/star-letter.webp",
+      "pages": [
+        {
+          "url": "/works/star-letter/page-01.jpg",
+          "caption": "편지 전체"
+        }
+      ],
+      "provenance": {
+        "category": "문학",
+        "date": "2026-06-08",
+        "date_basis": "편지에 적힌 날짜",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 편지 첫 줄, 소개는 사진 분석으로 작성",
+        "photo_taken": "2026-06-23 09:13",
         "photo_place": "충청북도 청주시",
         "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
       }
