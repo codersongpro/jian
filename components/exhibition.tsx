@@ -36,6 +36,7 @@ import { MathInterlude } from "./landing/math-interlude";
 import { BalletInterlude } from "./landing/ballet-interlude";
 import { CycloidCard } from "./landing/cycloid-card";
 import { BrainCard } from "./landing/brain-card";
+import { MathSymbolsCard } from "./landing/math-symbols-card";
 import { LangProvider, useCopy } from "./lang";
 import { categoryLabel, type Lang } from "@/lib/i18n";
 
@@ -694,11 +695,9 @@ function Universe({
                   className="text-link"
                   onClick={() => {
                     setLimit(PAGE);
-                    document
-                      .getElementById("collection")
-                      ?.scrollIntoView({
-                        behavior: reduced ? "auto" : "smooth",
-                      });
+                    document.getElementById("collection")?.scrollIntoView({
+                      behavior: reduced ? "auto" : "smooth",
+                    });
                   }}
                 >
                   {t.showLess}
@@ -753,6 +752,7 @@ function Universe({
               : undefined
           }
         />
+        <MathSymbolsCard tone={tone} />
         <section className="field-section section-shell reveal">
           <div className="eyebrow">
             <span className="section-index">03</span> MANY WAYS TO WONDER

@@ -15,6 +15,24 @@ const categoryEn: Record<string, string> = {
   "앱 기획": "App Planning",
   "공부 기록": "Study Notes",
 };
+// 수학 기호 카드: '한 번 더'를 누를 때마다 바뀌는 식 (언어와 무관한 계산)
+const symMath = (id: string, k: number) => {
+  if (id === "i")
+    return `i${["⁰", "¹", "²", "³"][k % 4]} = ${["1", "i", "−1", "−i"][k % 4]}`;
+  if (id === "sqrt") {
+    const n = (k % 5) + 1;
+    return `√${n * n} = ${n}`;
+  }
+  if (id === "sigma") {
+    const n = (k % 7) + 1;
+    return `${Array.from({ length: n }, (_, i) => i + 1).join(" + ")} = ${(n * (n + 1)) / 2}`;
+  }
+  if (id === "e") {
+    const n = 2 ** (k % 12);
+    return `(1 + 1/${n})^${n} = ${((1 + 1 / n) ** n).toFixed(5)}`;
+  }
+  return "";
+};
 export const categoryLabel = (c: string, lang: Lang) =>
   lang === "en" ? (categoryEn[c] ?? c) : c;
 
@@ -251,6 +269,56 @@ const ko = {
   mathWhole: "하나를 모두 채웠어요!",
   mathDivisors: (n: number) => `${n}의 약수`,
   mathHint: "조각을 눌러 칠해 보세요 · 약분이 되면 다음 수업 ‘약수’로 넘어가요",
+  symLabel: "수학 — 지안이가 좋아하는 기호들",
+  symTitle: ["작은 기호 하나에", "커다란 생각이 숨어 있어요."],
+  symText:
+    "지안이는 끝없이 이어지는 ∞, 원 속에 숨은 π, 상상 속의 수 i를 좋아해요. 기호를 고르고 ‘한 번 더’를 눌러 그 안의 생각을 펼쳐 보세요.",
+  symPick: "수학 기호 고르기",
+  symNext: "한 번 더",
+  symStep: (id: string, k: number) =>
+    id === "inf"
+      ? `${k + 1}바퀴째… 아무리 돌아도 끝이 없어요`
+      : id === "pi"
+        ? `π = ${"3.14159265358979323846264338327950288419716939937510".slice(0, Math.min(52, 6 + k * 3))}… 숫자가 반복 없이 영원히 이어져요`
+        : symMath(id, k),
+  symbols: {
+    inf: {
+      name: "무한대 ∞",
+      read: "인피니티",
+      text: "끝이 없는 것을 나타내요. 자연수는 아무리 세어도 더 큰 수가 있어서 끝이 없어요.",
+      figure: "8자 모양의 길을 따라 끝없이 도는 점들",
+    },
+    pi: {
+      name: "원주율 π",
+      read: "파이",
+      text: "어떤 원이든 둘레는 지름의 약 3.14배예요. 이 비율이 π이고, 소수점 아래 숫자가 끝없이 이어져요.",
+      figure: "원의 둘레를 펼치면 지름의 세 배 하고 조금 더",
+    },
+    i: {
+      name: "허수 i",
+      read: "아이",
+      text: "제곱하면 −1이 되는 상상의 수예요. i를 한 번 곱할 때마다 화살표가 90°씩 돌아요.",
+      figure: "i를 곱할 때마다 90도씩 도는 화살표",
+    },
+    sqrt: {
+      name: "제곱근 √",
+      read: "루트",
+      text: "넓이를 알 때 정사각형 한 변의 길이를 찾아 주는 기호예요. 넓이가 9이면 한 변은 3이에요.",
+      figure: "정사각형의 넓이와 한 변의 길이",
+    },
+    sigma: {
+      name: "시그마 Σ",
+      read: "합",
+      text: "여러 수를 차례로 모두 더하라는 뜻이에요. 1부터 더한 점들은 삼각형 모양으로 쌓여요.",
+      figure: "1부터 차례로 더한 점들이 만드는 삼각형",
+    },
+    e: {
+      name: "자연상수 e",
+      read: "이",
+      text: "(1 + 1/n)ⁿ에서 n을 키울수록 2.71828…에 다가가요. 자라고 불어나는 것들 속에 숨어 있는 수예요.",
+      figure: "n이 커질수록 e에 다가가는 막대",
+    },
+  },
   balletLabel: "발레 — 지안이의 안무 노트",
   balletTitle: ["무대에 오르기 전,", "지안이는 안무를 노트에 적어요."],
   balletText:
@@ -545,6 +613,56 @@ const en: Copy = {
   mathDivisors: (n: number) => `Divisors of ${n}`,
   mathHint:
     "Tap the pieces to color them · simplify a fraction to reach the next lesson, divisors",
+  symLabel: "Math — Jian’s favorite symbols",
+  symTitle: ["A tiny symbol", "can hold a giant idea."],
+  symText:
+    "Jian loves ∞ that never ends, π hiding inside every circle, and i, the imaginary number. Pick a symbol and tap “One more” to unfold the idea inside it.",
+  symPick: "Pick a math symbol",
+  symNext: "One more",
+  symStep: (id: string, k: number) =>
+    id === "inf"
+      ? `Loop ${k + 1}… no matter how far, it never ends`
+      : id === "pi"
+        ? `π = ${"3.14159265358979323846264338327950288419716939937510".slice(0, Math.min(52, 6 + k * 3))}… the digits go on forever without repeating`
+        : symMath(id, k),
+  symbols: {
+    inf: {
+      name: "Infinity ∞",
+      read: "infinity",
+      text: "It stands for something without end. However far you count, there is always a bigger number.",
+      figure: "Dots looping forever along a figure-eight path",
+    },
+    pi: {
+      name: "Pi π",
+      read: "pi",
+      text: "Around any circle, the distance is about 3.14 times its width. That ratio is π, and its digits never end.",
+      figure: "A circle’s edge unrolled is three diameters and a bit",
+    },
+    i: {
+      name: "Imaginary i",
+      read: "i",
+      text: "An imagined number whose square is −1. Each time you multiply by i, the arrow turns 90°.",
+      figure: "An arrow turning 90 degrees with each multiplication by i",
+    },
+    sqrt: {
+      name: "Square root √",
+      read: "root",
+      text: "It finds the side of a square from its area. If the area is 9, the side is 3.",
+      figure: "A square’s area and the length of its side",
+    },
+    sigma: {
+      name: "Sigma Σ",
+      read: "sum",
+      text: "It means add them all up in order. Adding from 1 stacks the dots into a triangle.",
+      figure: "Dots added from 1 forming a triangle",
+    },
+    e: {
+      name: "Euler’s number e",
+      read: "e",
+      text: "As n grows, (1 + 1/n)ⁿ creeps toward 2.71828…. It hides in everything that grows.",
+      figure: "A bar approaching e as n grows",
+    },
+  },
   balletLabel: "Ballet — Jian’s choreography notes",
   balletTitle: [
     "Before going on stage,",
