@@ -939,7 +939,32 @@ html {
   height: 250vh;
 }
 .rhythm-interlude .interlude-stage {
-  padding: 90px 24px 40px;
+  padding: 104px 24px 40px;
+  gap: clamp(10px, 2.4svh, 28px);
+}
+/* 낮은 화면(노트북 등): 제목을 줄이고, 그래도 좁으면 고정을 풀어 스크롤로 모두 보여요 */
+@media (min-width: 801px) and (max-height: 1000px) {
+  .rhythm-copy h2 {
+    font-size: clamp(26px, 4.2svh, 40px);
+    margin-top: 6px;
+  }
+}
+@media (max-height: 620px) {
+  .rhythm-interlude {
+    height: auto;
+  }
+  .rhythm-interlude .interlude-stage {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+  .rhythm-ribbon {
+    stroke-dashoffset: 0;
+  }
+  .rhythm-note {
+    --show: 1;
+  }
 }
 .rhythm-interlude .interlude-stage::before {
   content: "";
@@ -980,8 +1005,10 @@ html {
 }
 .rhythm-board {
   position: relative;
-  width: min(1100px, 100%);
+  /* 화면 높이에 맞춰 줄여 제목·노래 목록까지 한 화면에 모두 보이게 (PC에서 잘림 방지) */
+  width: min(1100px, 100%, max(300px, (100svh - 540px) * 2.38));
   aspect-ratio: 1000 / 420;
+  container-type: inline-size;
 }
 .rhythm-art {
   position: absolute;
@@ -1014,7 +1041,8 @@ html {
 .rhythm-note {
   --show: clamp(0, (var(--p, 0) * 1.4 - var(--i) * 0.1) * 6, 1);
   position: absolute;
-  width: clamp(30px, 4.4vw, 48px);
+  /* 음표 크기는 보드 너비를 따라가요 */
+  width: clamp(22px, 4.4cqw, 48px);
   aspect-ratio: 1 / 2;
   translate: -50% -80%;
   background: none;
@@ -2914,5 +2942,247 @@ html {
   .brain-info img {
     width: 84px;
     height: 84px;
+  }
+}
+
+/* 수학: 지안이가 좋아하는 기호들 */
+.symbols-card {
+  width: var(--content);
+  margin: 60px auto 0;
+  padding: clamp(24px, 4vw, 52px);
+  border-radius: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  background:
+    radial-gradient(
+      ellipse 60% 70% at 85% 20%,
+      rgb(185 198 255 / 0.28),
+      transparent 70%
+    ),
+    linear-gradient(160deg, #141a3a, #262056 60%, #3a2a62);
+  box-shadow: 0 30px 70px rgb(30 30 70 / 0.22);
+  color: #f1eefb;
+}
+.symbols-card .interlude-label {
+  color: #b8bcd8;
+}
+.symbols-card .interlude-label > span {
+  color: var(--star);
+}
+.symbols-card h2 {
+  margin-top: 12px;
+  color: #f4efe3;
+}
+.symbols-card h2 em {
+  color: var(--star);
+}
+.symbols-text {
+  margin-top: 14px;
+  font-size: 17px;
+  line-height: 1.85;
+  color: #cfd2ea;
+}
+.symbols-chips {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+.symbols-chips button {
+  aspect-ratio: 1;
+  min-height: 44px;
+  border-radius: 16px;
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-style: italic;
+  color: #f4efe3;
+  background: rgb(255 255 255 / 0.07);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16);
+  transition:
+    transform 0.2s,
+    background 0.2s,
+    color 0.2s;
+}
+.symbols-chips button:hover,
+.symbols-chips button:focus-visible {
+  transform: translateY(-3px);
+  background: rgb(255 255 255 / 0.14);
+}
+.symbols-chips button.active {
+  background: linear-gradient(140deg, var(--gold), var(--rose));
+  color: #2a1f45;
+  box-shadow: 0 10px 24px rgb(243 214 160 / 0.25);
+}
+.symbols-info {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgb(255 255 255 / 0.06);
+  min-height: 128px;
+}
+.symbols-info strong {
+  font-family: var(--kr-serif);
+  font-size: 19px;
+  color: var(--star);
+}
+.symbols-info small {
+  margin-left: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #b8bcd8;
+}
+.symbols-info p {
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #dcdcf0;
+}
+.symbols-stage {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: clamp(16px, 3vw, 28px);
+  border-radius: 24px;
+  background: rgb(8 10 30 / 0.35);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  overflow: hidden;
+}
+.symbols-glyph {
+  position: absolute;
+  top: -0.18em;
+  right: 0.06em;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(120px, 16vw, 200px);
+  line-height: 1;
+  color: rgb(243 214 160 / 0.1);
+  pointer-events: none;
+  animation: glyph-in 0.6s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+@keyframes glyph-in {
+  from {
+    transform: scale(0.6) rotate(-12deg);
+    opacity: 0;
+  }
+}
+.symbols-stage svg {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  overflow: visible;
+}
+.sym-line,
+.sym-accent,
+.sym-axis,
+.sym-tick,
+.sym-faint {
+  fill: none;
+  stroke-linecap: round;
+}
+.sym-line {
+  stroke: #b9c6ff;
+  stroke-width: 4;
+}
+.sym-accent {
+  stroke: var(--star);
+  stroke-width: 4;
+}
+.sym-axis {
+  stroke: rgb(255 255 255 / 0.35);
+  stroke-width: 1.5;
+}
+.sym-faint {
+  stroke: rgb(255 255 255 / 0.18);
+  stroke-dasharray: 3 6;
+}
+.sym-tick {
+  stroke: #f3d6a0;
+  stroke-width: 2;
+}
+.sym-goal {
+  stroke-dasharray: 4 5;
+}
+.sym-dot {
+  fill: var(--star);
+  filter: drop-shadow(0 0 6px var(--star));
+}
+.sym-small {
+  font-family: var(--serif);
+  font-size: 18px;
+  fill: #cfd2ea;
+  text-anchor: middle;
+}
+.sym-small.on {
+  fill: var(--star);
+  font-weight: 700;
+}
+.sym-arrow {
+  transform-box: view-box;
+  transform-origin: 180px 120px;
+  transition: transform 0.6s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+.sym-arrow path {
+  fill: none;
+  stroke: var(--star);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sym-cell {
+  fill: #b9c6ff;
+  fill-opacity: 0.75;
+  animation: cell-pop 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes cell-pop {
+  from {
+    transform: scale(0);
+  }
+}
+.sym-bar {
+  fill: #f3d6a0;
+  transition: width 0.6s ease;
+}
+.symbols-step {
+  position: relative;
+  min-height: 2.8em;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.5;
+  color: #f4efe3;
+  overflow-wrap: anywhere;
+}
+.symbols-next {
+  position: relative;
+  min-height: 44px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--gold), var(--rose));
+  color: #2a1f45;
+  font-size: 15px;
+  font-weight: 600;
+}
+.symbols-next:hover {
+  transform: translateY(-2px);
+}
+.universe[data-reduced="true"] .symbols-glyph,
+.universe[data-reduced="true"] .sym-cell {
+  animation: none;
+}
+@media (max-width: 800px) {
+  .symbols-card {
+    grid-template-columns: 1fr;
+    border-radius: 24px;
+  }
+  .symbols-chips {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .symbols-chips button {
+    aspect-ratio: auto;
   }
 }
