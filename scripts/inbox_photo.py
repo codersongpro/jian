@@ -8,6 +8,8 @@
 - 출력: 긴 변 1536px JPEG(본문), 선택 시 긴 변 640px WebP(썸네일)
 - 결과를 JSON 한 줄로 출력한다:
   {"page", "thumb", "date", "time", "place", "place_en", "date_source", "width", "height"}
+- 큰 사진은 Drive의 Apps Script(scripts/drive-inbox-resizer)가 줄인 사본으로 바뀌며 촬영 정보가 사라진다.
+  이때 사본 '설명'(jian-resize v1 {...})을 --meta로 넘기면 거기 적힌 촬영 시각·좌표를 대신 쓴다
 
 사용 예:
   python3 -I scripts/inbox_photo.py tool-result.json public/works/fall-tree/page-01.jpg \
@@ -77,11 +79,23 @@ def sigun_of(lat: float, lon: float) -> tuple[str, str] | tuple[None, None]:
     return None, None
 
 
+def drive_meta(text: str | None) -> dict:
+    """Apps Script가 사본 설명에 남긴 JSON(촬영 시각·좌표)을 읽는다. 없거나 깨지면 빈 dict."""
+    if not text or "{" not in text:
+        return {}
+    try:
+        meta = json.loads(text[text.index("{"):])
+    except ValueError:
+        return {}
+    return meta if isinstance(meta, dict) else {}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("src", type=Path)
     ap.add_argument("page", type=Path, help="본문 이미지 경로 (.jpg)")
     ap.add_argument("--thumb", type=Path, help="썸네일 경로 (.webp)")
+    ap.add_argument("--meta", help="Drive 파일 설명(jian-resize v1 {...}). EXIF가 없을 때 촬영 정보로 사용")
     args = ap.parse_args()
 
     with tempfile.TemporaryDirectory() as tmp:
@@ -93,7 +107,11 @@ def main() -> None:
             sys.exit(f"지원하지 않는 형식입니다: {kind or '알 수 없음'}")
 
         # 메타데이터를 지우기 전에 촬영 날짜·시간을 읽는다 (예: 2026:10:18 15:30:00)
+        meta = drive_meta(args.meta)
         taken = identify(src, "%[EXIF:DateTimeOriginal]")
+        source = "exif"
+        if not taken and isinstance(meta.get("taken"), str):
+            taken, source = meta["taken"], "drive"
         match = re.match(r"(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2})", taken)
         date = "-".join(match.groups()[:3]) if match else None
         time = ":".join(match.groups()[3:]) if match else None
@@ -101,6 +119,11 @@ def main() -> None:
         # 촬영 위치는 시·군 이름으로만 남긴다
         lat = gps_degrees(identify(src, "%[EXIF:GPSLatitude]"), identify(src, "%[EXIF:GPSLatitudeRef]"))
         lon = gps_degrees(identify(src, "%[EXIF:GPSLongitude]"), identify(src, "%[EXIF:GPSLongitudeRef]"))
+        if lat is None and lon is None:
+            try:
+                lat, lon = float(meta["lat"]), float(meta["lng"])
+            except (KeyError, TypeError, ValueError):
+                lat = lon = None
         place, place_en = sigun_of(lat, lon) if lat is not None and lon is not None else (None, None)
 
         args.page.parent.mkdir(parents=True, exist_ok=True)
@@ -126,7 +149,7 @@ def main() -> None:
         "time": time,
         "place": place,
         "place_en": place_en,
-        "date_source": "exif" if date else None,
+        "date_source": source if date else None,
         "width": int(width),
         "height": int(height),
     }, ensure_ascii=False))
