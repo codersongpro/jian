@@ -57,7 +57,9 @@ test("repository catalog and committed metadata contain no private review record
 });
 
 test("repository videos preserve all six requested links in order", async () => {
-  const { videos } = await readRepositoryCatalog();
+  const videos = (await readRepositoryCatalog()).videos.filter(
+    (video) => video.source !== "drive",
+  );
   const ids = [
     "8MTh27C_X9w",
     "isLp-Cpd69o",
@@ -74,4 +76,12 @@ test("repository videos preserve all six requested links in order", async () => 
     videos.map((video) => video.url),
     ids.map((id) => `https://www.youtube.com/watch?v=${id}`),
   );
+});
+test("drive videos open on Google Drive by file id", async () => {
+  const drive = (await readRepositoryCatalog()).videos.filter(
+    (video) => video.source === "drive",
+  );
+  assert.equal(drive.length, 2);
+  for (const video of drive)
+    assert.equal(video.url, `https://drive.google.com/file/d/${video.id}/view`);
 });

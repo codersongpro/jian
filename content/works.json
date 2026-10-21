@@ -1590,6 +1590,131 @@
         "photo_place": "충청북도 청주시",
         "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
       }
+    },
+    {
+      "id": "aunt-postcard",
+      "title": "이모에게 보낸 엽서",
+      "title_en": "A Postcard to My Aunt",
+      "category": "문학",
+      "year": 2026,
+      "description": "맛있는 음식을 해 준 이모에게 고마움을 전하고 포장이 너무 많아 환경이 오염되지 않게 부탁한 엽서.",
+      "description_en": "A postcard thanking her aunt for cooking delicious food, and asking her to use less packaging so the environment is not polluted.",
+      "content_file": "aunt-postcard.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/aunt-postcard.webp",
+      "pages": [
+        {
+          "url": "/works/aunt-postcard/page-01.jpg",
+          "caption": "엽서 전체"
+        }
+      ],
+      "provenance": {
+        "category": "문학",
+        "date": "2026-10-19",
+        "date_basis": "Drive 업로드일(사진에 촬영일 정보 없음)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성. 보호자 요청으로 학교 이름·반을 흐리게 처리함."
+      }
+    },
+    {
+      "id": "growth-chart",
+      "title": "지안의 성장흐름표",
+      "title_en": "Jian’s Growth Timeline",
+      "category": "미술",
+      "year": 2026,
+      "description": "2살부터 9살까지 처음 해 본 일 다섯 가지를 사진과 그림, 글로 이어 붙인 성장흐름표.",
+      "description_en": "A growth timeline linking five first-time moments from age 2 to 9 with photos, drawings and captions.",
+      "content_file": "growth-chart.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/growth-chart.webp",
+      "pages": [
+        {
+          "url": "/works/growth-chart/page-01.jpg",
+          "caption": "성장흐름표 전체"
+        }
+      ],
+      "provenance": {
+        "category": "미술",
+        "date": "2026-06-23",
+        "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 표에 적힌 제목, 소개는 사진 분석으로 작성. 붙인 사진 속 얼굴은 보호자 요청대로 그대로 두고, 교실 사진의 게시물만 흐리게 처리함.",
+        "photo_taken": "2026-06-23 09:16",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "village-character",
+      "title": "우리 마을 캐릭터 백이와 꿀벌이",
+      "title_en": "Our Village Characters: Baegi and Kkulbeori",
+      "category": "미술",
+      "year": 2026,
+      "description": "백목련과 호박벌을 웃는 얼굴로 그리고 이름과 설명, 활용 상품을 적은 우리 마을 캐릭터 활동지.",
+      "description_en": "A worksheet introducing two village characters, a smiling white magnolia and a bumblebee, with their names, description and merchandise ideas.",
+      "content_file": "village-character.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/village-character.webp",
+      "pages": [
+        {
+          "url": "/works/village-character/page-01.jpg",
+          "caption": "캐릭터 활동지"
+        }
+      ],
+      "provenance": {
+        "category": "미술",
+        "date": "2026-06-23",
+        "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 활동지에 적힌 캐릭터 이름, 소개는 사진 분석으로 작성. 보호자 요청으로 학교 이름·반을 흐리게 처리함. 옆 친구 활동지가 나오지 않게 잘라 냄.",
+        "photo_taken": "2026-06-23 09:23",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "dance-award",
+      "title": "CJ EDU DANCE FESTIVAL 금상",
+      "title_en": "Gold Prize, CJ EDU Dance Festival",
+      "category": "발레",
+      "year": 2026,
+      "description": "청주교육대학교가 주최한 제4회 CJ EDU DANCE FESTIVAL 초등저 발레 개인 부문에서 받은 금상 상장.",
+      "description_en": "A gold prize certificate from the 4th CJ EDU Dance Festival hosted by Cheongju National University of Education, lower-elementary solo ballet division.",
+      "content_file": "dance-award.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/dance-award.webp",
+      "pages": [
+        {
+          "url": "/works/dance-award/page-01.jpg",
+          "caption": "상장"
+        }
+      ],
+      "provenance": {
+        "category": "발레",
+        "date": "2026-06-20",
+        "date_basis": "상장에 적힌 날짜",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 소개는 사진 분석으로 작성. 보호자 요청으로 학교 이름·반을 흐리게 처리함.",
+        "photo_taken": "2026-07-07 21:34",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
     }
   ]
 }

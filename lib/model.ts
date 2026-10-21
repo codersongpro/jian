@@ -67,6 +67,8 @@ export type VideoLink = {
   id: string;
   url: string;
   title: string | null;
+  /** 영상이 있는 곳 (없으면 YouTube) */
+  source?: "youtube" | "drive";
 };
 export type VideoCandidate = VideoLink & {
   publish_ready: boolean;
