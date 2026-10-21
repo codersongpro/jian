@@ -2,8 +2,8 @@
  * 지안 작품 수신함 큰 사진 자동 줄이기 (Google Apps Script)
  *
  * Claude가 쓰는 Drive 커넥터는 약 5MB가 넘는 파일을 받지 못합니다.
- * 이 스크립트를 보호자 구글 계정에서 하루 한 번(새벽 5시대) 돌리거나, 필요할 때 웹앱 주소를 눌러 바로 돌려
- * 수신함에 올라온 큰 사진을 긴 변 2048px JPEG로 줄인 사본으로 바꿉니다.
+ * 이 스크립트를 보호자 구글 계정에서 5분마다 가볍게 확인해, 큰 사진이 있고 업로드가 끝났으면(마지막 업로드 뒤 5분)
+ * 긴 변 2048px JPEG로 줄인 사본으로 바꿉니다. 웹앱 주소를 열면 기다리지 않고 바로 줄입니다.
  *
  * - 사본은 원본과 같은 폴더·같은 이름(확장자만 .jpg)으로 만듭니다. 폴더 이름·파일 이름 메모가 그대로 유지됩니다.
  * - 줄이면 사진 속 촬영 정보(EXIF)가 사라지므로, 촬영 시각·좌표·원래 업로드 시각을
@@ -19,10 +19,24 @@ const ARCHIVE_NAME = '원본 보관';
 const LIMIT_BYTES = 4.5 * 1024 * 1024; // 이보다 크면 줄임 (커넥터 한도 약 5MB보다 여유 있게)
 const TARGET_PX = 2048; // 줄인 사진의 긴 변
 const MARK = 'jian-resize v1 '; // 사본 설명 앞머리. Claude가 이 표시로 사본을 알아봅니다.
+const SETTLE_MS = 5 * 60 * 1000; // 마지막 업로드 뒤 이만큼 새 파일이 없으면 업로드가 끝난 것으로 봄
 
-/** 하루 한 번 실행되는 본 작업. 급할 때는 웹앱 주소를 열거나 편집기에서 직접 실행합니다. */
+/** 5분마다 실행: 큰 사진이 없거나 아직 올리는 중이면 바로 끝내고, 업로드가 끝났으면 줄인다. */
+function checkInbox() {
+  let large = 0;
+  let newest = 0;
+  forEachFile_(DriveApp.getFolderById(INBOX_ID), (file) => {
+    newest = Math.max(newest, file.getDateCreated().getTime());
+    if (file.getMimeType().indexOf('image/') === 0 && file.getSize() > LIMIT_BYTES) large++;
+  });
+  if (!large) return; // 줄일 사진 없음
+  if (Date.now() - newest < SETTLE_MS) return console.log(`큰 사진 ${large}장, 아직 올리는 중 → 다음 확인 때 처리`);
+  resizeLargePhotos();
+}
+
+/** 큰 사진을 모두 줄인다. 웹앱 주소나 편집기에서 실행하면 업로드가 끝나기를 기다리지 않는다. */
 function resizeLargePhotos() {
-  // 새벽 자동 실행과 웹앱 실행이 겹쳐 같은 사진의 사본이 두 번 생기지 않도록 한 번에 하나만 실행
+  // 5분 자동 확인과 웹앱 실행이 겹쳐 같은 사진의 사본이 두 번 생기지 않도록 한 번에 하나만 실행
   const lock = LockService.getScriptLock();
   if (!lock.tryLock(1000)) return '다른 실행이 진행 중입니다. 잠시 뒤 다시 시도해 주세요.';
   try {
@@ -48,7 +62,7 @@ function resizeAll_() {
   forEachPhoto_(inbox, (file, parent) => {
     if (file.getSize() <= LIMIT_BYTES) return;
     const copy = resizeOne_(file, parent);
-    if (!copy) return; // 썸네일이 아직 준비되지 않음 → 다음 날 다시 시도
+    if (!copy) return; // 썸네일이 아직 준비되지 않음 → 다음 확인 때 다시 시도
     file.moveTo(archive);
     done.push(`${file.getName()} → ${Math.round(copy.getSize() / 1024)}KB`);
   });
@@ -61,27 +75,31 @@ function escapeHtml_(text) {
   return String(text).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 }
 
-/** 처음 한 번만 실행: 매일 새벽 5시대(한국 시간)에 resizeLargePhotos가 돌도록 등록 */
+/** 처음 한 번만 실행: 5분마다 checkInbox가 돌도록 등록 (예전 예약은 지움) */
 function install() {
   ScriptApp.getProjectTriggers()
-    .filter((t) => t.getHandlerFunction() === 'resizeLargePhotos')
+    .filter((t) => ['checkInbox', 'resizeLargePhotos'].indexOf(t.getHandlerFunction()) !== -1)
     .forEach((t) => ScriptApp.deleteTrigger(t));
-  ScriptApp.newTrigger('resizeLargePhotos').timeBased().everyDays(1).atHour(5).create();
-  resizeLargePhotos();
+  ScriptApp.newTrigger('checkInbox').timeBased().everyMinutes(5).create();
+  console.log(resizeLargePhotos());
 }
 
-/** 수신함과 하위 폴더(반영 완료·원본 보관 제외)의 이미지 파일마다 fn 실행 */
-function forEachPhoto_(folder, fn) {
+/** 수신함과 하위 폴더(반영 완료·원본 보관 제외)의 파일마다 fn 실행 */
+function forEachFile_(folder, fn) {
   const files = folder.getFiles();
-  while (files.hasNext()) {
-    const file = files.next();
-    if (file.getMimeType().indexOf('image/') === 0) fn(file, folder);
-  }
+  while (files.hasNext()) fn(files.next(), folder);
   const subs = folder.getFolders();
   while (subs.hasNext()) {
     const sub = subs.next();
-    if (SKIP_FOLDERS.indexOf(sub.getName()) === -1) forEachPhoto_(sub, fn);
+    if (SKIP_FOLDERS.indexOf(sub.getName()) === -1) forEachFile_(sub, fn);
   }
+}
+
+/** 이미지 파일만 */
+function forEachPhoto_(folder, fn) {
+  forEachFile_(folder, (file, parent) => {
+    if (file.getMimeType().indexOf('image/') === 0) fn(file, parent);
+  });
 }
 
 /** 사진 1장을 줄인 사본으로 만든다. 실패하면 null */
