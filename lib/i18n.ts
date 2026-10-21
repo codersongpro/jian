@@ -14,6 +14,7 @@ const categoryEn: Record<string, string> = {
   "사회·기획": "Society & Planning",
   "앱 기획": "App Planning",
   "공부 기록": "Study Notes",
+  "체험·활동": "Experiences",
 };
 // 수학 기호 카드: '한 번 더'를 누를 때마다 바뀌는 식 (언어와 무관한 계산)
 const symMath = (id: string, k: number) => {
@@ -126,9 +127,10 @@ const ko = {
   thoughts: (n: number) => `${n}개의 생각`,
   videosEyebrow: "MOVING MOMENTS · 지안이의 영상",
   videosTitle: "소리와 몸짓으로 남긴 장면들",
-  videosText: "영상을 누르면 YouTube에서 열립니다.",
+  videosText: "영상을 누르면 YouTube나 Google 드라이브에서 열립니다.",
   videoName: (i: number) => `지안이의 영상 ${i}`,
   watchOnYoutube: "YouTube에서 보기",
+  watchOnDrive: "Google 드라이브에서 보기",
   closing: ["“작은 호기심 하나가", "지안이를 어디까지 데려다 줄까요?”"],
   footer: "작은 호기심에서 시작된 커다란 이야기",
   musicOff: "배경 음악 끄기",
@@ -460,9 +462,10 @@ const en: Copy = {
   thoughts: (n: number) => `${n} ${n === 1 ? "thought" : "thoughts"}`,
   videosEyebrow: "MOVING MOMENTS · JIAN’S VIDEOS",
   videosTitle: "Moments told in sound and movement",
-  videosText: "Select a video to open it on YouTube.",
+  videosText: "Select a video to open it on YouTube or Google Drive.",
   videoName: (i: number) => `Jian’s video ${i}`,
   watchOnYoutube: "Watch on YouTube",
+  watchOnDrive: "Watch on Google Drive",
   closing: ["“Where will one little curiosity", "take Jian?”"],
   footer: "A big story that began with a little curiosity",
   musicOff: "Turn background music off",

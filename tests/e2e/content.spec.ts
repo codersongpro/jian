@@ -43,7 +43,7 @@ test("actual source works retain transcriptions, pages, dates and six unembedded
     page.getByRole("navigation", { name: "작품 페이지" }),
   ).toContainText("2 / 19");
   await page.keyboard.press("Escape");
-  await expect(page.locator(".source-video-grid a")).toHaveCount(6);
+  await expect(page.locator(".source-video-grid a")).toHaveCount(8);
   await expect(page.locator("iframe")).toHaveCount(0);
   // 카드 이미지는 화면에 들어올 때 불러오므로(지연 로딩) 하나씩 화면에 보이게 한 뒤 확인
   const images = page.locator("[data-work-card] img");

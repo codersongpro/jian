@@ -14,7 +14,7 @@ test("repository catalog works without a database and uploads stay protected", a
         work.is_public && !work.review,
     ),
   ).toBe(true);
-  expect(data.videos).toHaveLength(6);
+  expect(data.videos).toHaveLength(8);
   const image = await request.get(
     "http://127.0.0.1:3000" + data.works[0].thumbnail_url,
   );

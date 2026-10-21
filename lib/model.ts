@@ -11,6 +11,7 @@ export const categories = [
   "사회·기획",
   "앱 기획",
   "공부 기록",
+  "체험·활동",
 ] as const;
 export type Category = Exclude<(typeof categories)[number], "전체">;
 export type Media = {
@@ -67,6 +68,8 @@ export type VideoLink = {
   id: string;
   url: string;
   title: string | null;
+  /** 영상이 있는 곳 (없으면 YouTube) */
+  source?: "youtube" | "drive";
 };
 export type VideoCandidate = VideoLink & {
   publish_ready: boolean;

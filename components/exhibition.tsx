@@ -931,11 +931,15 @@ function Universe({
                   href={video.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${video.title || t.videoName(i + 1)} · ${t.watchOnYoutube}`}
+                  aria-label={`${video.title || t.videoName(i + 1)} · ${video.source === "drive" ? t.watchOnDrive : t.watchOnYoutube}`}
                 >
                   <span className="video-thumb">
                     <img
-                      src={`https://i.ytimg.com/vi/${encodeURIComponent(video.id)}/hqdefault.jpg`}
+                      src={
+                        video.source === "drive"
+                          ? `https://drive.google.com/thumbnail?id=${encodeURIComponent(video.id)}&sz=w640`
+                          : `https://i.ytimg.com/vi/${encodeURIComponent(video.id)}/hqdefault.jpg`
+                      }
                       alt=""
                       loading="lazy"
                       referrerPolicy="no-referrer"
