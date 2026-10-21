@@ -14,6 +14,7 @@ const categoryEn: Record<string, string> = {
   "사회·기획": "Society & Planning",
   "앱 기획": "App Planning",
   "공부 기록": "Study Notes",
+  "체험·활동": "Experiences",
 };
 export const categoryLabel = (c: string, lang: Lang) =>
   lang === "en" ? (categoryEn[c] ?? c) : c;

@@ -11,6 +11,7 @@ export const categories = [
   "사회·기획",
   "앱 기획",
   "공부 기록",
+  "체험·활동",
 ] as const;
 export type Category = Exclude<(typeof categories)[number], "전체">;
 export type Media = {
