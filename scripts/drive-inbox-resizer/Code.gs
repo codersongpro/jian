@@ -2,8 +2,8 @@
  * 지안 작품 수신함 큰 사진 자동 줄이기 (Google Apps Script)
  *
  * Claude가 쓰는 Drive 커넥터는 약 5MB가 넘는 파일을 받지 못합니다.
- * 이 스크립트를 보호자 구글 계정에서 10분마다 돌려, 수신함에 올라온 큰 사진을
- * 긴 변 2048px JPEG로 줄인 사본으로 바꿉니다.
+ * 이 스크립트를 보호자 구글 계정에서 하루 한 번(새벽 5시대) 돌리거나, 필요할 때 웹앱 주소를 눌러 바로 돌려
+ * 수신함에 올라온 큰 사진을 긴 변 2048px JPEG로 줄인 사본으로 바꿉니다.
  *
  * - 사본은 원본과 같은 폴더·같은 이름(확장자만 .jpg)으로 만듭니다. 폴더 이름·파일 이름 메모가 그대로 유지됩니다.
  * - 줄이면 사진 속 촬영 정보(EXIF)가 사라지므로, 촬영 시각·좌표·원래 업로드 시각을
@@ -20,27 +20,53 @@ const LIMIT_BYTES = 4.5 * 1024 * 1024; // 이보다 크면 줄임 (커넥터 한
 const TARGET_PX = 2048; // 줄인 사진의 긴 변
 const MARK = 'jian-resize v1 '; // 사본 설명 앞머리. Claude가 이 표시로 사본을 알아봅니다.
 
-/** 10분마다 실행되는 본 작업. 직접 실행해도 됩니다. */
+/** 하루 한 번 실행되는 본 작업. 급할 때는 웹앱 주소를 열거나 편집기에서 직접 실행합니다. */
 function resizeLargePhotos() {
+  // 새벽 자동 실행과 웹앱 실행이 겹쳐 같은 사진의 사본이 두 번 생기지 않도록 한 번에 하나만 실행
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(1000)) return '다른 실행이 진행 중입니다. 잠시 뒤 다시 시도해 주세요.';
+  try {
+    return resizeAll_();
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/** 웹앱 주소를 열면 바로 실행하고 결과를 보여 줍니다 (요청할 때 실행). */
+function doGet() {
+  const message = resizeLargePhotos();
+  const html = '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<div style="font:16px/1.6 sans-serif;padding:24px;white-space:pre-line">' +
+    '<b>지안 수신함 사진 줄이기</b>\n' + escapeHtml_(message) + '</div>';
+  return HtmlService.createHtmlOutput(html).setTitle('수신함 사진 줄이기');
+}
+
+function resizeAll_() {
   const inbox = DriveApp.getFolderById(INBOX_ID);
   const archive = archiveFolder_(inbox);
   const done = [];
   forEachPhoto_(inbox, (file, parent) => {
     if (file.getSize() <= LIMIT_BYTES) return;
     const copy = resizeOne_(file, parent);
-    if (!copy) return; // 썸네일이 아직 준비되지 않음 → 다음 실행 때 다시 시도
+    if (!copy) return; // 썸네일이 아직 준비되지 않음 → 다음 날 다시 시도
     file.moveTo(archive);
     done.push(`${file.getName()} → ${Math.round(copy.getSize() / 1024)}KB`);
   });
-  console.log(done.length ? `줄인 사진 ${done.length}장\n${done.join('\n')}` : '줄일 사진 없음');
+  const message = done.length ? `줄인 사진 ${done.length}장\n${done.join('\n')}` : '줄일 사진 없음';
+  console.log(message);
+  return message;
 }
 
-/** 처음 한 번만 실행: 10분마다 resizeLargePhotos가 돌도록 등록 */
+function escapeHtml_(text) {
+  return String(text).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+}
+
+/** 처음 한 번만 실행: 매일 새벽 5시대(한국 시간)에 resizeLargePhotos가 돌도록 등록 */
 function install() {
   ScriptApp.getProjectTriggers()
     .filter((t) => t.getHandlerFunction() === 'resizeLargePhotos')
     .forEach((t) => ScriptApp.deleteTrigger(t));
-  ScriptApp.newTrigger('resizeLargePhotos').timeBased().everyMinutes(10).create();
+  ScriptApp.newTrigger('resizeLargePhotos').timeBased().everyDays(1).atHour(5).create();
   resizeLargePhotos();
 }
 
