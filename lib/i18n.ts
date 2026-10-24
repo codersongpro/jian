@@ -34,6 +34,37 @@ const symMath = (id: string, k: number) => {
   }
   return "";
 };
+// 행성의 지식(knowledge 목록과 같은 순서)을 누르면 열리는 지안이의 작품 id.
+// 지식을 추가하면 여기에도 같은 자리에 작품 id(없으면 null)를 넣어 주세요.
+export const knowledgeWorks: (string | null)[] = [
+  "book-story", // 글쓰기
+  "science-board", // 과학
+  "math-board", // 수학
+  "orchestra-concert", // 음악
+  "drawings", // 미술
+  "ballet-moves", // 발레
+  "paper-solids", // 종이접기
+  null, // 줄넘기
+  "leg-muscles", // 달리기
+  "pickleball", // 피클볼
+  "piano-notes", // 피아노
+  "christmas-song", // 작곡
+  "poems", // 동시
+  "craft-wire", // 공예
+  "protect-animals", // 동물 보호
+  "family-debate", // 토론
+  "ai-talk", // 앱 기획
+  "teacher-board", // 가르치기
+  "english-essays", // 영어
+  "acorn", // 자연
+  "star-letter", // 우주
+  "body-organs", // 인체
+  "moonjar", // 역사
+  "rhythm-game", // 코딩
+  "designer-board", // 디자인
+  "thought-experiment", // 생각
+];
+
 export const categoryLabel = (c: string, lang: Lang) =>
   lang === "en" ? (categoryEn[c] ?? c) : c;
 
@@ -153,7 +184,8 @@ const ko = {
   orbitCanvas:
     "지안이의 행성이 중력으로 여러 지식을 끌어당기는 놀이. 누르면 새로운 지식이 날아와요",
   orbitCount: "끌어당긴 지식",
-  orbitHint: "누르면 새로운 지식이 날아와요 · 꾹 누르면 중력이 생겨요",
+  orbitHint:
+    "누르면 새로운 지식이 날아와요 · 꾹 누르면 중력이 생겨요 · ↗ 지식을 누르면 작품이 열려요",
   planetSub: "지안이의 행성",
   knowledge: [
     "글쓰기",
@@ -166,6 +198,14 @@ const ko = {
     "줄넘기",
     "달리기",
     "피클볼",
+    "피아노",
+    "작곡",
+    "동시",
+    "공예",
+    "동물 보호",
+    "토론",
+    "앱 기획",
+    "가르치기",
     "영어",
     "자연",
     "우주",
@@ -492,7 +532,8 @@ const en: Copy = {
   orbitCanvas:
     "Jian’s planet pulls in knowledge with its gravity. Tap to send new knowledge flying in",
   orbitCount: "Knowledge pulled in",
-  orbitHint: "Tap to send in new knowledge · press and hold to create gravity",
+  orbitHint:
+    "Tap to send in new knowledge · press and hold to create gravity · tap a ↗ star to open the work",
   planetSub: "Jian’s planet",
   knowledge: [
     "Writing",
@@ -505,6 +546,14 @@ const en: Copy = {
     "Jump rope",
     "Running",
     "Pickleball",
+    "Piano",
+    "Songwriting",
+    "Poems",
+    "Crafts",
+    "Animal care",
+    "Debate",
+    "App ideas",
+    "Teaching",
     "English",
     "Nature",
     "Space",

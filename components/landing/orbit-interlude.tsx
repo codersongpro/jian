@@ -2,10 +2,11 @@
 import { useEffect, useRef, useState } from "react";
 import { fitCanvas, seeded, useInView } from "./use-scroll";
 import { useCopy } from "../lang";
+import { knowledgeWorks } from "@/lib/i18n";
 
 // 과학·수학: 가운데 'JIAN PLANET'이 중력으로 여러 지식(별)을 끌어당깁니다.
 // 누르면 새로운 지식이 날아와 끌려 들어오고, 행성에 닿은 지식은 흡수되어 행성이 자랍니다.
-// 꾹 누르면 그 자리에 잠시 중력이 생깁니다.
+// 꾹 누르면 그 자리에 잠시 중력이 생깁니다. ↗가 붙은 지식을 누르면 관련 작품이 열립니다.
 type Body = {
   label: number;
   x: number;
@@ -15,6 +16,8 @@ type Body = {
   r: number;
   hue: string;
   trail: [number, number][];
+  /** 화면에 그린 이름표 너비 (누른 곳 찾기용) */
+  lw: number;
 };
 const HUES = ["#f3d6a0", "#b9c6ff", "#e7b6c8", "#a8e0d0", "#fff4dc"];
 const MAX = 28,
@@ -29,10 +32,13 @@ export function OrbitInterlude({
   reduced,
   economy,
   onSpawn,
+  openWork,
 }: {
   reduced: boolean;
   economy: boolean;
   onSpawn: () => void;
+  /** 작품 id로 작품 열기. 전시에 없는 작품이면 false */
+  openWork?: (id: string) => boolean;
 }) {
   const wrap = useRef<HTMLElement>(null),
     canvas = useRef<HTMLCanvasElement>(null),
@@ -49,6 +55,13 @@ export function OrbitInterlude({
   // 그리는 중에도 최신 언어의 지식 이름을 쓰도록 참조로 보관
   const names = useRef(t.knowledge);
   names.current = t.knowledge;
+  const canOpen = useRef(openWork);
+  canOpen.current = openWork;
+  /** 이 지식과 연결된 작품 id (없으면 null) */
+  const workOf = (label: number) =>
+    canOpen.current
+      ? (knowledgeWorks[label % knowledgeWorks.length] ?? null)
+      : null;
   const sub = useRef(t.planetSub);
   sub.current = t.planetSub;
 
@@ -74,6 +87,7 @@ export function OrbitInterlude({
       r: 3 + (label % 3),
       hue: HUES[label % HUES.length],
       trail: [],
+      lw: 0,
     };
   };
 
@@ -242,11 +256,11 @@ export function OrbitInterlude({
         ctx.globalAlpha = 0.95;
         ctx.textAlign = "left";
         ctx.font = `13px ${font}`;
-        ctx.fillText(
-          names.current[b.label % names.current.length],
-          b.x + b.r + 6,
-          b.y + 4,
-        );
+        const name =
+          names.current[b.label % names.current.length] +
+          (workOf(b.label) ? " ↗" : "");
+        b.lw = ctx.measureText(name).width;
+        ctx.fillText(name, b.x + b.r + 6, b.y + 4);
         ctx.globalAlpha = 1;
       }
       // 행성에 닿은 지식은 흡수되고, 행성이 조금 자랍니다.
@@ -290,6 +304,13 @@ export function OrbitInterlude({
       h: r.height,
     };
   };
+  // 누른 자리에 있는 지식(별 또는 이름표). 손가락으로도 누르기 쉽게 넉넉히 잡습니다.
+  const hit = (x: number, y: number) =>
+    bodies.current.findLast(
+      (b) =>
+        Math.hypot(b.x - x, b.y - y) < b.r + 18 ||
+        (x > b.x && x < b.x + b.r + 10 + b.lw && Math.abs(y - b.y) < 14),
+    );
   const hold = useRef<ReturnType<typeof setTimeout> | null>(null);
   return (
     <section
@@ -308,7 +329,12 @@ export function OrbitInterlude({
             hold.current = setTimeout(() => (well.current = p), 260);
           }}
           onPointerMove={(e) => {
-            if (well.current) well.current = point(e);
+            const p = point(e);
+            if (well.current) well.current = p;
+            // PC: 작품이 연결된 지식 위에서는 손가락 모양
+            const b = e.pointerType === "mouse" ? hit(p.x, p.y) : undefined;
+            e.currentTarget.style.cursor =
+              b && workOf(b.label) ? "pointer" : "";
           }}
           onPointerUp={(e) => {
             if (hold.current) clearTimeout(hold.current);
@@ -316,8 +342,12 @@ export function OrbitInterlude({
               well.current = null;
               return;
             }
-            // 누른 자리에서 새로운 지식이 날아와 행성 쪽으로 끌려 들어갑니다.
             const p = point(e);
+            // 작품이 연결된 지식을 누르면 그 작품을 엽니다.
+            const b = hit(p.x, p.y),
+              id = b && workOf(b.label);
+            if (id && canOpen.current?.(id)) return;
+            // 누른 자리에서 새로운 지식이 날아와 행성 쪽으로 끌려 들어갑니다.
             bodies.current = [
               ...bodies.current,
               orbiting(
