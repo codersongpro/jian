@@ -1435,12 +1435,12 @@
     },
     {
       "id": "paper-solids",
-      "title": "종이로 만든 입체 도형",
-      "title_en": "Paper Solids",
-      "category": "공예·디자인",
+      "title": "종이 스피리콘 대회",
+      "title_en": "Paper Sphericon Race",
+      "category": "수학",
       "year": 2026,
-      "description": "은색 반짝이 종이와 줄무늬 종이를 접고 붙여 만든 뿔·공 모양 입체 다섯 개.",
-      "description_en": "Five cone- and ball-like solids folded and glued from shiny silver paper and striped paper.",
+      "description": "은색 반짝이 종이와 줄무늬 종이로 스피리콘 다섯 개를 만들어 이름을 붙이고, 세 번씩 굴린 기록을 화이트보드에 표와 막대그래프로 정리한 활동.",
+      "description_en": "Five sphericons made from shiny silver and striped paper, each given a name, raced three times, with the times recorded on a whiteboard as a table and bar graph.",
       "content_file": "paper-solids.md",
       "is_public": true,
       "featured_order": null,
@@ -1450,16 +1450,24 @@
       "pages": [
         {
           "url": "/works/paper-solids/page-01.jpg",
-          "caption": "입체 다섯 개"
+          "caption": "종이로 만든 스피리콘 다섯 개"
+        },
+        {
+          "url": "/works/paper-solids/page-02.jpg",
+          "caption": "스피리콘 대회 기록과 막대그래프"
+        },
+        {
+          "url": "/works/paper-solids/page-03.jpg",
+          "caption": "전날 강의 화면의 여러 스피리콘 도형"
         }
       ],
       "provenance": {
-        "category": "공예·디자인",
+        "category": "수학",
         "date": "2026-03-15",
         "date_basis": "사진 촬영일(EXIF). 실제 완성일과 다를 수 있음",
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
-        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 화이트보드의 ‘스피리콘 대회’, 소개는 사진 분석으로 작성. 강의 화면 사진은 하루 전 대전에서 찍혀 같은 활동의 참고 자료로 묶음.",
         "photo_taken": "2026-03-15 22:26"
       }
     },
@@ -1766,15 +1774,23 @@
         {
           "url": "/works/bali-camp/page-08.jpg",
           "caption": "이번 주의 캠퍼(Camper of the Week) 소개"
+        },
+        {
+          "url": "/works/bali-camp/page-09.jpg",
+          "caption": "서핑 보드 위에서"
+        },
+        {
+          "url": "/works/bali-camp/page-10.jpg",
+          "caption": "팀 6 이름표"
         }
       ],
       "provenance": {
         "category": "체험·활동",
-        "date": "2026-01-22",
-        "date_basis": "사진 촬영일(EXIF, 첫 사진 기준 2026-01-22~02-01)",
+        "date": "2026-01-17",
+        "date_basis": "사진 촬영일(EXIF·드라이브 기록, 2026-01-17~02-01)",
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
-        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성. 발리라는 장소는 캠프 소개글의 반 이름(Kuta, Ubud)과 함께 올라온 캠프 이름표를 근거로 함. 보호자 요청으로 얼굴이 나온 사진도 그대로 공개함.",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성. 발리라는 장소는 캠프 소개글의 반 이름(Kuta, Ubud)과 함께 올라온 캠프 이름표를 근거로 함. 보호자 요청으로 얼굴이 나온 사진도 그대로 공개함. 이름표 중 가족이 아닌 친구 이름은 흐리게 처리함(DUSTIN SONG·EUNYOUNG SON은 가족으로 보고 그대로 둠).",
         "photo_taken": "2026-01-22 19:45"
       }
     },
@@ -1918,6 +1934,106 @@
         "photo_taken": "2026-06-14 15:03",
         "photo_place": "충청북도 청주시",
         "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "bio-board",
+      "title": "지안 생명공학 선생님의 칠판",
+      "title_en": "Her Biotech Teacher Whiteboard",
+      "category": "과학",
+      "year": 2025,
+      "description": "살해·기억·도움·조절 T세포를 나누어 적고, 바이러스와 싸우는 면역 세포의 흐름을 그림과 화살표로 설명한 생명공학 칠판.",
+      "description_en": "A biotech whiteboard sorting killer, memory, helper and regulatory T cells, with drawings and arrows showing how immune cells fight viruses.",
+      "content_file": "bio-board.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/bio-board.webp",
+      "pages": [
+        {
+          "url": "/works/bio-board/page-01.jpg",
+          "caption": "생명공학 선생님 칠판"
+        }
+      ],
+      "provenance": {
+        "category": "과학",
+        "date": "2025-12-29",
+        "date_basis": "사진 촬영일(드라이브 기록). 실제 완성일과 다를 수 있음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성. 큰 사진이라 드라이브에서 줄인 사본으로 처리함.",
+        "photo_taken": "2025-12-29 21:36",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "premier-concert",
+      "title": "프리미어뮤직 정기 연주회",
+      "title_en": "Premier Music Recital",
+      "category": "음악",
+      "year": 2026,
+      "description": "학원 정기 연주회에서 바이올린 「Bourree」, 피아노 「Sonatina Op.66 No.1 3악장」, 노래 「나의 바다」「별마중 달마중」을 연주한 순서지.",
+      "description_en": "The program of a music school recital where she played Bourrée on violin and Sonatina Op.66 No.1 (3rd mvt.) on piano, and sang two songs.",
+      "content_file": "premier-concert.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/premier-concert.webp",
+      "pages": [
+        {
+          "url": "/works/premier-concert/page-01.jpg",
+          "caption": "연주회 안내지"
+        },
+        {
+          "url": "/works/premier-concert/page-02.jpg",
+          "caption": "연주 순서지 (다른 연주자 이름·학교는 흐리게)"
+        }
+      ],
+      "provenance": {
+        "category": "음악",
+        "date": "2026-03-21",
+        "date_basis": "연주회 안내지에 적힌 날짜. 사진 촬영일(EXIF)과 같음",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성. 보호자 요청에 따라 순서지의 다른 학생·강사 이름과 모든 학교 이름을 흐리게 처리함. 학원 이름은 그대로 둠.",
+        "photo_taken": "2026-03-21 09:11",
+        "photo_place": "충청북도 청주시",
+        "photo_place_en": "Cheongju-si, Chungcheongbuk-do"
+      }
+    },
+    {
+      "id": "ai-contest",
+      "title": "AI 창작대회 참가",
+      "title_en": "Taking Part in an AI Creation Contest",
+      "category": "체험·활동",
+      "year": 2026,
+      "description": "전국민 AI 경진대회의 AI 창작대회 트랙 2 ‘사운드 with AI’ AI 동요 부문에 참가하며 받은 이름표.",
+      "description_en": "Her name badge from an AI creation contest, entered in the ‘Sound with AI’ track for AI children’s songs.",
+      "content_file": "ai-contest.md",
+      "is_public": true,
+      "featured_order": null,
+      "motion_enabled": true,
+      "youtube_id": null,
+      "thumbnail_url": "/works/thumbnails/ai-contest.webp",
+      "pages": [
+        {
+          "url": "/works/ai-contest/page-01.jpg",
+          "caption": "참가 이름표 (참가 코드는 흐리게)"
+        }
+      ],
+      "provenance": {
+        "category": "체험·활동",
+        "date": "2026-07-18",
+        "date_basis": "사진 촬영일(EXIF)",
+        "creator_display": "Jian",
+        "evidence_level": "실제 파일 육안 확인",
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성. 참가 코드는 흐리게 처리함.",
+        "photo_taken": "2026-07-18 13:25",
+        "photo_place": "서울특별시",
+        "photo_place_en": "Seoul"
       }
     }
   ]
