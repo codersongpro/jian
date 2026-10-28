@@ -730,6 +730,11 @@ function Universe({
           reduced={reduced}
           economy={economy}
           onSpawn={() => effect("orbit")}
+          openWork={(id) => {
+            const w = works.find((x) => x.id === id);
+            if (w) open(w);
+            return !!w;
+          }}
         />
         <CycloidCard
           reduced={reduced}
