@@ -1922,12 +1922,12 @@
     },
     {
       "id": "sun-moon-mountains",
-      "title": "해와 달이 뜬 산",
-      "title_en": "Mountains under the Sun and Moon",
+      "title": "일월오봉도",
+      "title_en": "Irworobongdo: Sun, Moon and Five Peaks",
       "category": "미술",
       "year": 2026,
-      "description": "빨간 해와 하얀 달 아래 여러 겹의 초록 산봉우리와 큰 나무를 검은 선으로 그리고 색연필로 칠한 그림.",
-      "description_en": "Layered green mountain peaks and a large tree under a red sun and a white moon, outlined in black and colored in with colored pencil.",
+      "description": "빨간 해와 하얀 달 아래 여러 겹의 초록 다섯 봉우리와 큰 나무를 검은 선으로 그리고 색연필로 칠한 일월오봉도.",
+      "description_en": "An Irworobongdo painting: five layered green peaks and a large tree under a red sun and a white moon, outlined in black and colored in with colored pencil.",
       "content_file": "sun-moon-mountains.md",
       "is_public": true,
       "featured_order": null,
@@ -1946,7 +1946,7 @@
         "date_basis": "Drive 업로드일(사진에 촬영일 정보 없음)",
         "creator_display": "Jian",
         "evidence_level": "실제 파일 육안 확인",
-        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목·소개는 사진 분석으로 작성"
+        "authorship_note": "보호자가 수신함에 올린 사진. 메모 없음, 제목은 보호자가 대화로 확인(일월오봉도), 소개는 사진 분석으로 작성"
       }
     }
   ]
