@@ -95,22 +95,22 @@ const ko = {
     "지안이의 생각이 반짝이는 작은 우주에 오신 걸 환영해요.",
   ],
   heroCta: "지안이의 우주 둘러보기",
-  heroFootnote: "생각이 작품이 되고, 작품이 하나의 세계가 되는 곳",
+  heroFootnote: "생각이 작품이 되고, 작품이 모여 세계가 되는 곳",
   preview: (title: string) => `${title} 미리보기`,
   heroEmpty: ["새로운 이야기를", "준비하고 있어요."],
   aboutTitle: ["좋아하는 것들이 모여", "나라는 우주가 돼요."],
   aboutText: [
     [
       "한 편의 동시, 한 장의 그림, 끝없는 물음표.",
-      "지안이의 시선으로 바라본 세상을 차곡차곡 모았습니다.",
+      "지안이의 시선으로 바라본 세상을 차곡차곡 모았어요.",
     ],
     [
       "잘하는 것보다 좋아하는 마음을,",
-      "완성보다 자라나는 과정을 담는 작은 전시관입니다.",
+      "완성보다 자라나는 과정을 담는 작은 전시관이에요.",
     ],
   ],
   collectionTitle: "반짝이는 생각의 조각들",
-  collectionText: "하나하나의 작품 속에 담긴 이야기를 만나 보세요.",
+  collectionText: "작품마다 담긴 이야기를 만나 보세요.",
   reviewNotice:
     "제공된 실제 자료입니다. 전사·편집 여부와 날짜 근거는 작품 상세에서 확인할 수 있습니다.",
   unavailable: "전시 자료를 잠시 불러올 수 없어요. 조금 뒤 다시 방문해 주세요.",
@@ -130,7 +130,7 @@ const ko = {
   showLess: "접기",
 
   fieldsTitle: ["호기심에는", "여러 가지 모양이 있어요."],
-  fieldsText: ["서로 다른 세계가 만나", "더 넓은 상상이 펼쳐집니다."],
+  fieldsText: ["서로 다른 세계가 만나", "더 넓은 상상이 펼쳐져요."],
   fields: [
     {
       title: "마음이 글이 되는 순간",
@@ -152,13 +152,13 @@ const ko = {
   journeyTitle: ["오늘의 작은 별이", "내일의 우주가 되도록."],
   journeyText: "작품을 따라 걸으며 성장의 순간들을 만나요.",
   dateBasis:
-    "자료에 남은 연도입니다. 파일 등록일·판권일은 창작일과 다를 수 있어요.",
+    "자료에 남은 연도예요. 파일 등록일·판권일은 창작일과 다를 수 있어요.",
   allMoments: "모든 순간",
   unknownYear: "연도 미상",
   thoughts: (n: number) => `${n}개의 생각`,
   videosEyebrow: "MOVING MOMENTS · 지안이의 영상",
   videosTitle: "소리와 몸짓으로 남긴 장면들",
-  videosText: "영상을 누르면 YouTube나 Google 드라이브에서 열립니다.",
+  videosText: "영상을 누르면 YouTube나 Google 드라이브에서 열려요.",
   videoName: (i: number) => `지안이의 영상 ${i}`,
   watchOnYoutube: "YouTube에서 보기",
   watchOnDrive: "Google 드라이브에서 보기",
@@ -278,7 +278,7 @@ const ko = {
     },
     skull: {
       name: "머리뼈와 뇌막",
-      text: "단단한 머리뼈와 말랑한 뇌막, 튼튼한 뇌막이 말랑한 뇌를 겹겹이 감싸 지켜 줘요.",
+      text: "단단한 머리뼈와 튼튼한 뇌막이 말랑한 뇌를 겹겹이 감싸 지켜 줘요.",
     },
     vessel: {
       name: "혈관과 뇌졸중",
@@ -408,7 +408,7 @@ const ko = {
   recordNote: "전사·편집 안내",
   recordReview: "공개 전 확인할 사항",
   dialogFootSample: "실제 작품은 전시 준비 후 만날 수 있어요.",
-  dialogFoot: "하나의 호기심에서 시작된 이야기",
+  dialogFoot: "호기심 하나에서 시작된 이야기",
   originalNote: "",
   imageAlt: (title: string) => `${title} · 제공된 미리보기 자료`,
 };
