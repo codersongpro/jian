@@ -34,6 +34,37 @@ const symMath = (id: string, k: number) => {
   }
   return "";
 };
+// 행성의 지식(knowledge 목록과 같은 순서)을 누르면 열리는 지안이의 작품 id.
+// 지식을 추가하면 여기에도 같은 자리에 작품 id(없으면 null)를 넣어 주세요.
+export const knowledgeWorks: (string | null)[] = [
+  "book-story", // 글쓰기
+  "science-board", // 과학
+  "math-board", // 수학
+  "orchestra-concert", // 음악
+  "drawings", // 미술
+  "ballet-moves", // 발레
+  "paper-solids", // 종이접기
+  null, // 줄넘기
+  "leg-muscles", // 달리기
+  "pickleball", // 피클볼
+  "piano-notes", // 피아노
+  "christmas-song", // 작곡
+  "poems", // 동시
+  "craft-wire", // 공예
+  "protect-animals", // 동물 보호
+  "family-debate", // 토론
+  "ai-talk", // 앱 기획
+  "teacher-board", // 가르치기
+  "english-essays", // 영어
+  "acorn", // 자연
+  "star-letter", // 우주
+  "body-organs", // 인체
+  "moonjar", // 역사
+  "rhythm-game", // 코딩
+  "designer-board", // 디자인
+  "thought-experiment", // 생각
+];
+
 export const categoryLabel = (c: string, lang: Lang) =>
   lang === "en" ? (categoryEn[c] ?? c) : c;
 
@@ -64,22 +95,22 @@ const ko = {
     "지안이의 생각이 반짝이는 작은 우주에 오신 걸 환영해요.",
   ],
   heroCta: "지안이의 우주 둘러보기",
-  heroFootnote: "생각이 작품이 되고, 작품이 하나의 세계가 되는 곳",
+  heroFootnote: "생각이 작품이 되고, 작품이 모여 세계가 되는 곳",
   preview: (title: string) => `${title} 미리보기`,
   heroEmpty: ["새로운 이야기를", "준비하고 있어요."],
   aboutTitle: ["좋아하는 것들이 모여", "나라는 우주가 돼요."],
   aboutText: [
     [
       "한 편의 동시, 한 장의 그림, 끝없는 물음표.",
-      "지안이의 시선으로 바라본 세상을 차곡차곡 모았습니다.",
+      "지안이의 시선으로 바라본 세상을 차곡차곡 모았어요.",
     ],
     [
       "잘하는 것보다 좋아하는 마음을,",
-      "완성보다 자라나는 과정을 담는 작은 전시관입니다.",
+      "완성보다 자라나는 과정을 담는 작은 전시관이에요.",
     ],
   ],
   collectionTitle: "반짝이는 생각의 조각들",
-  collectionText: "하나하나의 작품 속에 담긴 이야기를 만나 보세요.",
+  collectionText: "작품마다 담긴 이야기를 만나 보세요.",
   reviewNotice:
     "제공된 실제 자료입니다. 전사·편집 여부와 날짜 근거는 작품 상세에서 확인할 수 있습니다.",
   unavailable: "전시 자료를 잠시 불러올 수 없어요. 조금 뒤 다시 방문해 주세요.",
@@ -99,7 +130,7 @@ const ko = {
   showLess: "접기",
 
   fieldsTitle: ["호기심에는", "여러 가지 모양이 있어요."],
-  fieldsText: ["서로 다른 세계가 만나", "더 넓은 상상이 펼쳐집니다."],
+  fieldsText: ["서로 다른 세계가 만나", "더 넓은 상상이 펼쳐져요."],
   fields: [
     {
       title: "마음이 글이 되는 순간",
@@ -121,13 +152,13 @@ const ko = {
   journeyTitle: ["오늘의 작은 별이", "내일의 우주가 되도록."],
   journeyText: "작품을 따라 걸으며 성장의 순간들을 만나요.",
   dateBasis:
-    "자료에 남은 연도입니다. 파일 등록일·판권일은 창작일과 다를 수 있어요.",
+    "자료에 남은 연도예요. 파일 등록일·판권일은 창작일과 다를 수 있어요.",
   allMoments: "모든 순간",
   unknownYear: "연도 미상",
   thoughts: (n: number) => `${n}개의 생각`,
   videosEyebrow: "MOVING MOMENTS · 지안이의 영상",
   videosTitle: "소리와 몸짓으로 남긴 장면들",
-  videosText: "영상을 누르면 YouTube나 Google 드라이브에서 열립니다.",
+  videosText: "영상을 누르면 YouTube나 Google 드라이브에서 열려요.",
   videoName: (i: number) => `지안이의 영상 ${i}`,
   watchOnYoutube: "YouTube에서 보기",
   watchOnDrive: "Google 드라이브에서 보기",
@@ -153,7 +184,8 @@ const ko = {
   orbitCanvas:
     "지안이의 행성이 중력으로 여러 지식을 끌어당기는 놀이. 누르면 새로운 지식이 날아와요",
   orbitCount: "끌어당긴 지식",
-  orbitHint: "누르면 새로운 지식이 날아와요 · 꾹 누르면 중력이 생겨요",
+  orbitHint:
+    "누르면 새로운 지식이 날아와요 · 꾹 누르면 중력이 생겨요 · ↗ 지식을 누르면 작품이 열려요",
   planetSub: "지안이의 행성",
   knowledge: [
     "글쓰기",
@@ -162,6 +194,18 @@ const ko = {
     "음악",
     "미술",
     "발레",
+    "종이접기",
+    "줄넘기",
+    "달리기",
+    "피클볼",
+    "피아노",
+    "작곡",
+    "동시",
+    "공예",
+    "동물 보호",
+    "토론",
+    "앱 기획",
+    "가르치기",
     "영어",
     "자연",
     "우주",
@@ -234,7 +278,7 @@ const ko = {
     },
     skull: {
       name: "머리뼈와 뇌막",
-      text: "단단한 머리뼈와 말랑한 뇌막, 튼튼한 뇌막이 말랑한 뇌를 겹겹이 감싸 지켜 줘요.",
+      text: "단단한 머리뼈와 튼튼한 뇌막이 말랑한 뇌를 겹겹이 감싸 지켜 줘요.",
     },
     vessel: {
       name: "혈관과 뇌졸중",
@@ -364,7 +408,7 @@ const ko = {
   recordNote: "전사·편집 안내",
   recordReview: "공개 전 확인할 사항",
   dialogFootSample: "실제 작품은 전시 준비 후 만날 수 있어요.",
-  dialogFoot: "하나의 호기심에서 시작된 이야기",
+  dialogFoot: "호기심 하나에서 시작된 이야기",
   originalNote: "",
   imageAlt: (title: string) => `${title} · 제공된 미리보기 자료`,
 };
@@ -488,7 +532,8 @@ const en: Copy = {
   orbitCanvas:
     "Jian’s planet pulls in knowledge with its gravity. Tap to send new knowledge flying in",
   orbitCount: "Knowledge pulled in",
-  orbitHint: "Tap to send in new knowledge · press and hold to create gravity",
+  orbitHint:
+    "Tap to send in new knowledge · press and hold to create gravity · tap a ↗ star to open the work",
   planetSub: "Jian’s planet",
   knowledge: [
     "Writing",
@@ -497,6 +542,18 @@ const en: Copy = {
     "Music",
     "Art",
     "Ballet",
+    "Origami",
+    "Jump rope",
+    "Running",
+    "Pickleball",
+    "Piano",
+    "Songwriting",
+    "Poems",
+    "Crafts",
+    "Animal care",
+    "Debate",
+    "App ideas",
+    "Teaching",
     "English",
     "Nature",
     "Space",
