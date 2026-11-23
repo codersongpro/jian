@@ -81,7 +81,7 @@ test("drive videos open on Google Drive by file id", async () => {
   const drive = (await readRepositoryCatalog()).videos.filter(
     (video) => video.source === "drive",
   );
-  assert.equal(drive.length, 2);
+  assert.equal(drive.length, 3);
   for (const video of drive)
     assert.equal(video.url, `https://drive.google.com/file/d/${video.id}/view`);
 });
