@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import manifest from "../content/works.json";
 import links from "../content/videos.json";
 import settings from "../content/settings.json";
+import { sortNewestFirst } from "./validation";
 import type { Category, SiteSettings, VideoLink, Work } from "./model";
 
 export const repositoryEntries = manifest.works;
@@ -40,7 +41,7 @@ export async function readRepositoryCatalog() {
       }),
   );
   return {
-    works,
+    works: sortNewestFirst(works),
     videos: links.videos as VideoLink[],
     settings: settings as SiteSettings,
   };
