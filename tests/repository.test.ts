@@ -81,7 +81,9 @@ test("drive videos open on Google Drive by file id", async () => {
   const drive = (await readRepositoryCatalog()).videos.filter(
     (video) => video.source === "drive",
   );
-  assert.equal(drive.length, 3);
+  // 개수는 고정하지 않습니다. 수신함 영상이 늘어나도 테스트를 고칠 필요가 없습니다.
+  assert.ok(drive.length > 0);
+  assert.equal(new Set(drive.map((video) => video.id)).size, drive.length);
   for (const video of drive)
     assert.equal(video.url, `https://drive.google.com/file/d/${video.id}/view`);
 });
