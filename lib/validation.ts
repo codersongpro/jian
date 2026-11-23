@@ -10,6 +10,16 @@ export function filterWorks<
         (year === "미상" ? w.year === null : String(w.year) === year)),
   );
 }
+// 최신 작품이 먼저 보이도록 정렬합니다.
+// 기준: 만든 날짜(provenance.date) → 연도만 있으면 그해의 맨 뒤 → 날짜·연도 모두 없으면 맨 뒤.
+// 같은 날짜끼리는 원래 순서를 지킵니다(안정 정렬). 원본 배열은 바꾸지 않습니다.
+export function sortNewestFirst<
+  T extends { year: number | null; provenance?: { date: string | null } | null },
+>(works: T[]): T[] {
+  const key = (w: T) =>
+    w.provenance?.date ?? (w.year ? `${w.year}-00-00` : "");
+  return [...works].sort((a, b) => key(b).localeCompare(key(a)));
+}
 export function parsePreferences(value: string | null): Preferences {
   try {
     const p = JSON.parse(value || "{}");

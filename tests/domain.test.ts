@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   filterWorks,
   parsePreferences,
+  sortNewestFirst,
   youtubeId,
   validateUpload,
 } from "../lib/validation";
@@ -16,6 +17,20 @@ test("filters combine category and year without changing the source", () => {
   assert.deepEqual(filterWorks(works, "문학", "2025"), [works[0]]);
   assert.equal(filterWorks(works, "전체", "전체").length, 3);
   assert.equal(works.length, 3);
+});
+test("works are sorted newest first, undated last, ties keep order", () => {
+  const works = [
+    { id: "a", year: null, provenance: null },
+    { id: "b", year: 2024, provenance: { date: "2024-08-01" } },
+    { id: "c", year: 2026, provenance: { date: "2026-10-30" } },
+    { id: "d", year: 2025, provenance: null },
+    { id: "e", year: 2026, provenance: { date: "2026-10-30" } },
+  ];
+  assert.deepEqual(
+    sortNewestFirst(works).map((w) => w.id),
+    ["c", "e", "d", "b", "a"],
+  );
+  assert.equal(works[0].id, "a");
 });
 test("preferences recover safely from malformed and untrusted storage", () => {
   assert.deepEqual(parsePreferences("{broken"), {
